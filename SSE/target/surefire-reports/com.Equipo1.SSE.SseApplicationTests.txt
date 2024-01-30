@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.Equipo1.SSE.SseApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.241 s - in com.Equipo1.SSE.SseApplicationTests
