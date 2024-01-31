@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="entidades">
+  <ClassDiagramComponents>
+    <Class name="SSE" package="" visibility="public" xPosition="432.0" yPosition="55.0">
+      <Fields>
+        <Field name="profesionales" type="List&lt;Profesional&gt;" visibility="private"/>
+        <Field name="pacientes" type="List&lt;Paciente&gt;" visibility="private"/>
+        <Field name="historiales" type="List&lt;HistorialClinico&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Especialidades" package="" visibility="public" xPosition="832.0" yPosition="567.0">
+      <Literals>
+        <Literal name="Clinica"/>
+        <Literal name="Pediatria"/>
+        <Literal name="Ginecologia"/>
+        <Literal name="Cardiologia"/>
+      </Literals>
+    </Enum>
+    <Class name="Profesional   " package="" visibility="public" xPosition="940.0" yPosition="67.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="telefono" type="Integer" visibility="private"/>
+        <Field name="turnos" type="List&lt;Date&gt;" visibility="private"/>
+        <Field name="especialidad" type="Especialidades" visibility="private"/>
+        <Field name="valorConsulta" type="Double" visibility="private"/>
+        <Field name="reputacion" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Paciente" package="" visibility="public" xPosition="432.0" yPosition="269.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="telefono" type="Integer" visibility="private"/>
+        <Field name="obraSocial" type="Boolean" visibility="private"/>
+        <Field name="numAfiliado" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="HistorialClinico   " package="" visibility="public" xPosition="29.0" yPosition="55.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="consultas" type="List&lt;Consulta&gt;" visibility="private"/>
+        <Field name="paciente" type="Paciente" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="especialidad" source="Profesional   " target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="pacientes" source="Profesional   " target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="pacientes" source="SSE" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="historial" source="SSE" target="HistorialClinico   " type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="profesionales" source="SSE" target="Profesional   " type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="profesionales" source="Paciente" target="Profesional   " type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

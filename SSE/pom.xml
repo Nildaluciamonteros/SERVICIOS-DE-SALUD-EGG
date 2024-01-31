@@ -8,7 +8,7 @@
         <version>2.7.16</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.Equipo1</groupId>
+    <groupId>com.equipo1</groupId>
     <artifactId>SSE</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SSE</name>
