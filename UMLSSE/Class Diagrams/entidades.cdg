@@ -29,15 +29,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Enum name="Especialidades" package="" visibility="public" xPosition="940.0" yPosition="439.0">
-      <Literals>
-        <Literal name="Clinica"/>
-        <Literal name="Pediatria"/>
-        <Literal name="Ginecologia"/>
-        <Literal name="Cardiologia"/>
-      </Literals>
-    </Enum>
-    <Class name="Usuario" package="" visibility="public" xPosition="513.0" yPosition="490.0">
+    <Class name="Usuario" package="" visibility="public" xPosition="486.0" yPosition="439.0">
       <Fields>
         <Field name="id" type="String" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -46,6 +38,7 @@
         <Field name="email" type="String" visibility="private"/>
         <Field name="password" type="String" visibility="private"/>
         <Field name="imagen" type="Imagen" visibility="private"/>
+        <Field name="rol" type="Rol" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
@@ -60,7 +53,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Imagen" package="" visibility="public" xPosition="292.0" yPosition="519.0">
+    <Class name="Imagen" package="" visibility="public" xPosition="255.0" yPosition="493.0">
       <Fields>
         <Field name="id" type="String" visibility="private"/>
         <Field name="mime" type="String" visibility="private"/>
@@ -79,15 +72,31 @@
       <Constructors/>
       <Methods/>
     </Class>
+    <Enum name="Especialidades" package="" visibility="public" xPosition="940.0" yPosition="439.0">
+      <Literals>
+        <Literal name="Clinica"/>
+        <Literal name="Pediatria"/>
+        <Literal name="Ginecologia"/>
+        <Literal name="Cardiologia"/>
+      </Literals>
+    </Enum>
+    <Enum name="Rol" package="" visibility="public" xPosition="230.0" yPosition="255.0">
+      <Literals>
+        <Literal name="PACIENTE"/>
+        <Literal name="ADMIN"/>
+        <Literal name="PROFESIONAL"/>
+      </Literals>
+    </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="profesionales" source="Paciente" target="Profesional" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <IsRelation name="is" source="Paciente" target="Usuario"/>
-    <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="especialidad" source="Profesional" target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="profesionales" source="Paciente" target="Profesional" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <IsRelation name="is" source="Profesional" target="Usuario"/>
+    <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="imagen" source="Usuario" target="Imagen" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="rol" source="Usuario" target="Rol" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="especialidad" source="Profesional" target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
