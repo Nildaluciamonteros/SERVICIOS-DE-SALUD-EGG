@@ -13,15 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-/**
- *
- * @author Nico
- */
-@Entity
-@Data
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor 
 public class Imagen implements Serializable {
 
     @Id

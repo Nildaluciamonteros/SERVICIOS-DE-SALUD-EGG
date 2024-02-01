@@ -1,4 +1,4 @@
-package com.Equipo1.sse.entidades;
+package com.Equipo1.sse.enumeraciones;
 
 public enum Especialidades {
 
