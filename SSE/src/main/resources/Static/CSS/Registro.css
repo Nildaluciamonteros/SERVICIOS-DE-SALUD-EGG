@@ -290,10 +290,20 @@ body{
   .custum-file-upload input {
     display: none;
   }
-  .hidden-textbox {
-    visibility: hidden;
-  }
   
-  input[type='checkbox']:checked~.hidden-textbox {
+  input[type='checkbox']:checked~.inputs-hidden {
     visibility: visible;
+  }
+  .question{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .inputs-hidden{
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
   }

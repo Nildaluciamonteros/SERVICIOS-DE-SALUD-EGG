@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org/"
+  xmlns:sec="http://thymeleaf.org/extras/spring-security"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,43 +14,87 @@
     <title>SSE Login</title>
   </head>
   <body>
-    <form class="form">
+    <form
+      class="form"
+      th:action="@{/registro}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <p class="title">Registro</p>
       <p class="message">Para acceder a nuestros servicio Registrate</p>
       <div class="flex">
         <label>
-          <input required="" type="text" class="input" />
+          <input
+            required=""
+            type="text"
+            class="input"
+            th:value="${paciente.nombre}"
+            name="nombre"
+          />
           <span>Nombre</span>
         </label>
 
         <label>
-          <input required="" placeholder="" type="text" class="input" />
+          <input
+            required=""
+            placeholder=""
+            type="text"
+            class="input"
+            th:value="${paciente.apellido}"
+            name="apellido"
+          />
           <span>Apellido</span>
         </label>
       </div>
 
       <label>
-        <input required="" type="number" class="input" />
-        <span>Telefono</span>
+        <input
+          required=""
+          type="number"
+          class="input"
+          th:value="${paciente.telefono}"
+          name="telefono"
+        />
+        <span>Teléfono</span>
       </label>
 
       <label>
-        <input required="" type="email" class="input" />
+        <input
+          required=""
+          type="email"
+          class="input"
+          th:value="${paciente.email}"
+          name="email"
+        />
         <span>Email</span>
       </label>
 
       <div class="question">
-        Posee Obra Social: <input type="checkbox" checked /><input
-          type="text"
-          class="hidden-textbox"
-          placeholder="Nombre de la Obra Social"
-        />
-      </div>
+        <h3>Posee Obra Social:</h3>
 
-      <label>
-        <input required="" type="number" class="input" />
-        <span>Numero de Afiliado</span>
-      </label>
+        <input type="checkbox" checked />
+        <div class="inputs-hidden">
+          <label>
+            <input
+              type="text"
+              class="input"
+              placeholder="Nombre de la Obra Social"
+              th:value="${paciente.obraSocial}"
+              name="obraSocial"
+            />
+          </label>
+
+          <label>
+            <input
+              type="number"
+              class="input"
+              placeholder="Número de Afiliado"
+              th:value="${paciente.numAfiliado}"
+              name="numAfiliado"
+            />
+          </label>
+        </div>
+      </div>
 
       <label class="custum-file-upload" for="file">
         <div class="icon">
@@ -70,19 +118,33 @@
         <div class="text">
           <span>Ingrese una imagen </span>
         </div>
-        <input type="file" id="file" />
+        <input type="file" id="file" name="archivo" />
       </label>
 
       <label>
-        <input required="" placeholder="" type="password" class="input" />
+        <input
+          required=""
+          placeholder=""
+          type="password"
+          class="input"
+          th:value="${paciente.password}"
+          name="password"
+        />
         <span>Contraseña</span>
       </label>
       <label>
-        <input required="" placeholder="" type="password" class="input" />
+        <input
+          required=""
+          placeholder=""
+          type="password"
+          class="input"
+          th:value="${paciente.password}"
+          name="password2"
+        />
         <span>Confirmar Contraseña</span>
       </label>
       <button class="submit">Enviar</button>
-      <p class="signin">ya tienes una Cuenta? <a href="#">Ingresar</a></p>
+      <p class="signin">¿Ya tienes una cuenta? <a href="/login">Ingresar</a></p>
     </form>
   </body>
 </html>
