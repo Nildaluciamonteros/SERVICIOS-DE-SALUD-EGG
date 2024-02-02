@@ -8,10 +8,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity @Data @AllArgsConstructor 
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor 
 public class Turno {
 
     @Id

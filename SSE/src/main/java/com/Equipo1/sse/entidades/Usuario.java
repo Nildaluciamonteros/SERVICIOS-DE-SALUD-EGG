@@ -1,6 +1,10 @@
 package com.Equipo1.sse.entidades;
 
+import com.Equipo1.sse.enumeraciones.Rol;
+import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -10,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity @Data @AllArgsConstructor 
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -26,6 +30,9 @@ public class Usuario {
     private String email;
 
     private String password;
+	
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
     
     @OneToOne
     private Imagen imagen;
