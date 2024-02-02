@@ -2,7 +2,7 @@
 
 <ClassDiagram name="entidades">
   <ClassDiagramComponents>
-    <Class name="Profesional" package="" visibility="public" xPosition="840.0" yPosition="93.0">
+    <Class name="Profesional" package="" visibility="public" xPosition="819.0" yPosition="96.0">
       <Fields>
         <Field name="turnos" type="List&lt;Turno&gt;" visibility="private"/>
         <Field name="especialidad" type="Especialidades" visibility="private"/>
@@ -12,7 +12,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Paciente" package="" visibility="public" xPosition="486.0" yPosition="271.0">
+    <Class name="Paciente" package="" visibility="public" xPosition="486.0" yPosition="238.0">
       <Fields>
         <Field name="obraSocial" type="String" visibility="private"/>
         <Field name="numAfiliado" type="String" visibility="private"/>
@@ -29,7 +29,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Usuario" package="" visibility="public" xPosition="486.0" yPosition="439.0">
+    <Class name="Usuario" package="" visibility="public" xPosition="486.0" yPosition="417.0">
       <Fields>
         <Field name="id" type="String" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -89,14 +89,16 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="profesionales" source="Paciente" target="Profesional" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="rol" source="Usuario" target="Rol" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+
     <IsRelation name="is" source="Paciente" target="Usuario"/>
-    <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <IsRelation name="is" source="Profesional" target="Usuario"/>
+    <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+
     <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="especialidad" source="Profesional" target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="imagen" source="Usuario" target="Imagen" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+
   </ClassDiagramRelations>
 </ClassDiagram>

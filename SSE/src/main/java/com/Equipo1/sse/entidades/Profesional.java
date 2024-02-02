@@ -22,7 +22,7 @@ public class Profesional extends Usuario {
 
     private Integer reputacion;
 
-    public Profesional(String id, String nombre, String apellido, String telefono, String email, String password, Imagen imagen) {
+    public Profesional() {
         super();
     }
     
