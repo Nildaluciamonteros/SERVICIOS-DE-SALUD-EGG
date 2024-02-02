@@ -1,6 +1,9 @@
 package com.Equipo1.sse.entidades;
 
+import com.Equipo1.sse.enumeraciones.Rol;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -26,6 +29,9 @@ public class Usuario {
     private String email;
 
     private String password;
+	
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
     
     @OneToOne
     private Imagen imagen;

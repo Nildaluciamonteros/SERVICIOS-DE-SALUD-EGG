@@ -1,5 +1,6 @@
 package com.Equipo1.sse.entidades;
 
+import com.Equipo1.sse.enumeraciones.Especialidades;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +23,7 @@ public class Profesional extends Usuario {
     private Integer reputacion;
 
     public Profesional(String id, String nombre, String apellido, String telefono, String email, String password, Imagen imagen) {
-        super(id, nombre, apellido, telefono, email, password, imagen);
+        super();
     }
     
     
