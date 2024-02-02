@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity @Data @AllArgsConstructor 
 public class Paciente extends Usuario {
 
-    private Boolean obraSocial;
+    private String obraSocial;
 
     private String numAfiliado;
 
