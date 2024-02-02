@@ -35,6 +35,7 @@ public class PortalControlador
 	public String index(ModelMap modelo)
 	{
 		return "index.html";
+
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
@@ -47,6 +48,7 @@ public class PortalControlador
 			return "redirect:/admin/dashboard";
 		}
 		return "inicio.html";
+
 	}
 	
 	@GetMapping("/login")
