@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +10,7 @@
     <title>Login SSE</title>
   </head>
   <body>
-    <form class="form">
+    <form class="form" th:action="@{/logincheck}">
       <p class="form-title">Ingresa a tu Cuenta</p>
       <div class="input-container">
         <input placeholder="ejemplo@ejemplo.com" type="email" />

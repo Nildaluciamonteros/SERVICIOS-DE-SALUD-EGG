@@ -27,7 +27,7 @@ public class PortalControlador
 	@GetMapping("/")
 	public String inicio(ModelMap modelo)
 	{
-		return "inicio.html";
+		return "index.html";
 	}
 	
 	@GetMapping("/login")
