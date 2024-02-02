@@ -1,4 +1,4 @@
-package com.equipo1.sse;
+package com.Equipo1.sse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
