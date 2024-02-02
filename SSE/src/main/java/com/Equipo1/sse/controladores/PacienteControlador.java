@@ -5,11 +5,21 @@
  */
 package com.Equipo1.sse.controladores;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
  *
  * @author Nico
  */
+@Controller
+@RequestMapping("/paciente")
 public class PacienteControlador
 {
-	
+	@GetMapping("/")
+	public String paciente()
+	{
+		return "paciente.html";
+	}
 }
