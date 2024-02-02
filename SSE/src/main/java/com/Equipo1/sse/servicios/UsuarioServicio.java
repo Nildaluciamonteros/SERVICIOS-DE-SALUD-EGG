@@ -43,9 +43,10 @@ public class UsuarioServicio implements UserDetailsService
 	private ImagenServicio imagenServicio;
 
 	@Transactional
-	public void registrar(String nombre, String email, String password, String password2, MultipartFile archivo) throws MiException
+	public void registrar(String nombre, String apellido, String telefono,
+			String email, String password, String password2, MultipartFile archivo) throws MiException
 	{
-		validar(nombre, email, password, password2);
+		validar(nombre,apellido,telefono,email,password,password2);
 
 		Usuario usuario = new Usuario();
 
@@ -60,16 +61,17 @@ public class UsuarioServicio implements UserDetailsService
 	}
 	
 	@Transactional
-	public void actualizar(String idUsuario, String nombre, String email, String password, String password2, MultipartFile archivo) throws MiException
+	public void actualizar(String idUsuario, String nombre, String apellido,
+			String telefono, String email, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
 		if(claveVacia)
 		{
-			validar(nombre, email, "123456", "123456");
+			validar(nombre,apellido,telefono,email, "123456", "123456");
 		}
 		else
 		{
-			validar(nombre, email, password, password2);
+			validar(nombre,apellido,telefono,email,password,password2);
 		}
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if(respuesta.isPresent())
@@ -119,11 +121,20 @@ public class UsuarioServicio implements UserDetailsService
 		return usuarioRepositorio.findAll();
 	}
 
-	private void validar(String nombre, String email, String password, String password2) throws MiException
+	private void validar(String nombre, String apellido, String telefono,
+			String email, String password, String password2) throws MiException
 	{
 		if (nombre == null || nombre.isEmpty())
 		{
 			throw new MiException("El nombre no puede ser nulo o estar vacio");
+		}
+		if (apellido == null || apellido.isEmpty())
+		{
+			throw new MiException("El apellido no puede ser nulo o estar vacio");
+		}
+		if (telefono == null || telefono.isEmpty() || !telefono.matches("[0-9]+"))
+		{
+			throw new MiException("El telefono no puede contener caracteres que no sean numeros, ser nulo o estar vacio");
 		}
 		if (email == null || email.isEmpty())
 		{
