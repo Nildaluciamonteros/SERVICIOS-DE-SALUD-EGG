@@ -89,16 +89,14 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-
     <IsRelation name="is" source="Paciente" target="Usuario"/>
     <IsRelation name="is" source="Profesional" target="Usuario"/>
     <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-
     <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="especialidad" source="Profesional" target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="imagen" source="Usuario" target="Imagen" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-
+    <HasRelation name="rol" source="Usuario" target="Rol" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="profesionales" source="Paciente" target="Profesional" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

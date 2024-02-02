@@ -16,14 +16,14 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;*/
-import org.springframework.stereotype.Service; 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Nico
  */
 @Service
-public class UsuarioServicio //implements UserDetailsService
+public class UsuarioServicio implements UserDetailsService
 {
 
 	@Autowired
@@ -52,7 +52,7 @@ public class UsuarioServicio //implements UserDetailsService
 
 		usuario.setNombre(nombre);
 		usuario.setEmail(email);
-		//usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
@@ -81,7 +81,7 @@ public class UsuarioServicio //implements UserDetailsService
 			usuario.setEmail(email);
 			if(!claveVacia)
 			{
-				//usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 			}
 			if(archivo != null && !archivo.isEmpty())
 			{
@@ -153,7 +153,7 @@ public class UsuarioServicio //implements UserDetailsService
 	{
 		return usuarioRepositorio.getOne(id);
 	}
-	/* @Override
+	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{
 		Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
@@ -176,5 +176,5 @@ public class UsuarioServicio //implements UserDetailsService
 		{
 			return null;
 		}
-	}*/
+	}
 }
