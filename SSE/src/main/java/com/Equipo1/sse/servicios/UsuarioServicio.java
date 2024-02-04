@@ -44,14 +44,18 @@ public class UsuarioServicio implements UserDetailsService
 
 	@Transactional
 	public void registrar(String nombre, String apellido, String telefono,
-			String email, String password, String password2, MultipartFile archivo) throws MiException
+			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
-		validar(nombre,apellido,telefono,email,password,password2);
+		validar(nombre,apellido,telefono,email,obraSocial, numAfiliado,password,password2);
 
 		Usuario usuario = new Usuario();
 
 		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
+		usuario.setObraSocial(obraSocial);
+		usuario.setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
@@ -62,23 +66,27 @@ public class UsuarioServicio implements UserDetailsService
 	
 	@Transactional
 	public void actualizar(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String password, String password2, MultipartFile archivo) throws MiException
+			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
 		if(claveVacia)
 		{
-			validar(nombre,apellido,telefono,email, "123456", "123456");
+			validar(nombre,apellido,telefono,email,obraSocial, numAfiliado, "123456", "123456");
 		}
 		else
 		{
-			validar(nombre,apellido,telefono,email,password,password2);
+			validar(nombre,apellido,telefono,email,obraSocial, numAfiliado,password,password2);
 		}
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if(respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
 			usuario.setNombre(nombre);
+			usuario.setApellido(apellido);
+			usuario.setTelefono(telefono);
 			usuario.setEmail(email);
+			usuario.setObraSocial(obraSocial);
+			usuario.setNumAfiliado(numAfiliado);
 			if(!claveVacia)
 			{
 				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -122,7 +130,7 @@ public class UsuarioServicio implements UserDetailsService
 	}
 
 	private void validar(String nombre, String apellido, String telefono,
-			String email, String password, String password2) throws MiException
+			String email, String obraSocial, String numAfiliado, String password, String password2) throws MiException
 	{
 		if (nombre == null || nombre.isEmpty())
 		{
@@ -139,6 +147,14 @@ public class UsuarioServicio implements UserDetailsService
 		if (email == null || email.isEmpty())
 		{
 			throw new MiException("El email no puede ser nulo o estar vacio");
+		}
+		if (obraSocial == null || obraSocial.isEmpty())
+		{
+			throw new MiException("La obra social no puede ser nulo o estar vacio");
+		}
+		if (numAfiliado == null || numAfiliado.isEmpty())
+		{
+			throw new MiException("El numero de afiliado no puede ser nulo o estar vacio");
 		}
 		if (password == null || password.isEmpty() || password.length() <= 5)
 		{

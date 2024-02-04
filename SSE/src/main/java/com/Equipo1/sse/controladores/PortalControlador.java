@@ -67,12 +67,12 @@ public class PortalControlador
 	
 	@PostMapping("/registro")
 	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String email, @RequestParam String password, @RequestParam String password2,
+			@RequestParam String email, @RequestParam String obraSocial, @RequestParam String numAfiliado, @RequestParam String password, @RequestParam String password2,
 			@RequestParam MultipartFile archivo, ModelMap modelo)
 	{
 		try
 		{
-			usuarioServicio.registrar(nombre,apellido,telefono,email,password,password2,archivo);
+			usuarioServicio.registrar(nombre,apellido,telefono,email,obraSocial,numAfiliado,password,password2,archivo);
 			modelo.put("exito", "Usuario registrado correctamente");
 			return "index.html";
 		} catch (MiException ex)
