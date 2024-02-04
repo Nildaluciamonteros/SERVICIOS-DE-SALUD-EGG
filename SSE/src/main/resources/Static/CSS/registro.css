@@ -2,14 +2,17 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: cadetblue;
+  background-image: url("/SSE/src/main/resources/Static/Img/Dr.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
 }
 .form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 350px;
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
     padding: 50px;
     border-radius: 20px;
     position: relative;
@@ -18,7 +21,7 @@ body{
   
   .title {
     font-size: 28px;
-    color: royalblue;
+    color: #fff;
     font-weight: 600;
     letter-spacing: -1px;
     position: relative;
@@ -34,13 +37,13 @@ body{
     width: 16px;
     border-radius: 50%;
     left: 0px;
-    background-color: royalblue;
+    background-color: rgb(231, 233, 239);
   }
   
   .title::before {
     width: 18px;
     height: 18px;
-    background-color: royalblue;
+    background-color: rgb(214, 220, 240);
   }
   
   .title::after {
@@ -50,7 +53,7 @@ body{
   }
   
   .message, .signin {
-    color: rgba(88, 87, 87, 0.822);
+    color: #fff;
     font-size: 14px;
   }
   
@@ -59,7 +62,9 @@ body{
   }
   
   .signin a {
-    color: royalblue;
+    color:#abc1f3;
+    font-weight: bold
+    ;
   }
   
   .signin a:hover {
@@ -82,13 +87,14 @@ body{
     outline: 0;
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 10px;
+    color:#fff
   }
   
   .form label .input + span {
     position: absolute;
     left: 10px;
     top: 15px;
-    color: grey;
+    color: #fff;
     font-size: 0.9em;
     cursor: text;
     transition: 0.3s ease;
@@ -97,6 +103,7 @@ body{
   .form label .input:placeholder-shown + span {
     top: 15px;
     font-size: 0.9em;
+    
   }
   
   .form label .input:focus + span,.form label .input:valid + span {
@@ -193,7 +200,10 @@ body{
     cursor: pointer;
     z-index: 3;
   }
-  
+  .input{
+    background-color: rgba(0,0,0,0.3);
+    
+  }
   .knobs {
     z-index: 2;
   }
@@ -249,7 +259,7 @@ body{
   /* -------------------------------------------------------------------------------------- */
   
   .custum-file-upload {
-    height: 200px;
+    height: 100px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -259,21 +269,28 @@ body{
     align-items: center;
     justify-content: center;
     border: 2px dashed #cacaca;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(0,0,0, .3);
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+    
   }
-  
+  input::placeholder{
+    color: #fff;
+    font-family: sans-serif;
+  }
   .custum-file-upload .icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    
   }
   
   .custum-file-upload .icon svg {
     height: 80px;
-    fill: rgba(75, 85, 99, 1);
+    fill: #fff;
+
   }
   
   .custum-file-upload .text {
@@ -284,7 +301,8 @@ body{
   
   .custum-file-upload .text span {
     font-weight: 400;
-    color: rgba(75, 85, 99, 1);
+    color: #fff;
+    
   }
   
   .custum-file-upload input {
@@ -293,6 +311,8 @@ body{
   
   input[type='checkbox']:checked~.inputs-hidden {
     visibility: visible;
+    
+    
   }
   .question{
     display: flex;
@@ -300,10 +320,15 @@ body{
     justify-content: center;
     align-items: center;
     gap: 10px;
+    color: #fff;
+    font-family: sans-serif;
   }
   .inputs-hidden{
     visibility: hidden;
     display: flex;
     justify-content: center;
     gap: 30px;
+    
+    
   }
+

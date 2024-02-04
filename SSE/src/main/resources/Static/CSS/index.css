@@ -1,6 +1,8 @@
 
-body{
-    background-color: cadetblue;
+body{ 
+    background-image: url(../Img/pexels-pixabay-40568.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .contenedor{
     margin: 30px 30px;
@@ -8,15 +10,15 @@ body{
     padding: 30px;
     width: 100%;
     height: 100%;
-    background-color: cadetblue;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* background: ; */
     
 }
 .img2{
     width: 300px; 
-    height: 230px;
+    height: 300px;
     position: relative;
     
 }
