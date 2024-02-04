@@ -1,6 +1,7 @@
 package com.Equipo1.sse.entidades;
 
 import com.Equipo1.sse.enumeraciones.Rol;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity @Data @AllArgsConstructor 
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

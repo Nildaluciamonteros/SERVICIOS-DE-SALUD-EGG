@@ -9,7 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
+<<<<<<< HEAD
       href="/SSE/src/main/resources/Static/CSS/Registro.css" 
+=======
+      th:href="@{/CSS/registro.css}"
+>>>>>>> f2c0dd0f697f8e43bee2449696ee1ed3fd459673
     />
     <title>SSE Login</title>
   </head>
@@ -28,7 +32,7 @@
             required=""
             type="text"
             class="input"
-            th:value="${paciente.nombre}"
+            th:value="${nombre}"
             name="nombre"
           />
           <span>Nombre</span>
@@ -40,7 +44,7 @@
             placeholder=""
             type="text"
             class="input"
-            th:value="${paciente.apellido}"
+            th:value="${apellido}"
             name="apellido"
           />
           <span>Apellido</span>
@@ -52,7 +56,7 @@
           required=""
           type="number"
           class="input"
-          th:value="${paciente.telefono}"
+          th:value="${telefono}"
           name="telefono"
         />
         <span>Teléfono</span>
@@ -63,7 +67,7 @@
           required=""
           type="email"
           class="input"
-          th:value="${paciente.email}"
+          th:value="${email}"
           name="email"
         />
         <span>Email</span>
@@ -79,7 +83,7 @@
               type="text"
               class="input"
               placeholder="Nombre de la Obra Social"
-              th:value="${paciente.obraSocial}"
+              th:value="${obraSocial}"
               name="obraSocial"
             />
           </label>
@@ -89,7 +93,7 @@
               type="number"
               class="input"
               placeholder="Número de Afiliado"
-              th:value="${paciente.numAfiliado}"
+              th:value="${numAfiliado}"
               name="numAfiliado"
             />
           </label>
@@ -127,7 +131,7 @@
           placeholder=""
           type="password"
           class="input"
-          th:value="${paciente.password}"
+          th:value="${password}"
           name="password"
         />
         <span>Contraseña</span>
@@ -138,7 +142,7 @@
           placeholder=""
           type="password"
           class="input"
-          th:value="${paciente.password}"
+          th:value="${password}"
           name="password2"
         />
         <span>Confirmar Contraseña</span>
