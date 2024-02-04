@@ -1,0 +1,52 @@
+body{
+    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.display-3{
+    color: #fff;
+}
+.fw-normal{
+    color: #fff;
+}
+.inicioLogo{
+    width: 80px;
+    height: 80px;
+}
+.container{
+    background: rgba(0,0,0,.1);
+    backdrop-filter: blur(10px);
+    width: 600px;
+    height: 600px;
+    border-radius: 20px;
+    gap: 10px;
+}
+.icon-link{
+    color: aquamarine;
+    text-decoration: none;
+}
+.icon-link:hover{
+    color: #000;
+}
+.col-lg-4{
+    background: rgba(0,0,0,.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.row{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap:100px;
+}
+p{
+    color: #fff;
+}
