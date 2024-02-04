@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html 
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org/"
+<html
+  xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://thymeleaf.org/extras/spring-security"
-  >
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      th:href="@{/CSS/login.css}"
+      th:href="@{/CSS/registro.css}"
+      href="/SSE/src/main/resources/Static/CSS/login.css"
     />
     <title>Login SSE</title>
   </head>
   <body>
+    <nav th:replace="/fragments/navbar :: nav" />
     <form class="form">
       <p class="form-title">Ingresa a tu Cuenta</p>
       <div class="input-container">
         <input placeholder="ejemplo@ejemplo.com" type="email" />
-
- 
 
         <span>
           <svg
@@ -38,7 +37,6 @@
         </span>
       </div>
       <div class="input-container">
-
         <input placeholder="Ingrese contraseña" type="password" />
         <span>
           <svg
@@ -65,9 +63,7 @@
       <button class="submit" type="submit">Ingresar</button>
 
       <p class="signup-link">
-
         ¿No tienes una Cuenta?
-
 
         <a href="">Registrarse</a>
       </p>
