@@ -48,7 +48,11 @@ public class UsuarioServicio implements UserDetailsService
 	public void registrar(String nombre, String apellido, String telefono,
 			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
-		validar(nombre,apellido,telefono,email,obraSocial, numAfiliado,password,password2);
+		if(obraSocial == null)
+		{
+			obraSocial = "Particular";
+		}
+		validar(nombre,apellido,telefono,email, numAfiliado,password,password2);
 
 		Usuario usuario = new Usuario();
 
@@ -71,13 +75,17 @@ public class UsuarioServicio implements UserDetailsService
 			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
+		if(obraSocial == null)
+		{
+			obraSocial = "Particular";
+		}
 		if(claveVacia)
 		{
-			validar(nombre,apellido,telefono,email,obraSocial, numAfiliado, "123456", "123456");
+			validar(nombre,apellido,telefono,email, numAfiliado, "123456", "123456");
 		}
 		else
 		{
-			validar(nombre,apellido,telefono,email,obraSocial, numAfiliado,password,password2);
+			validar(nombre,apellido,telefono,email, numAfiliado,password,password2);
 		}
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if(respuesta.isPresent())
@@ -142,7 +150,7 @@ public class UsuarioServicio implements UserDetailsService
 	}
 
 	private void validar(String nombre, String apellido, String telefono,
-			String email, String obraSocial, String numAfiliado, String password, String password2) throws MiException
+			String email, String numAfiliado, String password, String password2) throws MiException
 	{
 		if (nombre == null || nombre.isEmpty())
 		{
@@ -159,10 +167,6 @@ public class UsuarioServicio implements UserDetailsService
 		if (email == null || email.isEmpty())
 		{
 			throw new MiException("El email no puede ser nulo o estar vacio");
-		}
-		if (obraSocial == null || obraSocial.isEmpty())
-		{
-			throw new MiException("La obra social no puede ser nulo o estar vacio");
 		}
 		if (numAfiliado == null || numAfiliado.isEmpty())
 		{
