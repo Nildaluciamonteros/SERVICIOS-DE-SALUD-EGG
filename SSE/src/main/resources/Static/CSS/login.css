@@ -4,8 +4,8 @@ body{
     position: relative;
     top: 8rem;
     background-image: url("/SSE/src/main/resources/Static/Img/loginImg.jpg");
-background-repeat: no-repeat;
-background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 .form {
     background-color:rgba(0, 0, 0, 0.05);
@@ -54,7 +54,19 @@ background-size: cover;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
-  
+  .LogoBlanco{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+  .LogoBlanco img{
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    
+ }
+
   .input-container span {
     display: grid;
     position: absolute;
