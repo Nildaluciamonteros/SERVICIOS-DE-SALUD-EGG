@@ -209,4 +209,12 @@ public class UsuarioServicio implements UserDetailsService
 			return null;
 		}
 	}
+        public void eliminarUsuario(String idUsuario){
+            Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if(respuesta.isPresent())
+		{
+			Usuario usuario = respuesta.get();
+                        usuarioRepositorio.delete(usuario);
+                }
+        }
 }
