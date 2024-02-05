@@ -12,7 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity @Data @AllArgsConstructor 
+@Entity
+@Data
+@AllArgsConstructor
 
 public class Usuario implements Serializable {
 
@@ -30,19 +32,16 @@ public class Usuario implements Serializable {
     private String email;
 
     private String password;
-	
-	private String obraSocial;
-	
-	private String numAfiliado;
-	
-	@Enumerated(EnumType.STRING)
-	private Rol rol;
-    
+
+    private String numAfiliado;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
     @OneToOne
     private Imagen imagen;
 
     public Usuario() {
     }
-    
-    
+
 }
