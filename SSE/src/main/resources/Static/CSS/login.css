@@ -4,8 +4,8 @@ body{
     position: relative;
     top: 8rem;
     background-image: url("/SSE/src/main/resources/Static/Img/loginImg.jpg");
-background-repeat: no-repeat;
-background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 .form {
     background-color:rgba(0, 0, 0, 0.05);

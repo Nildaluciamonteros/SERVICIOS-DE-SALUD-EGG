@@ -1,18 +1,26 @@
-body{
-    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio2.jpg");
+
+.main{
+    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
-.display-3{
-    color: #fff;
+.prestadores-cont{
+    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
-.fw-normal{
-    color: #fff;
-}
+
+
 .inicioLogo{
     width: 80px;
     height: 80px;
@@ -20,14 +28,16 @@ body{
 .container{
     background: rgba(0,0,0,.1);
     backdrop-filter: blur(10px);
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    height: auto;
     border-radius: 20px;
     gap: 10px;
 }
 .icon-link{
-    color: aquamarine;
+    color: rgb(84, 95, 91);
     text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 .icon-link:hover{
     color: #000;
@@ -47,6 +57,21 @@ body{
     justify-content: center;
     gap:100px;
 }
-p{
-    color: #fff;
+
+.feature{
+    text-align: center;
+}
+.redes{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+.redes svg{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    
 }
