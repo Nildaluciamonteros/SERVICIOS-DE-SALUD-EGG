@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Entity @Data @AllArgsConstructor 
+@Entity @Data @AllArgsConstructor
 public class Paciente extends Usuario {
 
     private String obraSocial;
