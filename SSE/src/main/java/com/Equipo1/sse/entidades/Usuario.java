@@ -31,6 +31,10 @@ public class Usuario implements Serializable {
 
     private String password;
 	
+	private String obraSocial;
+	
+	private String numAfiliado;
+	
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
     
