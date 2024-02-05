@@ -6,7 +6,9 @@
 package com.Equipo1.sse.servicios;
 
 import com.Equipo1.sse.entidades.Imagen;
+import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
+import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.repositorios.UsuarioRepositorio;
@@ -127,6 +129,16 @@ public class UsuarioServicio implements UserDetailsService
 	public List<Usuario> listarUsuarios()
 	{
 		return usuarioRepositorio.findAll();
+	}
+	
+	public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad)
+	{
+		return usuarioRepositorio.buscarPorEspecialidad(especialidad);
+	}
+	
+	public List<Profesional> listarProfesionales()
+	{
+		return usuarioRepositorio.buscarTodosLosProfesionales();
 	}
 
 	private void validar(String nombre, String apellido, String telefono,
