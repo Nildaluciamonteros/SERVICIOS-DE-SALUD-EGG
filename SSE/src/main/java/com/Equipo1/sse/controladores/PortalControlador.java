@@ -60,7 +60,7 @@ public class PortalControlador
                 if (logeado.getRol() == Rol.PROFESIONAL)
 		{
 			return "redirect:/profesional/";
-		}
+		} 
 		return "inicio.html";
 	}
 
@@ -71,13 +71,13 @@ public class PortalControlador
 		{
 			modelo.put("error", "Usuario o contraseña invalidos!");
 		}
-		return "Login.html";
+		return "login.html";
 	}
 
 	@GetMapping("/registro")
 	public String registro(ModelMap modelo)
 	{
-		return "Registro.html";
+		return "registro.html";
 	}
 
 	@PostMapping("/registro")
