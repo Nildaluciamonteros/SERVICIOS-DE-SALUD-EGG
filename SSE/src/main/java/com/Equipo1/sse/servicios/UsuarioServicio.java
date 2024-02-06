@@ -120,10 +120,17 @@ public class UsuarioServicio implements UserDetailsService
 			usuario.setApellido(apellido);
 			usuario.setTelefono(telefono);
 			usuario.setEmail(email);
-			if (usuario instanceof Paciente)
+			if (usuario instanceof Paciente && usuario.getRol() == Rol.PACIENTE)
 			{
 				((Paciente) usuario).setObraSocial(OS);
 				((Paciente) usuario).setNumAfiliado(numAfiliado);
+			}
+			if(usuario instanceof Profesional && usuario.getRol() == Rol.PROFESIONAL)
+			{
+				/*((Profesional)usuario).setEspecialidad(Especialidades.Pediatria);
+				((Profesional)usuario).setReputacion(Integer.MIN_VALUE);
+				((Profesional)usuario).setTurnos(turnos);
+				((Profesional)usuario).setValorConsulta(Double.NaN);*/
 			}
 			if (!claveVacia)
 			{
@@ -149,9 +156,30 @@ public class UsuarioServicio implements UserDetailsService
 		
 		if (respuesta.isPresent())
 		{
-			Usuario usuario = respuesta.get();
-			usuario.setRol(Rol.buscar(rol));
-			usuarioRepositorio.save(usuario);
+			Usuario usuarioViejo = respuesta.get();
+			Rol rolNuevo = Rol.buscar(rol);
+			Usuario usuarioActualizado;
+			switch (rolNuevo)
+			{
+				case PROFESIONAL:
+					usuarioActualizado = new Profesional();
+					break;
+				case ADMIN:
+					usuarioActualizado = new Usuario();
+					break;
+				default:
+					usuarioActualizado = new Paciente();
+					break;
+			}
+			usuarioActualizado.setId(usuarioViejo.getId());
+			usuarioActualizado.setNombre(usuarioViejo.getNombre());
+			usuarioActualizado.setApellido(usuarioViejo.getApellido());
+			usuarioActualizado.setEmail(usuarioViejo.getEmail());
+			usuarioActualizado.setImagen(usuarioViejo.getImagen());
+			usuarioActualizado.setPassword(usuarioViejo.getPassword());
+			usuarioActualizado.setTelefono(usuarioViejo.getTelefono());
+			usuarioActualizado.setRol(rolNuevo);
+			usuarioRepositorio.save(usuarioActualizado);
 		}
 	}
 	
