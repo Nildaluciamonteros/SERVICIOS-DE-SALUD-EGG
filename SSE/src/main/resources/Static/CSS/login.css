@@ -3,7 +3,7 @@ body{
     justify-content: center;
     position: relative;
     top: 8rem;
-    background-image: url("/SSE/src/main/resources/Static/Img/loginImg.jpg");
+    background-image: url(../Img/loginImg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }
