@@ -2,7 +2,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/SSE/src/main/resources/Static/Img/Dr.jpg");
+  background-image: url(../Img/Dr.jpg);
   background-repeat: no-repeat;
   background-size:cover;
 }
