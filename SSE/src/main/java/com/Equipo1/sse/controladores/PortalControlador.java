@@ -5,11 +5,13 @@
  */
 package com.Equipo1.sse.controladores;
 
+import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
+import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,86 +33,77 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/")
-public class PortalControlador
-{
-	@Autowired
-	private UsuarioServicio usuarioServicio;
-	
-	@GetMapping("/")
-	public String index(ModelMap modelo)
-	{
-		return "index.html";
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
-	@GetMapping("/inicio")
-	public String inicio(HttpSession session)
-	{
-		Usuario logeado = (Usuario) session.getAttribute("usuarioSession");
-		if (logeado.getRol() == Rol.ADMIN)
-		{
-			return "redirect:/admin/dashboard";
-		}
-		return "inicio.html";
-	}
-	
-	@GetMapping("/login")
-	public String login(@RequestParam(required = false) String error, ModelMap modelo)
-	{
-		if (error != null)
-		{
-			modelo.put("error", "Usuario o contraseña invalidos!");
-		}
-		return "login.html";
-	}
-	
-	@GetMapping("/registro")
-	public String registro(ModelMap modelo)
-	{
-		return "registro.html";
-	}
-	
-	@PostMapping("/registro")
-	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String email, @RequestParam String obraSocial, @RequestParam String numAfiliado, @RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, ModelMap modelo)
-	{
-		try
-		{
-			usuarioServicio.registrar(nombre,apellido,telefono,email,obraSocial,numAfiliado,password,password2,archivo);
-			modelo.put("exito", "Usuario registrado correctamente");
-			return "index.html";
-		} catch (MiException ex)
-		{
-			modelo.put("error", ex.getMessage());
-			
-			modelo.put("nombre", nombre);
-			modelo.put("apellido", apellido);
-			modelo.put("telefono", telefono);
-			modelo.put("email", email);
-			modelo.put("password",password);
-			modelo.put("password2",password2);
-			return "registro.html";
-		}
-	}
-	
-	@GetMapping("/especialidades/")
-	public String especialidades(ModelMap modelo)
-	{
-		List<String> especialidades = new ArrayList();
-		for(Especialidades e : Especialidades.values())
-		{
-			especialidades.add(e.name());
-		}
-		modelo.put("especialidades", especialidades);
-		return "especialidades.html";
-	}
-	
-	@GetMapping("/especialidades/{especialidad}")
-	public String especialidad(@PathVariable String especialidad, ModelMap modelo)
-	{
-		List<Profesional> profesionales = usuarioServicio.listarProfesionalesPorEspecialidad(especialidad);
-		modelo.put("profesionales",profesionales);
-		return "especialidad.html";
-	}
+public class PortalControlador {
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+    @Autowired
+    private ObraSocialServicio obraSocialServicio;
+
+    @GetMapping("/")
+    public String index(ModelMap modelo) {
+        return "index.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
+    @GetMapping("/inicio")
+    public String inicio(HttpSession session) {
+        Usuario logeado = (Usuario) session.getAttribute("usuarioSession");
+        if (logeado.getRol() == Rol.ADMIN) {
+            return "redirect:/admin/dashboard";
+        }
+        return "inicio.html";
+    }
+
+    @GetMapping("/login")
+    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña invalidos!");
+        }
+        return "login.html";
+    }
+
+    @GetMapping("/registro")
+    public String registro(ModelMap modelo) {
+        return "registro.html";
+    }
+
+    @PostMapping("/registro")
+    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
+            @RequestParam String email, @RequestParam String obraSocial, @RequestParam String numAfiliado, @RequestParam String password, @RequestParam String password2,
+            @RequestParam MultipartFile archivo, ModelMap modelo) {
+        try {
+            ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
+            usuarioServicio.registrar(nombre, apellido, telefono, email, OS, numAfiliado, password, password2, archivo);
+            modelo.put("exito", "Usuario registrado correctamente");
+            return "index.html";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+
+            modelo.put("nombre", nombre);
+            modelo.put("apellido", apellido);
+            modelo.put("telefono", telefono);
+            modelo.put("email", email);
+            modelo.put("password", password);
+            modelo.put("password2", password2);
+            return "registro.html";
+        }
+    }
+
+    @GetMapping("/especialidades/")
+    public String especialidades(ModelMap modelo) {
+        List<String> especialidades = new ArrayList();
+        for (Especialidades e : Especialidades.values()) {
+            especialidades.add(e.name());
+        }
+        modelo.put("especialidades", especialidades);
+        return "especialidades.html";
+    }
+
+    @GetMapping("/especialidades/{especialidad}")
+    public String especialidad(@PathVariable String especialidad, ModelMap modelo) {
+        List<Profesional> profesionales = usuarioServicio.listarProfesionalesPorEspecialidad(especialidad);
+        modelo.put("profesionales", profesionales);
+        return "especialidad.html";
+    }
 }

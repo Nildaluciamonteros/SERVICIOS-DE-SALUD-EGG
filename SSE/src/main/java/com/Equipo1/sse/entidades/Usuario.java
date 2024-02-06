@@ -33,8 +33,6 @@ public class Usuario implements Serializable {
 
     private String password;
 
-    private String numAfiliado;
-
     @Enumerated(EnumType.STRING)
     private Rol rol;
 

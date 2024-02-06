@@ -5,8 +5,10 @@
  */
 package com.Equipo1.sse.controladores;
 
+import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.excepciones.MiException;
+import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -29,70 +31,65 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
-public class AdminControlador
-{
+public class AdminControlador {
 
-	@Autowired
-	private UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
-	@GetMapping("/dashboard")
-	public String index(ModelMap modelo)
-	{
-		return "panelAdmin.html";
-	}
+    @Autowired
+    private ObraSocialServicio obraSocialServicio;
 
-	@GetMapping("/usuarios")
-	public String listar(ModelMap modelo)
-	{
-		List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-		modelo.addAttribute("usuarios", usuarios);
+    @GetMapping("/dashboard")
+    public String index(ModelMap modelo) {
+        return "panelAdmin.html";
+    }
 
-		return "usuario_lista.html";
-	}
+    @GetMapping("/usuarios")
+    public String listar(ModelMap modelo) {
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+        modelo.addAttribute("usuarios", usuarios);
 
-	@GetMapping("/modificarRol/{id}")
-	public String cambiarRol(@PathVariable String id, HttpSession session, Authentication authentication)
-	{
-		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
-		usuarioServicio.cambiarRol(id);
-		Usuario editado = usuarioServicio.getOne(id);
-		if (!editado.equals(usuarioSession))
-		{
+        return "usuario_lista.html";
+    }
 
-		}
-		return "redirect:/admin/usuarios";
-	}
+    @GetMapping("/modificarRol/{id}")
+    public String cambiarRol(@PathVariable String id, HttpSession session, Authentication authentication) {
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
+        usuarioServicio.cambiarRol(id);
+        Usuario editado = usuarioServicio.getOne(id);
+        if (!editado.equals(usuarioSession)) {
 
-	@GetMapping("/modificar/{id}")
-	public String modificarUsuario(@PathVariable String id, ModelMap modelo)
-	{
+        }
+        return "redirect:/admin/usuarios";
+    }
 
-		Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-		modelo.put("usuario", usuario);
-		return "usuario_modificar.html";
-	}
+    @GetMapping("/modificar/{id}")
+    public String modificarUsuario(@PathVariable String id, ModelMap modelo) {
 
-	@PostMapping("/modificar/{id}")
-	public String actualizar(@PathVariable String id, @RequestParam String nombre,
-			@RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String numAfiliado,
-			@RequestParam String email, @RequestParam String obraSocial,
-			@RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo)
-	{
-		try
-		{
-			usuarioServicio.actualizar(id, nombre, apellido,
-					telefono, email, obraSocial, numAfiliado, password, password2, archivo);
-			modelo.put("exito", "Usuario actualizado correctamente");
-			return "inicio.html";
-		} catch (MiException ex)
-		{
-			modelo.put("error", ex.getMessage());
-			Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-			modelo.put("usuario", usuario);
+        Usuario usuario = (Usuario) usuarioServicio.getOne(id);
+        modelo.put("usuario", usuario);
+        return "usuario_modificar.html";
+    }
 
-			return "usuario_modificar.html";
-		}
-	}
+    @PostMapping("/modificar/{id}")
+    public String actualizar(@PathVariable String id, @RequestParam String nombre,
+            @RequestParam String apellido, @RequestParam String telefono,
+            @RequestParam String numAfiliado,
+            @RequestParam String email, @RequestParam String obraSocial,
+            @RequestParam String password, @RequestParam String password2,
+            @RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo) {
+        try {
+            ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
+            usuarioServicio.actualizar(id, nombre, apellido,
+                    telefono, email, OS, numAfiliado, password, password2, archivo);
+            modelo.put("exito", "Usuario actualizado correctamente");
+            return "inicio.html";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            Usuario usuario = (Usuario) usuarioServicio.getOne(id);
+            modelo.put("usuario", usuario);
+
+            return "usuario_modificar.html";
+        }
+    }
 }
