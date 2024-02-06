@@ -76,7 +76,7 @@ public class PortalControlador {
             ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
             usuarioServicio.registrar(nombre, apellido, telefono, email, OS, numAfiliado, password, password2, archivo);
             modelo.put("exito", "Usuario registrado correctamente");
-            return "index.html";
+            return "inicio.html";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
 
@@ -90,7 +90,7 @@ public class PortalControlador {
         }
     }
 
-    @GetMapping("/especialidades/")
+    @GetMapping("/especialidades")
     public String especialidades(ModelMap modelo) {
         List<String> especialidades = new ArrayList();
         for (Especialidades e : Especialidades.values()) {
