@@ -71,13 +71,13 @@ public class PortalControlador
 		{
 			modelo.put("error", "Usuario o contraseña invalidos!");
 		}
-		return "Login.html";
+		return "login.html";
 	}
 
 	@GetMapping("/registro")
 	public String registro(ModelMap modelo)
 	{
-		return "Registro.html";
+		return "registro.html";
 	}
 
 	@PostMapping("/registro")
@@ -90,7 +90,7 @@ public class PortalControlador
 			usuarioServicio.registrar(nombre, apellido, telefono, email, obraSocial, numAfiliado,
 					password, password2, archivo);
 			modelo.put("exito", "Usuario registrado correctamente");
-			return "inicio.html";
+			return "redirect:/login";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
