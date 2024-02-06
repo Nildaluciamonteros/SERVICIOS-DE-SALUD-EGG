@@ -12,4 +12,16 @@ package com.Equipo1.sse.enumeraciones;
 public enum Rol
 {
 	PACIENTE,PROFESIONAL,ADMIN;
+	
+	public static Rol buscar(String val)
+	{
+		for (Rol v : values())
+		{
+			if (v.name().equals(val))
+			{
+				return v;
+			}
+		}
+		return null;
+	}
 }

@@ -6,7 +6,10 @@
 package com.Equipo1.sse.repositorios;
 
 import com.Equipo1.sse.entidades.Turno;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,5 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TurnoRepositorio extends JpaRepository<Turno, String> {
     
-    
+    @Query("SELECT t FROM Turno t WHERE t.paciente.numAfiliado = :numAfiliado")
+	public List<Turno> buscarPorNumeroAfiliado(@Param("numAfiliado") String numAfiliado);
 }
