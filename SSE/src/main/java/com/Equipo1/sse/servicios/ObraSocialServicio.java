@@ -19,53 +19,63 @@ import org.springframework.stereotype.Service;
  * @author ALEXIS.R.L
  */
 @Service
-public class ObraSocialServicio {
-    
-    @Autowired
+public class ObraSocialServicio
+{
+
+	@Autowired
 	private ObraSocialRepositorio obraSocialRepositorio;
-    @Transactional
-	public void registrar(String nombre) throws MiException{
-            validar(nombre);
-            ObraSocial obraSocial = new ObraSocial();
-            obraSocial.setNombre(nombre);
-            obraSocialRepositorio.save(obraSocial);
-        }
-    @Transactional
-	public void actualizar(String idOS, String nombre){
-            Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
-		if(respuesta.isPresent())
+
+	@Transactional
+	public void registrar(String nombre) throws MiException
+	{
+		validar(nombre);
+		ObraSocial obraSocial = new ObraSocial();
+		obraSocial.setNombre(nombre);
+		obraSocialRepositorio.save(obraSocial);
+	}
+
+	@Transactional
+	public void actualizar(String idOS, String nombre)
+	{
+		Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
+		if (respuesta.isPresent())
 		{
 			ObraSocial obraSocial = respuesta.get();
 			obraSocial.setNombre(nombre);
-                        obraSocialRepositorio.save(obraSocial);
-                }
-        }
-    public List<ObraSocial> listarObraSociales()
+			obraSocialRepositorio.save(obraSocial);
+		}
+	}
+
+	public List<ObraSocial> listarObraSociales()
 	{
 		return obraSocialRepositorio.findAll();
 	}
-    
-    public ObraSocial buscarObraSocial(String nombre)
+
+	public ObraSocial buscarObraSocial(String nombre)
 	{
 		return obraSocialRepositorio.buscarPorNombre(nombre);
 	}
-    
-    private void validar(String nombre)throws MiException {
-        if (nombre == null || nombre.isEmpty())
+
+	private void validar(String nombre) throws MiException
+	{
+		if (nombre == null || nombre.isEmpty())
 		{
 			throw new MiException("El nombre no puede ser nulo o estar vacio");
 		}
-    }
-    public ObraSocial getOne(String id)
+	}
+
+	public ObraSocial getOne(String id)
 	{
 		return obraSocialRepositorio.getOne(id);
 	}
-    public void eliminarObraSocial(String idOS){
-            Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
-		if(respuesta.isPresent())
+
+	public void eliminarObraSocial(String idOS)
+	{
+		Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
+		if (respuesta.isPresent())
 		{
 			ObraSocial obraSocial = respuesta.get();
-                        obraSocialRepositorio.delete(obraSocial);
-                }
-        }
+			obraSocialRepositorio.delete(obraSocial);
+		}
+	}
 }

@@ -48,6 +48,11 @@ public class TurnoServicio
 
 		return turnos;
 	}
+	
+	public List<Turno> buscarPorNumeroAfiliado(String numAfiliado)
+	{
+		return turnoRepositorio.buscarPorNumeroAfiliado(numAfiliado);
+	}
 
 	public void modificarEditorial(String id, Date fecha, Paciente paciente) throws MiException
 	{
