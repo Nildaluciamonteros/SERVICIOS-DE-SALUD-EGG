@@ -54,15 +54,18 @@ public class UsuarioServicio implements UserDetailsService
 			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		// Validar datos
-		ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
-		if (OS == null)
+		ObraSocial OS = null;
+		if(obraSocial != null && !obraSocial.isEmpty())
 		{
-			OS = obraSocialServicio.buscarObraSocial("Particular");
-			numAfiliado = "";
+			OS = obraSocialServicio.buscarObraSocial(obraSocial);
+			if(numAfiliado == null || numAfiliado.isEmpty())
+			{
+				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			}
 		}
-		else if(numAfiliado == null || numAfiliado.isEmpty())
+		else
 		{
-			throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			numAfiliado = "";
 		}
 		validar(nombre, apellido, telefono, email, password, password2);
 		// Crear Usuario
@@ -88,15 +91,18 @@ public class UsuarioServicio implements UserDetailsService
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
 		// Validar datos
-		ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
-		if (OS == null)
+		ObraSocial OS = null;
+		if(obraSocial != null && !obraSocial.isEmpty())
 		{
-			OS = obraSocialServicio.buscarObraSocial("Particular");
-			numAfiliado = "";
+			OS = obraSocialServicio.buscarObraSocial(obraSocial);
+			if(numAfiliado == null || numAfiliado.isEmpty())
+			{
+				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			}
 		}
-		else if(numAfiliado == null || numAfiliado.isEmpty())
+		else
 		{
-			throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			numAfiliado = "";
 		}
 		if (claveVacia) 
 		{
