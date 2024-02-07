@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SseApplication<SSE>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.Equipo1.sse.SseApplication",
+            "projectName": "SSE",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
