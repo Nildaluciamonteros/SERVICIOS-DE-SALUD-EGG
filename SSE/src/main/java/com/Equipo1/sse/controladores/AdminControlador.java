@@ -14,6 +14,7 @@ import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -55,8 +56,14 @@ public class AdminControlador
 	public String listar(ModelMap modelo)
 	{
 		List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+		List<String> roles = new ArrayList();
+		for (Rol e : Rol.values())
+		{
+			roles.add(e.name());
+		}
 		modelo.addAttribute("usuarios", usuarios);
-
+		modelo.addAttribute("roles", roles);
+		
 		return "usuario_lista.html";
 	}
 	
@@ -78,17 +85,12 @@ public class AdminControlador
 		return "usuario_buscar.html";
 	}
 
-	@GetMapping("/usuarios/{id}/cambiarRol")
-	public String cambiarRol(@PathVariable String id, @PathVariable String rol, HttpSession session, Authentication authentication)
+	@PostMapping("/usuarios/{id}/cambiarRol")
+	public String cambiarRol(@PathVariable String id, String rol, HttpSession session, Authentication authentication)
 	{
 		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
 
 		usuarioServicio.cambiarRol(id, rol);
-		Usuario editado = usuarioServicio.getOne(id);
-		if (!editado.equals(usuarioSession))
-		{
-
-		}
 		return "redirect:/admin/usuarios";
 	}
 	
@@ -105,7 +107,7 @@ public class AdminControlador
 			usuarioServicio.eliminarUsuario(id);
 			modelo.put("exito", "El usuario se eliminó");
 		}
-		return "usuario_eliminado.html";
+		return "redirect:/admin/usuarios";
 	}
 
 	@GetMapping("/usuarios/{id}/modificar")
