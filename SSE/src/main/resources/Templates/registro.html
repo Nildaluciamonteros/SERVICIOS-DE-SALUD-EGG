@@ -8,12 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      th:href="@{/CSS/registro.css}"
-      href="/SSE/src/main/resources/Static/CSS/registro.css"
-      Develop
-    />
+    <link rel="stylesheet" th:href="@{/CSS/registro.css}" Develop />
     <title>SSE Login</title>
   </head>
   <body>
@@ -27,7 +22,7 @@
     >
       <p class="title">Registro</p>
       <div class="registroLogo">
-        <img src="/Img/LogoBlanco.svg" alt="" />
+        <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
       </div>
       <p class="message">Para acceder a nuestros servicio Registrate</p>
       <div class="flex">
