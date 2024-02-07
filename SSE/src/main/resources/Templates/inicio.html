@@ -5,17 +5,20 @@ xmlns:th="http://www.thymeleaf.org/"
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/SSE/src/main/resources/Static/CSS/inicio.css">
+    <link rel="stylesheet" th:href="@{/CSS/inicio.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>SSE-Inicio</title>
   </head>
   <body>
+
     <nav th:replace="/fragments/navbar :: nav"><!-- navbar -->
+     
     <main class="main">
+      <div th:replace="/fragments/status :: div"/><!-- Mensaje de exito / error -->
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center  container">
           <div class="col-md-6 p-lg-5 mx-auto my-5">
-            <img src="/SSE/src/main/resources/Static/Img/LogoBlanco.svg" alt="" class="inicioLogo"><!--logo  -->
+            <img th:src="@{../Img/LogoBlanco.svg}" alt="" class="inicioLogo"><!--logo  -->
             <h1 class="display-3 fw-bold">Servicio de Salud EGG</h1>
             
             <p>
@@ -55,11 +58,11 @@ xmlns:th="http://www.thymeleaf.org/"
                   </svg>
               <h2 class="fw-normal">Clinica</h2>
               <p>Nuestros médicos clínicos cuentan con años de experiencia en el campo de la medicina, asegurando un diagnóstico preciso y un tratamiento efectivo para una amplia gama de condiciones médicas. </p>
-              <p><a class="btn btn-primary href="#">Especialistas &raquo;</a></p>
+              <p><a class="btn btn-primary" href="#">Especialistas &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
                 <svg class="pediatria bd-placeholder-img rounded-circle" width="140" height="140" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                     <image th:src="@{/SSE/src/main/resources/Static/Img/Pediatra.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                     <image th:src="@{/Img/Pediatra.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
                 
                   </svg>
                 
@@ -73,7 +76,7 @@ xmlns:th="http://www.thymeleaf.org/"
        
             <div class="col-lg-4">
                 <svg class="pediatria bd-placeholder-img rounded-circle" width="140" height="140" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                     <image th:src="@{/SSE/src/main/resources/Static/Img/cardiologia.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                     <image th:src="@{../Img/cardiologia.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
                 </svg>
               <h2 class="fw-normal">Cardiologia</h2>
               <p>Nuestro cardiólogo cuenta con una sólida formación y experiencia en el diagnóstico y tratamiento de condiciones cardiovasculares. Desde enfermedades cardíacas comunes hasta casos más complejos, estamos aquí para cuidar de tu corazón. </p>
@@ -81,7 +84,7 @@ xmlns:th="http://www.thymeleaf.org/"
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
                 <svg class="pediatria bd-placeholder-img rounded-circle" width="140" height="140" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                     <image th:src="@{/SSE/src/main/resources/Static/Img/ginecologia.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                     <image th:src="@{../Img/ginecologia.jpg}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
 
                 </svg>
                               
