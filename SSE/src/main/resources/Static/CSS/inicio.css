@@ -1,6 +1,6 @@
 
 .main{
-    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio3.jpg");
+    background-image: url("/Img/fondoInicio3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -10,7 +10,7 @@
     padding: 20px;
 }
 .prestadores-cont{
-    background-image: url("/SSE/src/main/resources/Static/Img/fondoInicio3.jpg");
+    background-image: url("/Img/fondoInicio3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
