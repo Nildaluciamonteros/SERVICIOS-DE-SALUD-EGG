@@ -1,0 +1,12 @@
+body{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url(../Img/fondoAdmin.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  h1{
+    text-align: center;
+  }
