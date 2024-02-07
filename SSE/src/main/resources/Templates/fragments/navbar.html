@@ -27,6 +27,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/turnos">Turnos</a>
+        </li> 
+
+        </li>
+        <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
+          <a class="nav-link" href="/admin/usuarios">Usuarios</a>
         </li>
 
         <li class="nav-item dropdown">

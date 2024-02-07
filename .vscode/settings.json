@@ -1,3 +1,4 @@
 {
-  "livePreview.defaultPreviewPath": "/SSE/src/main/resources/Templates/Registro.html"
+  "livePreview.defaultPreviewPath": "/SSE/src/main/resources/Templates/Registro.html",
+  "java.compile.nullAnalysis.mode": "automatic"
 }
