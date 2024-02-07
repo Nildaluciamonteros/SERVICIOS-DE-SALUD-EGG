@@ -53,12 +53,6 @@
             >
               <datalist id="rol" name="rol">
                 <option
-                  hidden
-                  disabled="true"
-                  selected="selected"
-                  data-value=""
-                />
-                <option
                   th:each="rol : ${roles}"
                   th:data-value="${rol}"
                   th:text="${rol}"
