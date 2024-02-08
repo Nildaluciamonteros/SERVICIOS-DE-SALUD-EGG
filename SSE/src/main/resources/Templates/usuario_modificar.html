@@ -72,7 +72,7 @@ th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admi
                     />
                 <span>Email</span>
             </label>
-			<!--
+			
             <div class="question" th:if="${usuario.rol.toString() == 'PACIENTE'}">
                 <h3>Posee Obra Social:</h3>
 
@@ -83,7 +83,6 @@ th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admi
                             type="text"
                             class="input"
                             placeholder="Nombre de la Obra Social"
-							th:value="${usuario.obraSocial.nombre}"
                             name="obraSocial"
                             />
                     </label>
@@ -93,7 +92,6 @@ th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admi
                             type="number"
                             class="input"
                             placeholder="Número de Afiliado"
-							th:value="${usuario.numAfiliado}"
                             name="numAfiliado"
                             />
                     </label>
@@ -108,7 +106,7 @@ th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admi
                             type="text"
                             class="input"
                             placeholder="Especialidad"
-							th:value="${usuario.especialidad}"
+							
                             name="especialidad"
                             />
                     </label>
@@ -118,13 +116,12 @@ th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admi
                             type="number"
                             class="input"
                             placeholder="Valor de consulta"
-                            th:value="${usuario.valorConsulta}"
+                            
                             name="valorConsulta"
                             />
                     </label>
                 </div>
             </div>
-			!-->
             <label class="custum-file-upload" for="file">
                 <div class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
