@@ -179,6 +179,7 @@ public class UsuarioServicio implements UserDetailsService
 			usuarioActualizado.setPassword(usuarioViejo.getPassword());
 			usuarioActualizado.setTelefono(usuarioViejo.getTelefono());
 			usuarioActualizado.setRol(rolNuevo);
+			usuarioRepositorio.delete(usuarioViejo);
 			usuarioRepositorio.save(usuarioActualizado);
 		}
 	}
