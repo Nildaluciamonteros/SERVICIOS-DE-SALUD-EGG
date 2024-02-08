@@ -16,7 +16,7 @@
         <!-- Mensaje de exito / error -->
         <form
             class="form"
-th:action="${usuario.rol == 'ADMIN' ? '/admin/usuarios/' + usuario.id + '/modificar' :
+th:action="${#strings.contains(#httpServletRequest.requestURI, 'admin') ? '/admin/usuarios/' + usuario.id + '/modificar' :
 '/perfil/' + usuario.id + '/modificar'}"
             method="post"
             enctype="multipart/form-data"
