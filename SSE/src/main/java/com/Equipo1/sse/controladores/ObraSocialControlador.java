@@ -40,27 +40,25 @@ public class ObraSocialControlador {
         
         try {
             obraSocialServicio.registrar(nombre);
-            
             modelo.put("exito", "La obra Socual fue registrada correctamente!");
         } catch (MiException ex) {
-                      
+            modelo.put("nombre",nombre);
             modelo.put("error", ex.getMessage());
             return "obraSocial_form.html";
         }
         
-        return "obraSocial.html";        
+        return "redirect:/admin/obraSocial/lista";
     }
     
     @GetMapping("/lista")
     public String lista(ModelMap modelo) {
         List<ObraSocial> OS = obraSocialServicio.listarObraSociales();
         modelo.put("obraSociales", OS);
-
         return "obraSocial_lista.html";
     }
     
-    @GetMapping("/obraSocial/{id}/eliminar")
-	public String eliminarUsuario(@PathVariable String id, ModelMap modelo)
+    @GetMapping("/{id}/eliminar")
+	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo)
 	{
 		ObraSocial OS = obraSocialServicio.getOne(id);
 		if(OS == null)
@@ -72,6 +70,34 @@ public class ObraSocialControlador {
 			obraSocialServicio.eliminarObraSocial(id);
 			modelo.put("exito", "La Obra Social se eliminó");
 		}
-		return "redirect:/admin/obraSocial";
+		return "redirect:/admin/obraSocial/lista";
+	}
+	
+	@GetMapping("/{id}/modificar")
+	public String modificarUsuario(@PathVariable String id, ModelMap modelo)
+	{
+
+		ObraSocial obraSocial = obraSocialServicio.getOne(id);
+		modelo.put("nombre", obraSocial.getNombre());
+		return "obraSocial_modificar.html";
+	}
+
+	@PostMapping("/{id}/modificar")
+	public String actualizar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo)
+	{
+		try
+		{
+			obraSocialServicio.actualizar(id, nombre);
+			modelo.put("exito", "Obra social actualizada correctamente");
+			return "redirect:/admin/obraSocial/lista";
+		}
+		catch (MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
+			ObraSocial usuario = obraSocialServicio.getOne(id);
+			modelo.put("nombre", nombre);
+
+			return "obraSocial_modificar.html";
+		}
 	}
 }

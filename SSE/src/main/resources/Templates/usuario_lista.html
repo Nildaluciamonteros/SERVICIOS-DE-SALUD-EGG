@@ -9,6 +9,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" th:href="@{/CSS/usuario_lista.css}" />
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
     <title>Dashboard</title>
   </head>
@@ -19,7 +20,7 @@
     <!-- Mensaje de exito / error -->
     <h1>Usuarios Registrados</h1>
 
-    <table class="table table-dark">
+    <table class="table table-gradient">
       <thead>
         <tr>
           <th scope="col">Id del Usuario</th>
@@ -45,21 +46,69 @@
                 th:src="@{/imagen/perfil/__${usuario.id}__}"
             /></a>
           </td>
-          <td th:text="${usuario.rol}"></td>
+          <td th:text="${usuario.rol}" class="roltxt"></td>
           <td>
-            <form
-              th:action="@{/admin/usuarios/__${usuario.id}__/cambiarRol}"
-              method="post"
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#cambiarRolModal' + ${usuario.id}">
+              Cambiar Rol
+            </button>
+
+            <div
+              class="modal fade"
+              th:id="'cambiarRolModal' + ${usuario.id}"
+              tabindex="-1"
+              aria-labelledby="cambiarRolModalLabel"
+              aria-hidden="true"
             >
-              <datalist id="rol" name="rol">
-                <option
-                  th:each="rol : ${roles}"
-                  th:data-value="${rol}"
-                  th:text="${rol}"
-                />
-              </datalist>
-              <button type="submit" class="btn btn-primary">Cambiar</button>
-            </form>
+              <div class="modal-dialog">
+                <form
+                      th:action="@{/admin/usuarios/__${usuario.id}__/cambiarRol}"
+                      method="post"
+                    >
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cambiarRolModalLabel">
+                      Seleccione un ROL
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <div class="opciones">
+                      <div class="form-check" th:each="rol: ${roles}" >
+                        <input class="form-check-input" type="radio" name="rol" id="flexRadioDefault1" th:value="${rol}">
+                        <label class="form-check-label" th:text="${rol}" ></label>
+                      </div>
+                      </div>
+                     
+                        </label>
+                      </div>
+
+                   
+
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Aceptar
+                      </button>
+                    </div>
+
+                  </div>
+                </form>
+                
+                </div>
+              </div>
+            </div>
           </td>
           <td>
             <a
