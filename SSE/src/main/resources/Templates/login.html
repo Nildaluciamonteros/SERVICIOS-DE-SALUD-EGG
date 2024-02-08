@@ -6,19 +6,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      th:href="@{/CSS/registro.css}"
-      href="/SSE/src/main/resources/Static/CSS/login.css"
-    />
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/login.css}" />
     <title>Login SSE</title>
   </head>
   <body>
-    <nav th:replace="/fragments/navbar :: nav" />
-    <form class="form">
+    <form class="form" th:action="@{/logincheck}" method="POST">
+      <div th:replace="/fragments/status :: div" />
+      <!-- Mensaje de exito / error -->
       <p class="form-title">Ingresa a tu Cuenta</p>
+      <div class="LogoBlanco">
+        <img th:src="@{../Img/LogoBlanco.svg}" alt="" ; />
+      </div>
       <div class="input-container">
-        <input placeholder="ejemplo@ejemplo.com" type="email" />
+        <input placeholder="ejemplo@ejemplo.com" type="email" name="email" />
 
         <span>
           <svg
@@ -37,7 +37,11 @@
         </span>
       </div>
       <div class="input-container">
-        <input placeholder="Ingrese contraseña" type="password" />
+        <input
+          placeholder="Ingrese contraseña"
+          type="password"
+          name="password"
+        />
         <span>
           <svg
             stroke="currentColor"
@@ -64,8 +68,7 @@
 
       <p class="signup-link">
         ¿No tienes una Cuenta?
-
-        <a href="">Registrarse</a>
+        <a th:href="@{/registro}">Registrarse</a>
       </p>
     </form>
   </body>

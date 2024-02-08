@@ -5,8 +5,7 @@
  */
 package com.Equipo1.sse.repositorios;
 
-import com.Equipo1.sse.entidades.Turno;
-import java.util.List;
+import com.Equipo1.sse.entidades.ObraSocial;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,11 +13,11 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Aldan
+ * @author ALEXIS.R.L
  */
 @Repository
-public interface TurnoRepositorio extends JpaRepository<Turno, String> {
+public interface ObraSocialRepositorio extends JpaRepository<ObraSocial, String>{
+    @Query("SELECT o FROM ObraSocial o WHERE o.nombre = :nombre")
+    public ObraSocial buscarPorNombre(@Param("nombre") String nombre);
     
-    @Query("SELECT t FROM Turno t WHERE t.paciente.numAfiliado = :numAfiliado")
-	public List<Turno> buscarPorNumeroAfiliado(@Param("numAfiliado") String numAfiliado);
 }

@@ -2,9 +2,21 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/SSE/src/main/resources/Static/Img/Dr.jpg");
+  background-image: url(../Img/Dr.jpg);
   background-repeat: no-repeat;
   background-size:cover;
+}
+.registroLogo{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+ 
+}
+.registroLogo img{
+   color: #fff;
+   width: 80px;
+   height: 80px;
 }
 .form {
     display: flex;
