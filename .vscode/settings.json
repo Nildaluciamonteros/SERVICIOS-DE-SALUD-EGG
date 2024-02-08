@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
-    "java.compile.nullAnalysis.mode": "automatic"
-}
-=======
   "livePreview.defaultPreviewPath": "/SSE/src/main/resources/Templates/Registro.html",
   "java.compile.nullAnalysis.mode": "automatic"
 }
->>>>>>> d537166901fb6a47bea6414dba7fb7d4bc20aab3
