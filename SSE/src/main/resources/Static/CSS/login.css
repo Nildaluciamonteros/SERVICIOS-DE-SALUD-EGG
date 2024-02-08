@@ -95,38 +95,50 @@ body{
     justify-content: center;
     position: relative;
     top: 8rem;
-    background-color: cadetblue;
-}
+    background-image: url(../Img/loginImg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 .form {
-    background-color:#fff;
+    background-color:rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
     display: block;
     padding: 3rem;
     max-width: 350px;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    
   }
   
   .form-title {
+    font-family: sans-serif;
     font-size: 1.25rem;
     line-height: 1.75rem;
     font-weight: 600;
     text-align: center;
-    color: #000;
+    color: #fff;
   }
   
   .input-container {
     position: relative;
+    
   }
-  
+  input::placeholder{
+    color: #fff;
+  }
   .input-container input, .form button {
     outline: none;
     border: 1px solid #e5e7eb;
     margin: 8px 0;
+    
   }
   
   .input-container input {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.05);
     padding: 1rem;
+    color: #e5e7eb;
     padding-right: 3rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -134,7 +146,19 @@ body{
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
-  
+  .LogoBlanco{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+  .LogoBlanco img{
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    
+ }
+
   .input-container span {
     display: grid;
     position: absolute;
@@ -169,7 +193,7 @@ body{
   }
   
   .signup-link {
-    color: #6B7280;
+    color: #fff;
     font-size: 0.875rem;
     line-height: 1.25rem;
     text-align: center;
@@ -177,5 +201,11 @@ body{
   
   .signup-link a {
     text-decoration: underline;
+<<<<<<< HEAD
   }
 >>>>>>> f2c0dd0f697f8e43bee2449696ee1ed3fd459673
+=======
+    color: #a5bff1;
+    font-weight:bold;
+  }
+>>>>>>> d537166901fb6a47bea6414dba7fb7d4bc20aab3

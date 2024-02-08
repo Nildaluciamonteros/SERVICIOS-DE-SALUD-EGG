@@ -7,42 +7,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
-    <link
-      rel="stylesheet"
-
-      href="/SSE/src/main/resources/Static/CSS/Registro.css" 
-
-      th:href="@{/CSS/registro.css}"
-
-    />
-=======
 
     <link rel="stylesheet" th:href="@{/CSS/registro.css}" Develop />
->>>>>>> d537166901fb6a47bea6414dba7fb7d4bc20aab3
-    <title>SSE Login</title>
+    <title>SSE Modificar</title>
   </head>
   <body>
     <div th:replace="/fragments/status :: div" />
     <!-- Mensaje de exito / error -->
     <form
       class="form"
-      th:action="@{/registro}"
-      method="POST"
+      th:action="@{/admin/usuarios/__${usuario.id}__/modificar}"
+      method="post"
       enctype="multipart/form-data"
     >
-      <p class="title">Registro</p>
+      <p class="title">Modificar</p>
       <div class="registroLogo">
         <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
       </div>
-      <p class="message">Para acceder a nuestros servicio Registrate</p>
+      <p class="message">Editar Datos de usuario</p>
       <div class="flex">
         <label>
           <input
             required=""
             type="text"
             class="input"
-            th:value="${nombre}"
+            th:value="${usuario.nombre}"
             name="nombre"
           />
           <span>Nombre</span>
@@ -54,7 +43,7 @@
             placeholder=""
             type="text"
             class="input"
-            th:value="${apellido}"
+            th:value="${usuario.apellido}"
             name="apellido"
           />
           <span>Apellido</span>
@@ -66,7 +55,7 @@
           required=""
           type="number"
           class="input"
-          th:value="${telefono}"
+          th:value="${usuario.telefono}"
           name="telefono"
         />
         <span>Teléfono</span>
@@ -77,7 +66,7 @@
           required=""
           type="email"
           class="input"
-          th:value="${email}"
+          th:value="${usuario.email}"
           name="email"
         />
         <span>Email</span>
@@ -93,7 +82,6 @@
               type="text"
               class="input"
               placeholder="Nombre de la Obra Social"
-              th:value="${obraSocial}"
               name="obraSocial"
             />
           </label>
@@ -103,7 +91,7 @@
               type="number"
               class="input"
               placeholder="Número de Afiliado"
-              th:value="${numAfiliado}"
+              th:value="${usuario.numAfiliado}"
               name="numAfiliado"
             />
           </label>
@@ -141,7 +129,7 @@
           placeholder=""
           type="password"
           class="input"
-          th:value="${password}"
+          th:value="${usuario.password}"
           name="password"
         />
         <span>Contraseña</span>
@@ -152,13 +140,12 @@
           placeholder=""
           type="password"
           class="input"
-          th:value="${password}"
+          th:value="${usuario.password}"
           name="password2"
         />
         <span>Confirmar Contraseña</span>
       </label>
       <button class="submit">Enviar</button>
-      <p class="signin">¿Ya tienes una cuenta? <a href="/login">Ingresar</a></p>
     </form>
   </body>
 </html>

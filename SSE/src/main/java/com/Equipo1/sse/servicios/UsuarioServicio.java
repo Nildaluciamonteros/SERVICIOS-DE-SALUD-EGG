@@ -6,7 +6,11 @@
 package com.Equipo1.sse.servicios;
 
 import com.Equipo1.sse.entidades.Imagen;
+import com.Equipo1.sse.entidades.ObraSocial;
+import com.Equipo1.sse.entidades.Paciente;
+import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
+import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.repositorios.UsuarioRepositorio;
@@ -35,58 +39,107 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UsuarioServicio implements UserDetailsService
 {
-
+	
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
-
+	
 	@Autowired
 	private ImagenServicio imagenServicio;
-
+	
+	@Autowired
+	private ObraSocialServicio obraSocialServicio;
+	
 	@Transactional
 	public void registrar(String nombre, String apellido, String telefono,
-			String email, String password, String password2, MultipartFile archivo) throws MiException
+			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
-		validar(nombre,apellido,telefono,email,password,password2);
-
-		Usuario usuario = new Usuario();
-
+		// Validar datos
+		ObraSocial OS = null;
+		if(obraSocial != null && !obraSocial.isEmpty())
+		{
+			OS = obraSocialServicio.buscarObraSocial(obraSocial);
+			if(numAfiliado == null || numAfiliado.isEmpty())
+			{
+				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			}
+		}
+		else
+		{
+			numAfiliado = "";
+		}
+		validar(nombre, apellido, telefono, email, password, password2);
+		// Crear Usuario
+		Usuario usuario = new Paciente();
+		
 		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
+		((Paciente)usuario).setObraSocial(OS);
+		((Paciente)usuario).setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
-
+		
 		usuarioRepositorio.save(usuario);
 	}
 	
 	@Transactional
 	public void actualizar(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String password, String password2, MultipartFile archivo) throws MiException
+			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
-		if(claveVacia)
+		// Validar datos
+		ObraSocial OS = null;
+		if(obraSocial != null && !obraSocial.isEmpty())
 		{
-			validar(nombre,apellido,telefono,email, "123456", "123456");
+			OS = obraSocialServicio.buscarObraSocial(obraSocial);
+			if(numAfiliado == null || numAfiliado.isEmpty())
+			{
+				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
+			}
 		}
 		else
 		{
-			validar(nombre,apellido,telefono,email,password,password2);
+			numAfiliado = "";
 		}
+		if (claveVacia) 
+		{
+			validar(nombre, apellido, telefono, email, "123456", "123456");
+		} else
+		{
+			validar(nombre, apellido, telefono, email, password, password2);
+		}
+		// Buscar usuario
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
-		if(respuesta.isPresent())
+		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
 			usuario.setNombre(nombre);
+			usuario.setApellido(apellido);
+			usuario.setTelefono(telefono);
 			usuario.setEmail(email);
-			if(!claveVacia)
+			if (usuario instanceof Paciente && usuario.getRol() == Rol.PACIENTE)
+			{
+				((Paciente) usuario).setObraSocial(OS);
+				((Paciente) usuario).setNumAfiliado(numAfiliado);
+			}
+			if(usuario instanceof Profesional && usuario.getRol() == Rol.PROFESIONAL)
+			{
+				/*((Profesional)usuario).setEspecialidad(Especialidades.Pediatria);
+				((Profesional)usuario).setReputacion(Integer.MIN_VALUE);
+				((Profesional)usuario).setTurnos(turnos);
+				((Profesional)usuario).setValorConsulta(Double.NaN);*/
+			}
+			if (!claveVacia)
 			{
 				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 			}
-			if(archivo != null && !archivo.isEmpty())
+			if (archivo != null && !archivo.isEmpty())
 			{
 				String idImagen = null;
-				if(usuario.getImagen().getId() != null)
+				if (usuario.getImagen().getId() != null)
 				{
 					idImagen = usuario.getImagen().getId();
 				}
@@ -97,22 +150,50 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	public void cambiarRol(String id)
+	public void cambiarRol(String id, String rol)
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 		
-		if(respuesta.isPresent())
+		if (respuesta.isPresent())
+		{
+			Usuario usuarioViejo = respuesta.get();
+			Rol rolNuevo = Rol.buscar(rol);
+			Usuario usuarioActualizado;
+			switch (rolNuevo)
+			{
+				case PROFESIONAL:
+					usuarioActualizado = new Profesional();
+					break;
+				case ADMIN:
+					usuarioActualizado = new Usuario();
+					break;
+				default:
+					usuarioActualizado = new Paciente();
+					break;
+			}
+			usuarioActualizado.setId(usuarioViejo.getId());
+			usuarioActualizado.setNombre(usuarioViejo.getNombre());
+			usuarioActualizado.setApellido(usuarioViejo.getApellido());
+			usuarioActualizado.setEmail(usuarioViejo.getEmail());
+			usuarioActualizado.setImagen(usuarioViejo.getImagen());
+			usuarioActualizado.setPassword(usuarioViejo.getPassword());
+			usuarioActualizado.setTelefono(usuarioViejo.getTelefono());
+			usuarioActualizado.setRol(rolNuevo);
+			usuarioRepositorio.save(usuarioActualizado);
+		}
+	}
+	
+	public void cambiarEspecialidad(String idUsuario, String especialidad)
+	{
+		Especialidades esp = Especialidades.buscar(especialidad);
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
-			if(usuario.getRol().equals(Rol.PACIENTE))
+			if(usuario instanceof Profesional)
 			{
-				usuario.setRol(Rol.ADMIN);
+				((Profesional)usuario).setEspecialidad(Especialidades.buscar(especialidad));
 			}
-			else if(usuario.getRol().equals(Rol.ADMIN))
-			{
-				usuario.setRol(Rol.PACIENTE);
-			}
-			usuarioRepositorio.save(usuario);
 		}
 	}
 	
@@ -120,7 +201,22 @@ public class UsuarioServicio implements UserDetailsService
 	{
 		return usuarioRepositorio.findAll();
 	}
-
+	
+	public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad)
+	{
+		return usuarioRepositorio.buscarPorEspecialidad(especialidad);
+	}
+	
+	public List<Profesional> listarProfesionales()
+	{
+		return usuarioRepositorio.buscarTodosLosProfesionales();
+	}
+	
+	public List<Usuario> buscarPorNombre(String nombre)
+	{
+		return usuarioRepositorio.buscarPorNombre(nombre);
+	}
+	
 	private void validar(String nombre, String apellido, String telefono,
 			String email, String password, String password2) throws MiException
 	{
@@ -142,39 +238,56 @@ public class UsuarioServicio implements UserDetailsService
 		}
 		if (password == null || password.isEmpty() || password.length() <= 5)
 		{
-			throw new MiException("La contraseña no puede ser nula o estar vacia, y debe tener más de 5 digitos");
+			throw new MiException("La contraseña no puede ser nula o estar vacia, y debe tener minimo 6 digitos");
 		}
 		if (password2 == null || password2.isEmpty() || !password.equals(password2))
 		{
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
 		}
 	}
+	
+	private void validarAfiliado(ObraSocial obraSocial, String numAfiliado)
+	{
+		
+	}
+	
 	public Usuario getOne(String id)
 	{
 		return usuarioRepositorio.getOne(id);
 	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{
 		Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-
+		
 		if (usuario != null)
 		{
 			List<GrantedAuthority> permisos = new ArrayList();
 			GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-
+			
 			permisos.add(p);
-
+			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
+			
 			HttpSession session = attr.getRequest().getSession();
-
+			
 			session.setAttribute("usuarioSession", usuario);
-
+			
 			return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 		} else
 		{
 			return null;
+		}
+	}
+	
+	public void eliminarUsuario(String idUsuario)
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+			Usuario usuario = respuesta.get();
+			usuarioRepositorio.delete(usuario);
 		}
 	}
 }
