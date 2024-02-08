@@ -1,0 +1,9 @@
+body{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url(../Img/obraSocial_lista.css);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
