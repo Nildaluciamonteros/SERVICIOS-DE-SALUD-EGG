@@ -6,11 +6,17 @@
 package com.Equipo1.sse.controladores;
 
 import com.Equipo1.sse.entidades.ObraSocial;
+import com.Equipo1.sse.entidades.Paciente;
+import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
+import com.Equipo1.sse.enumeraciones.Especialidades;
+import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,65 +37,138 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
-public class AdminControlador {
+public class AdminControlador
+{
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+	@Autowired
+	private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private ObraSocialServicio obraSocialServicio;
+	@Autowired
+	private ObraSocialServicio obraSocialServicio;
 
-    @GetMapping("/dashboard")
-    public String index(ModelMap modelo) {
-        return "panelAdmin.html";
-    }
+	@GetMapping("/dashboard")
+	public String index(ModelMap modelo)
+	{
+		return "panelAdmin.html";
+	}
 
-    @GetMapping("/usuarios")
-    public String listar(ModelMap modelo) {
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
-        modelo.addAttribute("usuarios", usuarios);
+	@GetMapping("/usuarios")
+	public String listar(ModelMap modelo)
+	{
+		List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+		List<String> roles = new ArrayList();
+		for (Rol e : Rol.values())
+		{
+			roles.add(e.name());
+		}
+		modelo.addAttribute("usuarios", usuarios);
+		modelo.addAttribute("roles", roles);
 
-        return "usuario_lista.html";
-    }
+		return "usuario_lista.html";
+	}
 
-    @GetMapping("/modificarRol/{id}")
-    public String cambiarRol(@PathVariable String id, HttpSession session, Authentication authentication) {
-        Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
-        usuarioServicio.cambiarRol(id);
-        Usuario editado = usuarioServicio.getOne(id);
-        if (!editado.equals(usuarioSession)) {
+	@PostMapping("/usuarios/buscar")
+	public String buscarUsuario(ModelMap modelo, @RequestParam String nombre)
+	{
+		List<Usuario> usuarios = usuarioServicio.buscarPorNombre(nombre);
+		if (usuarios == null || usuarios.size() > 0)
+		{
+			modelo.addAttribute("usuarios", usuarios);
+		} else
+		{
+			modelo.put("error", "No se encuentra ningun usuario con ese nombre.");
+			usuarios = usuarioServicio.listarUsuarios();
+			modelo.addAttribute("usuarios", usuarios);
+		}
 
-        }
-        return "redirect:/admin/usuarios";
-    }
+		return "usuario_buscar.html";
+	}
 
-    @GetMapping("/modificar/{id}")
-    public String modificarUsuario(@PathVariable String id, ModelMap modelo) {
+	@PostMapping("/usuarios/{id}/cambiarRol")
+	public String cambiarRol(@PathVariable String id, @RequestParam String rol, HttpSession session, Authentication authentication)
+	{
+		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
 
-        Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-        modelo.put("usuario", usuario);
-        return "usuario_modificar.html";
-    }
+		usuarioServicio.cambiarRol(id, rol);
+		return "redirect:/admin/usuarios";
+	}
 
-    @PostMapping("/modificar/{id}")
-    public String actualizar(@PathVariable String id, @RequestParam String nombre,
-            @RequestParam String apellido, @RequestParam String telefono,
-            @RequestParam String numAfiliado,
-            @RequestParam String email, @RequestParam String obraSocial,
-            @RequestParam String password, @RequestParam String password2,
-            @RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo) {
-        try {
-            ObraSocial OS = obraSocialServicio.buscarObraSocial(obraSocial);
-            usuarioServicio.actualizar(id, nombre, apellido,
-                    telefono, email, OS, numAfiliado, password, password2, archivo);
-            modelo.put("exito", "Usuario actualizado correctamente");
-            return "inicio.html";
-        } catch (MiException ex) {
-            modelo.put("error", ex.getMessage());
-            Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-            modelo.put("usuario", usuario);
+	@GetMapping("/usuarios/{id}/eliminar")
+	public String eliminarUsuario(@PathVariable String id, ModelMap modelo)
+	{
+		Usuario usuario = usuarioServicio.getOne(id);
+		if (usuario == null)
+		{
+			modelo.put("error", "El usuario no se encuentra");
+		} else
+		{
+			usuarioServicio.eliminarUsuario(id);
+			modelo.put("exito", "El usuario se eliminó");
+		}
+		return "redirect:/admin/usuarios";
+	}
 
-            return "usuario_modificar.html";
-        }
-    }
+	@GetMapping("/usuarios/{id}/modificar")
+	public String modificarUsuario(@PathVariable String id, ModelMap modelo)
+	{
+
+		Usuario usuario = (Usuario) usuarioServicio.getOne(id);
+		Paciente paciente = null;
+		Profesional profesional = null;
+		if(usuario instanceof Paciente)
+		{
+			paciente = (Paciente)usuario;
+			modelo.put("usuario", paciente);
+		}
+		else if(usuario instanceof Profesional)
+		{
+			profesional = (Profesional)usuario;
+			modelo.put("usuario", profesional);
+		}
+		else
+		{
+			modelo.put("usuario", usuario);
+		}
+		if (usuario instanceof Profesional)
+		{
+			modelo.put("especialidades", Especialidades.values());
+		}
+		if (usuario instanceof Paciente)
+		{
+			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+		}
+		return "usuario_modificar.html";
+	}
+
+	@PostMapping("/usuarios/{id}/modificar")
+	public String actualizar(@PathVariable String id, @RequestParam String nombre,
+			@RequestParam String apellido, @RequestParam String telefono,
+			String numAfiliado,
+			@RequestParam String email, String obraSocial,
+			@RequestParam String password, @RequestParam String password2,
+			MultipartFile archivo, HttpSession session, ModelMap modelo)
+	{
+		try
+		{
+			usuarioServicio.actualizar(id, nombre, apellido,
+					telefono, email, obraSocial, numAfiliado, password, password2, archivo);
+			modelo.put("exito", "Usuario actualizado correctamente");
+			return "inicio.html";
+		} catch (MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
+			Usuario usuario = (Usuario) usuarioServicio.getOne(id);
+			if (usuario instanceof Profesional)
+			{
+				modelo.put("especialidades", Especialidades.values());
+			}
+			if (usuario instanceof Paciente)
+			{
+				modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+			}
+			modelo.put("usuario", usuario);
+
+			return "usuario_modificar.html";
+		}
+	}
 }

@@ -1,0 +1,12 @@
+body{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url(../Img/fondoUsuarios.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+ .roltxt{
+    font-weight: 700;
+ }

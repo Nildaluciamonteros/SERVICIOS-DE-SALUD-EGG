@@ -3,23 +3,28 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://thymeleaf.org/extras/spring-security"
 >
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" th:href="@{/CSS/login.css}" />
-  
-  <title>SSE</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/login.css}" />
+    <title>Login SSE</title>
+  </head>
   <body>
+<<<<<<< HEAD
     <form class="form"
     
     >
+=======
+    <form class="form" th:action="@{/logincheck}" method="POST">
+      <div th:replace="/fragments/status :: div" />
+      <!-- Mensaje de exito / error -->
+>>>>>>> 76d0796f49b81587f6870f1f779bd209ac7dc6df
       <p class="form-title">Ingresa a tu Cuenta</p>
       <div class="LogoBlanco">
-        <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
+        <img th:src="@{../Img/LogoBlanco.svg}" alt="" ; />
       </div>
       <div class="input-container">
-        <input placeholder="ejemplo@ejemplo.com" type="email" />
+        <input placeholder="ejemplo@ejemplo.com" type="email" name="email" />
 
         <span>
           <svg
@@ -38,7 +43,11 @@
         </span>
       </div>
       <div class="input-container">
-        <input placeholder="Ingrese contraseña" type="password" />
+        <input
+          placeholder="Ingrese contraseña"
+          type="password"
+          name="password"
+        />
         <span>
           <svg
             stroke="currentColor"
@@ -61,18 +70,12 @@
           </svg>
         </span>
       </div>
-      <button class="submit" type="submit"  >Ingresar</button>
+      <button class="submit" type="submit">Ingresar</button>
 
       <p class="signup-link">
         ¿No tienes una Cuenta?
         <a th:href="@{/registro}">Registrarse</a>
-    </p>
-
+      </p>
     </form>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
