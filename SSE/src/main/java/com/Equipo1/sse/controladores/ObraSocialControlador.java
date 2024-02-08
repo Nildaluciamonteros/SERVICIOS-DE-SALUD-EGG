@@ -47,7 +47,7 @@ public class ObraSocialControlador {
             return "obraSocial_form.html";
         }
         
-        return "redirect:/admin/obraSocial/lista";
+        return "redirect:/obraSocial/lista";
     }
     
     @GetMapping("/lista")
@@ -70,7 +70,7 @@ public class ObraSocialControlador {
 			obraSocialServicio.eliminarObraSocial(id);
 			modelo.put("exito", "La Obra Social se eliminó");
 		}
-		return "redirect:/admin/obraSocial/lista";
+		return "redirect:/obraSocial/lista";
 	}
 	
 	@GetMapping("/{id}/modificar")
@@ -89,7 +89,7 @@ public class ObraSocialControlador {
 		{
 			obraSocialServicio.actualizar(id, nombre);
 			modelo.put("exito", "Obra social actualizada correctamente");
-			return "redirect:/admin/obraSocial/lista";
+			return "redirect:/obraSocial/lista";
 		}
 		catch (MiException ex)
 		{
