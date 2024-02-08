@@ -5,7 +5,7 @@
  */
 package com.Equipo1.sse.controladores;
 
-import com.Equipo1.sse.entidades.ObraSocial;
+import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
@@ -57,7 +57,7 @@ public class PortalControlador
 		{
 			return "redirect:/admin/dashboard";
 		}
-                if (logeado.getRol() == Rol.PROFESIONAL)
+		if (logeado.getRol() == Rol.PROFESIONAL)
 		{
 			return "redirect:/profesional/";
 		}
@@ -130,7 +130,15 @@ public class PortalControlador
 	{
 		Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
 		modelo.put("usuario", usuario);
-		return "perfil_modificar.html";
+		if (usuario instanceof Profesional)
+		{
+			modelo.put("especialidades", Especialidades.values());
+		}
+		if (usuario instanceof Paciente)
+		{
+			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+		}
+		return "usuario_modificar.html";
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
@@ -150,14 +158,22 @@ public class PortalControlador
 						password, password2, archivo);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "inicio.html";
+			return "redirect:/inicio";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
 			Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
 			modelo.put("usuario", usuario);
+			if (usuario instanceof Profesional)
+			{
+				modelo.put("especialidades", Especialidades.values());
+			}
+			if (usuario instanceof Paciente)
+			{
+				modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+			}
 
-			return "perfil_modificar.html";
+			return "usuario_modificar.html";
 		}
 	}
 }
