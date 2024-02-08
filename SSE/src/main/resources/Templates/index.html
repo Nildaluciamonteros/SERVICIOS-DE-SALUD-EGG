@@ -1,53 +1,122 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org/"
-  xmlns:sec="http://thymeleaf.org/extras/spring-security"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" th:href="@{/CSS/index.css}" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <title>SSE</title>
-  </head>
-  <body>
-    <div class="contenedor">
-      <div class="img-container">
-        <img th:src="@{/Img/SSE-logo.png}" alt="" class="img2" />
-      </div>
-      <p class="col-lg-8 mx-auto fs-4 text-muted bg-gradient">
-        En Sistema de Salud Egg, nos enorgullece ser tu destino confiable para
-        el cuidado de la salud. Somos un centro integral dedicado a proporcionar
-        servicios médicos de calidad con un enfoque centrado en el paciente y
-        respaldado por profesionales altamente capacitados.
-      </p>
-    </div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <a class="btn btn-primary" role="button" th:href="@{/registro}"
-            >Registrar</a
-          >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href=@{/CSS/index.css} />
+  <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css}" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <title>SSE</title>
+</head>
+
+<body>
+  <div class="justify-content-center">
+    <div class="container text-center bg-secondary bg-opacity-50">
+      <div class="p-3 row align-items-start justify-content-center">
+
+        <div class="col-2 d-flex">
+          <div class="bg-gradient rounded">
+            <img th:src="@{/Img/LogoBlanco.svg}" alt="" class="img2 align-items-start" />
+            <h3 class="align-self-end text-white-50">Servicio de Salud EGG</h1>
+          </div>
         </div>
-        <div class="col">
-          <a class="btn btn-secondary" role="button" th:href="@{/login}"
-            >Ingresar</a
-          >
+        <div class="col-10 align-self-end bg-gradient p-2">
+          <div class="container text-center">
+            <div class="row pt-2">
+              <div class="col-6">
+                <a class="btn btn-outline-light btn-lg px-5" role="button" th:href="@{/registro}">Registrarse</a>
+              </div>
+              <div class="col-6">
+                <a class="btn btn-outline-light btn-lg px-5" role="button" th:href="@{/login}">Ingresar</a>
+              </div>
+            </div>
+            <hr>
+            <p class="col-lg-8 mx-auto fs-4 mt-3 text-white-50">
+              En Sistema de Salud Egg, nos enorgullece ser tu destino confiable para
+              el cuidado de la salud. Somos un centro integral dedicado a proporcionar
+              servicios médicos de calidad con un enfoque centrado en el paciente y
+              respaldado por profesionales altamente capacitados.
+            </p>
+          </div>
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div class="card bg-transparent text-dark rounded border-0 mb-3 align-items-center">
+          <img id="img" class="card-img img-fluid opacity-75" th:src="@{/Img/resonancia.jpg }" alt="Card image">
+          <div class="d-flex card-img-overlay row align-items-end">
+            <div class="col-2">
+            </div>
+            <div class="col-8 bg-dark bg-opacity-25 p-3 rounded text-white-50">
+              <p class="card-text h4 text-light">Tecnología punta.</p>
+              <p class="card-text h5 ">Queremos que la atencion sea la mejor por ello contamos con la mejor tecnologia
+                del sector</p>
+            </div>
+          </div>
+        </div>
+
+        <br><br><br>
+        <hr class="hrcolor"><br>
+
+        <div class="row">
+          <div class="card col m-3 bg-dark bg-opacity-25 pt-2" style="width: 18rem;">
+            <img class="card-img-top" th:src="@{/Img/carta1.jpg}" alt="Card image cap"
+              style="height: 80%;object-fit: cover;">
+            <div class="card-body">
+              <p class="card-text h5 text-white-50">Tenemos convenio con una amplia variedad de obras sociales, y
+                atención especial a jubilados</p>
+            </div>
+          </div>
+          <div class="card col m-3 bg-dark bg-opacity-25 pt-2" style="width: 18rem;">
+            <img class="card-img-top" th:src="@{/Img/carta2.jpeg}" alt="Card image cap"
+              style="height: 80%;object-fit: cover;">
+            <div class="card-body">
+              <p class="card-text h5 text-white-50">Tenemos el mejor entrenamiento con las mejores herramientas, para
+                garantizar un tratamiento óptimo</p>
+            </div>
+          </div>
+          <div class="card col m-3 bg-dark bg-opacity-25 pt-2" style="width: 18rem;">
+            <img class="card-img-top" th:src="@{/Img/carta3.png}" alt="Card image cap "
+              style="height: 80%;object-fit: cover;">
+            <div class="card-body">
+              <p class="card-text h5 text-white-50">No se que carajo poner, conoces a conocelo? agachate y marcelo jaja
+                salu2 pete</p>
+            </div>
+          </div>
+        </div>
+
+        <br><br><br>
+        <hr><br>
+
+        <div class="row bg-dark bg-opacity-25 p-2 rounded align-items-center">
+          <div class="text-dark col-6 p-5 text-white-50">
+            <h2 class="text-light">Miles de personas nos avalan</h2>
+            <p class="p-3 fs-4 d-flex align-items-center">Tenemos una amplia cantidad de testimonios que
+              acreditan nuestro compromiso y nuestro nivel de atención.</p>
+          </div>
+          <div class="rounded col-6 p-3 bg-opacity-75 bg-gradient">
+            <iframe class="rounded" width="560" height="315" src="https://www.youtube.com/embed/w-R8O4Fmqjs?si=KYmugFeXrOAuT9jd"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
         </div>
       </div>
-    </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    </div>
+  </div>
+
+  <footer th:fragment="footer" class="fs-18 text-light text-center mb5 fixed-buttom p-3">
+    <img th:src="@{/Img/LogoBlanco.svg}" alt="" style="height: 5vh;">
+    SSE | ©2024 Todos los derechos reservados
+  </footer>
+
+  <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
