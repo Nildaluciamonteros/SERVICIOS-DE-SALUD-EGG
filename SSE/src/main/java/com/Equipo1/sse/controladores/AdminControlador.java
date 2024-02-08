@@ -113,7 +113,22 @@ public class AdminControlador
 	{
 
 		Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-		modelo.put("usuario", usuario);
+		Paciente paciente = null;
+		Profesional profesional = null;
+		if(usuario instanceof Paciente)
+		{
+			paciente = (Paciente)usuario;
+			modelo.put("usuario", paciente);
+		}
+		else if(usuario instanceof Profesional)
+		{
+			profesional = (Profesional)usuario;
+			modelo.put("usuario", profesional);
+		}
+		else
+		{
+			modelo.put("usuario", usuario);
+		}
 		if (usuario instanceof Profesional)
 		{
 			modelo.put("especialidades", Especialidades.values());
