@@ -86,7 +86,7 @@ public class AdminControlador
 	}
 
 	@PostMapping("/usuarios/{id}/cambiarRol")
-	public String cambiarRol(@PathVariable String id, String rol, HttpSession session, Authentication authentication)
+	public String cambiarRol(@PathVariable String id, @RequestParam String rol, HttpSession session, Authentication authentication)
 	{
 		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
 
