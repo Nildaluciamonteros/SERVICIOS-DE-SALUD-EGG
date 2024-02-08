@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/" 
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/SSE/src/main/resources/Static/CSS/especialistasclinica.css"
+    />
+   
+    <title>Pediatría - Especialistas</title>
+  </head>
+
+  <body>
+    <img class="bg-img" th:src="@{../Img/fondo 1.webp}" alt="">
+    <div class="body">
+      <img class="body-img" th:src="@{../Img/SSE-logo.png}" alt="">
+    <h1>Pediatras</h1>
+    </div>
+    <div>
+      <img
+        class="imgpediatria"
+        th:src="@{../Img/Médico4.png}"
+        alt="..."
+      />
+    </div>
+
+    <div class="col">
+      <div class="card-medico">
+        <div class="card">
+          <img
+            class="card-img"
+            th:src="@{../Img/doctor10.jpeg}"
+            alt="..."
+          />
+          <h5 class="card-title">Dra. Aldana Ucci</h5>
+          <p class="card-text">M.P. 74589</p>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+          </div>
+          <b><u>Horario de atención:</u></b> 
+          Lunes, Miércoles y Viernes de 8 a 13 hs.
+        </p>
+        <div class="card-btn">
+          <button class="card-btn1"><a class="card-curriculum" href="">Sacar Turno</a></button>
+          <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+        </div>
+        </div>
+      </div>
+
+      <div class="card-medico">
+        <div class="card">
+          <img
+            class="card-img"
+            th:src="@{../Img/doctor6.jpeg}"
+            alt="..."
+          />
+          <h5 class="card-title">Dra. Lucia Monteros</h5>
+          <p class="card-text">M.N. 64879</p>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+          </div>
+          <p class="card-text"> 
+            <b><u>Horario de atención:</u></b>
+             Lunes y Jueves de 8 a 13 hs.
+          </p>
+          <div class="card-btn">
+            <button class="card-btn1"><a class="card-curriculum" href="">Sacar Turno</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card-medico">
+        <div class="card">
+          <img
+            class="card-img"
+            th:src="@{../Img/doctor5.jpeg}"
+            alt="..."
+          />
+          <h5 class="card-title">Dr. Gabriel Castro</h5>
+          <p class="card-text">M.N. 98754</p>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+          </div>
+          <p class="card-text">
+            <b><u>Horario de atención:</u></b>
+             Martes y Jueves de 16 a 21 hs.
+          </p>
+          <div class="card-btn">
+            <button class="card-btn1"><a class="card-curriculum" href="">Sacar Turno</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-medico">
+        <div class="card">
+          <img
+            class="card-img"
+            th:src="@{../Img/doctor8.jpeg}"
+            alt="..."
+          />
+          <h5 class="card-title">Dr. Nicolás Lobos</h5>
+          <p class="card-text">M.N. 12648</p>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+          </div>
+          <p class="card-text">
+            <b><u>Horario de atención:</u></b>
+            Lunes, Miércoles y Viernes de 16 a 21 hs.
+          </p>
+          <div class="card-btn">
+            <button class="card-btn1"><a class="card-curriculum" href="">Sacar Turno</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+  </body>
+</html>
