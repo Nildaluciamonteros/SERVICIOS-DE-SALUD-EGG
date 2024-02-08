@@ -82,8 +82,8 @@ public class PortalControlador
 
 	@PostMapping("/registro")
 	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String email, @RequestParam String obraSocial, @RequestParam String numAfiliado, @RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, ModelMap modelo)
+			@RequestParam String email, String obraSocial, String numAfiliado, @RequestParam String password, @RequestParam String password2,
+			MultipartFile archivo, ModelMap modelo)
 	{
 		try
 		{
@@ -146,7 +146,7 @@ public class PortalControlador
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono, @RequestParam String email, @RequestParam String obraSocial,
 			@RequestParam String numAfiliado,
-			@RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo, Authentication authentication)
+			@RequestParam String password, @RequestParam String password2, MultipartFile archivo, HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{

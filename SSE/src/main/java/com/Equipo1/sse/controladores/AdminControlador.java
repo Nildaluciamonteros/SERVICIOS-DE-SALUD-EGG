@@ -128,10 +128,10 @@ public class AdminControlador
 	@PostMapping("/usuarios/{id}/modificar")
 	public String actualizar(@PathVariable String id, @RequestParam String nombre,
 			@RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String numAfiliado,
-			@RequestParam String email, @RequestParam String obraSocial,
+			String numAfiliado,
+			@RequestParam String email, String obraSocial,
 			@RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo)
+			MultipartFile archivo, HttpSession session, ModelMap modelo)
 	{
 		try
 		{
