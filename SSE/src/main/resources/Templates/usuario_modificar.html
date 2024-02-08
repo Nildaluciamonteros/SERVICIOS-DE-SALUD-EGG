@@ -16,13 +16,14 @@
         <!-- Mensaje de exito / error -->
         <form
             class="form"
-            th:action="@{/admin/usuarios/__${usuario.id}__/modificar}"
+th:action="${usuario.rol == 'ADMIN' ? '/admin/usuarios/' + usuario.id + '/modificar' :
+'/perfil/' + usuario.id + '/modificar'}"
             method="post"
             enctype="multipart/form-data"
             >
             <p class="title">Modificar</p>
             <div class="registroLogo">
-                <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
+                <img th:src="@{/Img/LogoBlanco.svg}" alt="" />
             </div>
             <p class="message">Editar Datos de usuario</p>
             <div class="flex">
@@ -71,8 +72,8 @@
                     />
                 <span>Email</span>
             </label>
-
-            <div class="question" th:if="${usuario.rol.name() == 'PACIENTE'}">
+			<!--
+            <div class="question" th:if="${usuario.rol.toString() == 'PACIENTE'}">
                 <h3>Posee Obra Social:</h3>
 
                 <input type="checkbox" checked />
@@ -82,7 +83,7 @@
                             type="text"
                             class="input"
                             placeholder="Nombre de la Obra Social"
-                            th:value="${usuario.obraSocial.nombre}"
+							th:value="${usuario.obraSocial.nombre}"
                             name="obraSocial"
                             />
                     </label>
@@ -92,13 +93,38 @@
                             type="number"
                             class="input"
                             placeholder="Número de Afiliado"
-                            th:value="${usuario.numAfiliado}"
+							th:value="${usuario.numAfiliado}"
                             name="numAfiliado"
                             />
                     </label>
                 </div>
             </div>
+			
+			<div class="question" th:if="${usuario.rol.toString() == 'PROFESIONAL'}">
+                <input type="checkbox" checked />
+                <div class="inputs-hidden">
+                    <label>
+                        <input
+                            type="text"
+                            class="input"
+                            placeholder="Especialidad"
+							th:value="${usuario.especialidad}"
+                            name="especialidad"
+                            />
+                    </label>
 
+                    <label>
+                        <input
+                            type="number"
+                            class="input"
+                            placeholder="Valor de consulta"
+                            th:value="${usuario.valorConsulta}"
+                            name="valorConsulta"
+                            />
+                    </label>
+                </div>
+            </div>
+			!-->
             <label class="custum-file-upload" for="file">
                 <div class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
@@ -130,7 +156,6 @@
                     placeholder=""
                     type="password"
                     class="input"
-                    th:value="${usuario.password}"
                     name="password"
                     />
                 <span>Contraseña</span>
@@ -141,7 +166,6 @@
                     placeholder=""
                     type="password"
                     class="input"
-                    th:value="${usuario.password}"
                     name="password2"
                     />
                 <span>Confirmar Contraseña</span>
