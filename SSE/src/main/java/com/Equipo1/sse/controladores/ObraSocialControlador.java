@@ -57,7 +57,7 @@ public class ObraSocialControlador {
         return "obraSocial_lista.html";
     }
     
-    @GetMapping("/obraSocial/{id}/eliminar")
+    @GetMapping("/{id}/eliminar")
 	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo)
 	{
 		ObraSocial OS = obraSocialServicio.getOne(id);
@@ -73,7 +73,7 @@ public class ObraSocialControlador {
 		return "redirect:/admin/obraSocial/lista";
 	}
 	
-	@GetMapping("/obraSocial/{id}/modificar")
+	@GetMapping("/{id}/modificar")
 	public String modificarUsuario(@PathVariable String id, ModelMap modelo)
 	{
 
@@ -82,7 +82,7 @@ public class ObraSocialControlador {
 		return "obraSocial_modificar.html";
 	}
 
-	@PostMapping("/obraSocial/{id}/modificar")
+	@PostMapping("/{id}/modificar")
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo)
 	{
 		try
