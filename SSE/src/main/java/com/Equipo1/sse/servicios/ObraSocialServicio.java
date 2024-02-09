@@ -35,8 +35,9 @@ public class ObraSocialServicio
 	}
 
 	@Transactional
-	public void actualizar(String idOS, String nombre)
+	public void actualizar(String idOS, String nombre) throws MiException
 	{
+		validar(nombre);
 		Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
 		if (respuesta.isPresent())
 		{

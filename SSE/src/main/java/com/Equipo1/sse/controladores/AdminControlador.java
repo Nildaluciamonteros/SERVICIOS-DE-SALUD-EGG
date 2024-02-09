@@ -63,21 +63,20 @@ public class AdminControlador
 		}
 		modelo.addAttribute("usuarios", usuarios);
 		modelo.addAttribute("roles", roles);
-		
+
 		return "usuario_lista.html";
 	}
-	
+
 	@PostMapping("/usuarios/buscar")
 	public String buscarUsuario(ModelMap modelo, @RequestParam String nombre)
 	{
 		List<Usuario> usuarios = usuarioServicio.buscarPorNombre(nombre);
-		if(usuarios == null || usuarios.size() > 0)
+		if (usuarios == null || usuarios.size() > 0)
 		{
 			modelo.addAttribute("usuarios", usuarios);
-		}
-		else
+		} else
 		{
-			modelo.put("error","No se encuentra ningun usuario con ese nombre.");
+			modelo.put("error", "No se encuentra ningun usuario con ese nombre.");
 			usuarios = usuarioServicio.listarUsuarios();
 			modelo.addAttribute("usuarios", usuarios);
 		}
@@ -86,23 +85,22 @@ public class AdminControlador
 	}
 
 	@PostMapping("/usuarios/{id}/cambiarRol")
-	public String cambiarRol(@PathVariable String id, String rol, HttpSession session, Authentication authentication)
+	public String cambiarRol(@PathVariable String id, @RequestParam String rol, HttpSession session, Authentication authentication)
 	{
 		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
 
 		usuarioServicio.cambiarRol(id, rol);
 		return "redirect:/admin/usuarios";
 	}
-	
+
 	@GetMapping("/usuarios/{id}/eliminar")
 	public String eliminarUsuario(@PathVariable String id, ModelMap modelo)
 	{
 		Usuario usuario = usuarioServicio.getOne(id);
-		if(usuario == null)
+		if (usuario == null)
 		{
 			modelo.put("error", "El usuario no se encuentra");
-		}
-		else
+		} else
 		{
 			usuarioServicio.eliminarUsuario(id);
 			modelo.put("exito", "El usuario se eliminó");
@@ -115,12 +113,27 @@ public class AdminControlador
 	{
 
 		Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-		modelo.put("usuario", usuario);
-		if(usuario instanceof Profesional)
+		Paciente paciente = null;
+		Profesional profesional = null;
+		if(usuario instanceof Paciente)
+		{
+			paciente = (Paciente)usuario;
+			modelo.put("usuario", paciente);
+		}
+		else if(usuario instanceof Profesional)
+		{
+			profesional = (Profesional)usuario;
+			modelo.put("usuario", profesional);
+		}
+		else
+		{
+			modelo.put("usuario", usuario);
+		}
+		if (usuario instanceof Profesional)
 		{
 			modelo.put("especialidades", Especialidades.values());
 		}
-		if(usuario instanceof Paciente)
+		if (usuario instanceof Paciente)
 		{
 			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		}
@@ -130,10 +143,10 @@ public class AdminControlador
 	@PostMapping("/usuarios/{id}/modificar")
 	public String actualizar(@PathVariable String id, @RequestParam String nombre,
 			@RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String numAfiliado,
-			@RequestParam String email, @RequestParam String obraSocial,
+			String numAfiliado,
+			@RequestParam String email, String obraSocial,
 			@RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo)
+			MultipartFile archivo, HttpSession session, ModelMap modelo)
 	{
 		try
 		{
@@ -145,11 +158,11 @@ public class AdminControlador
 		{
 			modelo.put("error", ex.getMessage());
 			Usuario usuario = (Usuario) usuarioServicio.getOne(id);
-			if(usuario instanceof Profesional)
+			if (usuario instanceof Profesional)
 			{
 				modelo.put("especialidades", Especialidades.values());
 			}
-			if(usuario instanceof Paciente)
+			if (usuario instanceof Paciente)
 			{
 				modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 			}

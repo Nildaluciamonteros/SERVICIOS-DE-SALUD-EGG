@@ -20,7 +20,7 @@
     <!-- Mensaje de exito / error -->
     <h1>Usuarios Registrados</h1>
 
-    <table class="table ">
+    <table class="table table-gradient">
       <thead>
         <tr>
           <th scope="col">Id del Usuario</th>
@@ -80,7 +80,7 @@
                     
                     <div class="opciones">
                       <div class="form-check" th:each="rol: ${roles}" >
-                        <input class="form-check-input" type="radio" name="rol" id="flexRadioDefault1" th:value="${rol}">
+                        <input class="form-check-input" type="radio" name="rol" id="flexRadioDefault1" th:value="${rol}" th:checked="${usuario.rol.toString() == rol}">
                         <label class="form-check-label" th:text="${rol}" ></label>
                       </div>
                       </div>
