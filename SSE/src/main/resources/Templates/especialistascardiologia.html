@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    
+    <nav th:replace="/fragments/navbar :: nav"/>
     <div class="body">
       <img
         class="body-img"
@@ -61,7 +61,7 @@
           </p>
           <div class="card-btn">
            
-            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum12.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
           </p>
           <div class="card-btn">
            
-            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum14.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
           </p>
           <div class="card-btn">
             
-            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum13.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -159,10 +159,12 @@
           </p>
           <div class="card-btn">
           
-            <button class="card-btn1"><a class="card-curriculum" href="">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum5.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
     </div>
+
+    <div th:replace="/fragments/footer :: div" />
   </body>
 </html>
