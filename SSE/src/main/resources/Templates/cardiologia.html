@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org/"
-  xmlns:sec="http://thymeleaf.org/extras/spring-security"
->
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="/SSE/src/main/resources/Static/CSS/especialistascardiologia.css"
-    />
+      href="/src/main/resources/Static/CSS/cardiologia.css"/>
 
     <title>Cardiología - Especialistas</title>
   </head>
 
-  <body>
-    <nav th:replace="/fragments/navbar :: nav"/>
-    <div class="body">
-      <img
-        class="body-img"
-        th:src="@{../Img/SSE-logo.png}"
-        alt=""
-      />
+  <body>   
+      <div class="body">
+        <img class="body-img" src="/src/main/resources/Static/Img/SSE-logo.png" alt="">
       <h1>Cardiología</h1>
-    </div>
+   </div>
     <div>
       <img
-        class="imgclinicaM" 
-        th:src="@{../Img/Imagen2.jpg}"
+        class="cardiologia" 
+        src="/src/main/resources/Static/Img/cardiologia1.webp"
         alt="..."
       />
     </div>
@@ -38,7 +28,7 @@
         <div class="card">
           <img
             class="card-img"  
-            th:src="@{../Img/doctor1.jpeg}"
+            src="/src/main/resources/Static/Img/doctor1.jpeg"
             alt="..."
           />
           <h5 class="card-title">Dra. Teresa Maisterra </h5>
@@ -61,7 +51,7 @@
           </p>
           <div class="card-btn">
            
-            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum12.pdf}">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum12.pdf">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -70,7 +60,7 @@
         <div class="card">
           <img
             class="card-img" 
-            th:src="@{../Img/doctor2.jpeg}"
+            src="/src/main/resources/Static/Img/doctor2.jpeg"
             alt="..."
           />
           <h5 class="card-title">Dra. Bett Sosa</h5>
@@ -93,7 +83,7 @@
           </p>
           <div class="card-btn">
            
-            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum14.pdf}">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum14.pdf">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -104,7 +94,7 @@
         <div class="card">
           <img
             class="card-img" 
-            th:src="@{../Img/doctor3.jpeg}"
+            src="/src/main/resources/Static/Img/doctor3.jpeg"
             alt="..."
           />
           <h5 class="card-title">Dr. Luciano Ponce</h5>
@@ -127,7 +117,7 @@
           </p>
           <div class="card-btn">
             
-            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum13.pdf}">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum13.pdf">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -136,7 +126,7 @@
         <div class="card">
           <img
             class="card-img" 
-            th:src="@{../Img/doctor4.jpeg}"
+            src="/src/main/resources/Static/Img/doctor4.jpeg"
             alt="..."
           />
           <h5 class="card-title">Dr. Nicolás Lobos </h5>
@@ -159,12 +149,10 @@
           </p>
           <div class="card-btn">
           
-            <button class="card-btn1"><a class="card-curriculum" th:href="@{../pdf/curriculum5.pdf}">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum5.pdf">Curriculum</a></button>
           </div>
         </div>
       </div>
-    </div>
-
-    <div th:replace="/fragments/footer :: div" />
+    </div>  
   </body>
 </html>
