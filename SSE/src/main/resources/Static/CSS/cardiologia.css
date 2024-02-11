@@ -4,6 +4,10 @@ body {
     background-image: url("/src/main/resources/Static/Img/cardiologia.webp");
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .body {
     display: flex;
