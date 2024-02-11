@@ -11,8 +11,8 @@
     />
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
 
-    <link rel="stylesheet" th:href="@{/CSS/panelAdministrador.css}" />
-    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/CSS/panelProfesional.css}" />
+    <title>Dashboard Profesional</title>
   </head>
   <body>
     <nav th:replace="/fragments/navbar :: nav" />
@@ -21,14 +21,14 @@
     <!-- Mensaje de exito / error -->
    
     <div class="contenidoAdmin">
-       <h1>Bienvenido Mr Admin</h1>
+       <h1>Profesional</h1>
       <main class="d-flex flex-nowrap">
-        <h1 class="visually-hidden">Sidebars examples</h1>
+        <h1 class="visually-hidden">Tareas</h1>
       
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Sidebar</span>
+            <span class="fs-4">Turnos Pendientes</span>
           </a>
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
@@ -53,6 +53,7 @@
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
               <strong>mdo</strong>
+             
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
               <li><a class="dropdown-item" href="#">New project...</a></li>
