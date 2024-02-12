@@ -8,14 +8,21 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-.body {
+.contenedor{
+    display: block;    
+    width: 100%;
+    min-width: 250px;
+   
+}
+.header {
     display: flex;
     margin: 2%;
     padding: 5%;
-    justify-content: space-around;
+    justify-content:space-evenly;
 }
-.body-img {
+.header-img {
     width: 15%;
     height: 27%;
 
@@ -24,7 +31,7 @@ body {
     text-decoration: none;
 }
 
-h1 {
+.header-title {
     text-align: center;
     padding-top: 2%;
     font-size: 100px;
@@ -32,7 +39,7 @@ h1 {
 }
 
 .cardiologia {
-    width: 200vh;
+    width: 195vh;
     height: 70vh;
     margin: 2%;
     border: 2px solid;

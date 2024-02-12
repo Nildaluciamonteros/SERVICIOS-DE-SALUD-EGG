@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="/src/main/resources/Static/CSS/cardiologia.css"/>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
-    <title>Cardiología - Especialistas</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href="@{/CSS/cardiologia.css}" />
 
-  <body>   
-      <div class="body">
-        <img class="body-img" src="/src/main/resources/Static/Img/SSE-logo.png" alt="">
-      <h1>Cardiología</h1>
-   </div>
+  <title>Cardiología - Especialistas</title>
+</head>
+
+<body>
+  <div class="contenedor">
+    <div class="header">
+      <img class="header-img" th:src="@{/Img/SSE-logo.png}" alt="">
+      <h1 class="header-title">Cardiología</h1>
+    </div>
     <div>
-      <img
-        class="cardiologia" 
-        src="/src/main/resources/Static/Img/cardiologia1.webp"
-        alt="..."
-      />
+      <img class="cardiologia" th:src="@{/Img/cardiologia1.webp}" alt="..." />
     </div>
 
     <div class="col">
       <div class="card-medico">
         <div class="card">
-          <img
-            class="card-img"  
-            src="/src/main/resources/Static/Img/doctor1.jpeg"
-            alt="..."
-          />
+          <img class="card-img" th:src="@{/Img/doctor1.jpeg}" alt="..." />
           <h5 class="card-title">Dra. Teresa Maisterra </h5>
           <p class="card-text">M.P. 24905</p>
           <div class="rating">
@@ -46,23 +38,20 @@
             <label for="star1"></label>
           </div>
           <p class="card-text">
-            <b><u>Horario de atención:</u></b> 
+            <b><u>Horario de atención:</u></b>
             Lunes, Miércoles y Viernes de 8 a 13 hs.
           </p>
           <div class="card-btn">
-           
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum12.pdf">Curriculum</a></button>
+
+            <button class="card-btn1"><a class="card-curriculum"
+                th:href="@{/pdf/curriculum12.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
 
       <div class="card-medico">
         <div class="card">
-          <img
-            class="card-img" 
-            src="/src/main/resources/Static/Img/doctor2.jpeg"
-            alt="..."
-          />
+          <img class="card-img" th:src="@{/Img/doctor2.jpeg}" alt="..." />
           <h5 class="card-title">Dra. Bett Sosa</h5>
           <p class="card-text">M.N. 45789</p>
           <div class="rating">
@@ -77,13 +66,14 @@
             <input type="radio" id="star1" name="rating" value="1">
             <label for="star1"></label>
           </div>
-          <p class="card-text"> 
+          <p class="card-text">
             <b><u>Horario de atención:</u></b>
-             Lunes y Jueves de 8 a 13 hs.
+            Lunes y Jueves de 8 a 13 hs.
           </p>
           <div class="card-btn">
-           
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum14.pdf">Curriculum</a></button>
+
+            <button class="card-btn1"><a class="card-curriculum"
+                th:href="@{/pdf/curriculum14.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -92,11 +82,7 @@
     <div class="col">
       <div class="card-medico">
         <div class="card">
-          <img
-            class="card-img" 
-            src="/src/main/resources/Static/Img/doctor3.jpeg"
-            alt="..."
-          />
+          <img class="card-img" th:src="@{/Img/doctor3.jpeg}" alt="..." />
           <h5 class="card-title">Dr. Luciano Ponce</h5>
           <p class="card-text">M.N. 12365</p>
           <div class="rating">
@@ -113,22 +99,19 @@
           </div>
           <p class="card-text">
             <b><u>Horario de atención:</u></b>
-             Martes y Jueves de 16 a 21 hs.
+            Martes y Jueves de 16 a 21 hs.
           </p>
           <div class="card-btn">
-            
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum13.pdf">Curriculum</a></button>
+
+            <button class="card-btn1"><a class="card-curriculum"
+                th:href="@{/pdf/curriculum13.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
 
       <div class="card-medico">
         <div class="card">
-          <img
-            class="card-img" 
-            src="/src/main/resources/Static/Img/doctor4.jpeg"
-            alt="..."
-          />
+          <img class="card-img" th:src="@{/Img/doctor4.jpeg}" alt="..." />
           <h5 class="card-title">Dr. Nicolás Lobos </h5>
           <p class="card-text">M.N. 12648</p>
           <div class="rating">
@@ -148,11 +131,13 @@
             Lunes, Miércoles y Viernes de 16 a 21 hs.
           </p>
           <div class="card-btn">
-          
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum5.pdf">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum"
+                th:href="@{/pdf/curriculum5.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
-    </div>  
-  </body>
+    </div>
+  </div>
+</body>
+
 </html>
