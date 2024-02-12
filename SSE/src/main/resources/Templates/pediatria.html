@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-      >
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="/src/main/resources/Static/CSS/pediatria.css"
+      th:href="@{/CSS/pediatria.css}"
     />
    
     <title>Pediatría - Especialistas</title>
@@ -14,13 +13,13 @@
 
   <body>    
     <div class="body">
-      <img class="body-img" src="/src/main/resources/Static/Img/SSE-logo.png" alt="">
+      <img class="body-img" th:src="@{/Img/SSE-logo.png}" alt="">
     <h1>Pediatras</h1>
     </div>
     <div>
       <img
         class="imgpediatria"
-        src="/src/main/resources/Static/Img/Médico4.png"
+        th:src="@{/Img/Médico4.png}"
         alt="..."
       />
     </div>
@@ -30,7 +29,7 @@
         <div class="card">
           <img
             class="card-img"
-            src="/src/main/resources/Static/Img/Doctor10.jpeg"
+            th:src="@{/Img/Doctor10.jpeg}"
             alt="..."
           />
           <h5 class="card-title">Dra. Aldana Ucci</h5>
@@ -51,7 +50,7 @@
           Lunes, Miércoles y Viernes de 8 a 13 hs.
         </p>
         <div class="card-btn">
-          <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum10.pdf">Curriculum</a></button>
+          <button class="card-btn1"><a class="card-curriculum" th:href="@{/pdf/curriculum10.pdf}">Curriculum</a></button>
         </div>
         </div>
       </div>
@@ -60,7 +59,7 @@
         <div class="card">
           <img
             class="card-img"
-            src="/src/main/resources/Static/Img/Doctor6.jpeg"
+            th:src="@{/Img/Doctor6.jpeg}"
             alt="..."
           />
           <h5 class="card-title">Dra. Lucia Monteros</h5>
@@ -82,7 +81,7 @@
              Lunes y Jueves de 8 a 13 hs.
           </p>
           <div class="card-btn">
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum15.pdf">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{/pdf/curriculum15.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -93,7 +92,7 @@
         <div class="card">
           <img
             class="card-img"
-            src="/src/main/resources/Static/Img/Doctor5.jpeg"
+            th:src="@{/Img/Doctor5.jpeg}"
             alt="..."
           />
           <h5 class="card-title">Dr. Gabriel Castro</h5>
@@ -115,7 +114,7 @@
              Martes y Jueves de 16 a 21 hs.
           </p>
           <div class="card-btn">
-            <button class="card-btn1"><a class="card-curriculum" href="/SSE/src/main/resources/Static/pdf/curriculum11.pdf">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{/pdf/curriculum11.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
@@ -124,7 +123,7 @@
         <div class="card">
           <img
             class="card-img"
-            src="/src/main/resources/Static/Img/Doctor8.jpeg"
+            th:src="@{/Img/Doctor8.jpeg}"
             alt="..."
           />
           <h5 class="card-title">Dr. Nicolás Lobos</h5>
@@ -146,7 +145,7 @@
             Lunes, Miércoles y Viernes de 16 a 21 hs.
           </p>
           <div class="card-btn">
-            <button class="card-btn1"><a class="card-curriculum" href="/src/main/resources/Static/pdf/curriculum16.pdf">Curriculum</a></button>
+            <button class="card-btn1"><a class="card-curriculum" th:href="@{/pdf/curriculum16.pdf}">Curriculum</a></button>
           </div>
         </div>
       </div>
