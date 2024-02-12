@@ -5,7 +5,7 @@
  */
 package com.Equipo1.sse.repositorios;
 
-import com.Equipo1.sse.entidades.Imagen;
+import com.Equipo1.sse.entidades.Curriculum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Nico
  */
 @Repository
-public interface ImagenRepositorio extends JpaRepository<Imagen, String>
+public interface CurriculumRepositorio extends JpaRepository<Curriculum, String>
 {
 	
 }
-

@@ -21,4 +21,6 @@ public interface TurnoRepositorio extends JpaRepository<Turno, String> {
     
     @Query("SELECT t FROM Turno t WHERE t.paciente.numAfiliado = :numAfiliado")
 	public List<Turno> buscarPorNumeroAfiliado(@Param("numAfiliado") String numAfiliado);
+	
+	
 }
