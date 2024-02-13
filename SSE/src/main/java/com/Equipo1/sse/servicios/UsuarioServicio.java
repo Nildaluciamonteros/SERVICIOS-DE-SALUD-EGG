@@ -5,7 +5,6 @@
  */
 package com.Equipo1.sse.servicios;
 
-import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Paciente;
@@ -45,9 +44,6 @@ public class UsuarioServicio implements UserDetailsService
 	private UsuarioRepositorio usuarioRepositorio;
 	
 	@Autowired
-	private CurriculumServicio curriculumServicio;
-	
-	@Autowired
 	private ImagenServicio imagenServicio;
 	
 	@Autowired
@@ -82,25 +78,9 @@ public class UsuarioServicio implements UserDetailsService
 		((Paciente)usuario).setObraSocial(OS);
 		((Paciente)usuario).setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
-		
-		usuarioRepositorio.save(usuario);
-	}
-	
-	@Transactional
-	public void registrarProfesional(String nombre, String apellido, String telefono,
-			String email, String password, String password2) throws MiException
-	{
-		validar(nombre, apellido, telefono, email, password, password2);
-		// Crear Usuario
-		Usuario usuario = new Profesional();
-		
-		usuario.setNombre(nombre);
-		usuario.setApellido(apellido);
-		usuario.setTelefono(telefono);
-		usuario.setEmail(email);
-		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		
 		usuarioRepositorio.save(usuario);
 	}
@@ -145,6 +125,13 @@ public class UsuarioServicio implements UserDetailsService
 				((Paciente) usuario).setObraSocial(OS);
 				((Paciente) usuario).setNumAfiliado(numAfiliado);
 			}
+			if(usuario instanceof Profesional && usuario.getRol() == Rol.PROFESIONAL)
+			{
+				/*((Profesional)usuario).setEspecialidad(Especialidades.Pediatria);
+				((Profesional)usuario).setReputacion(Integer.MIN_VALUE);
+				((Profesional)usuario).setTurnos(turnos);
+				((Profesional)usuario).setValorConsulta(Double.NaN);*/
+			}
 			if (!claveVacia)
 			{
 				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -163,59 +150,37 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	@Transactional
-	public void actualizarProfesional(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String password, String password2,
-			Double valorConsulta, String especialidad, String matricula,
-			MultipartFile archImagen, MultipartFile archCurriculum) throws MiException
+	public void cambiarRol(String id, String rol)
 	{
-		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
-		// Validar datos
-		if (claveVacia) 
-		{
-			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad);
-		} else
-		{
-			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad);
-		}
-		// Buscar usuario
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+		
 		if (respuesta.isPresent())
 		{
-			Profesional profesional = (Profesional) respuesta.get();
-			profesional.setNombre(nombre);
-			profesional.setApellido(apellido);
-			profesional.setTelefono(telefono);
-			profesional.setEmail(email);
-			Especialidades espe = Especialidades.buscar(especialidad);
-			profesional.setEspecialidad(espe);
-			profesional.setValorConsulta(valorConsulta);
-			
-			if (!claveVacia)
+			Usuario usuarioViejo = respuesta.get();
+			Rol rolNuevo = Rol.buscar(rol);
+			Usuario usuarioActualizado;
+			switch (rolNuevo)
 			{
-				profesional.setPassword(new BCryptPasswordEncoder().encode(password));
+				case PROFESIONAL:
+					usuarioActualizado = new Profesional();
+					break;
+				case ADMIN:
+					usuarioActualizado = new Usuario();
+					break;
+				default:
+					usuarioActualizado = new Paciente();
+					break;
 			}
-			if (archImagen != null && !archImagen.isEmpty())
-			{
-				String idImagen = null;
-				if (profesional.getImagen().getId() != null)
-				{
-					idImagen = profesional.getImagen().getId();
-				}
-				Imagen imagen = imagenServicio.actualizar(archImagen, idImagen);
-				profesional.setImagen(imagen);
-			}
-			if (archCurriculum != null && !archCurriculum.isEmpty())
-			{
-				String idCurriculum = null;
-				if (profesional.getCurriculum().getId() != null)
-				{
-					idCurriculum = profesional.getCurriculum().getId();
-				}
-				Curriculum curriculum = curriculumServicio.actualizar(archCurriculum, idCurriculum);
-				profesional.setCurriculum(curriculum);
-			}
-			usuarioRepositorio.save(profesional);
+			usuarioActualizado.setId(usuarioViejo.getId());
+			usuarioActualizado.setNombre(usuarioViejo.getNombre());
+			usuarioActualizado.setApellido(usuarioViejo.getApellido());
+			usuarioActualizado.setEmail(usuarioViejo.getEmail());
+			usuarioActualizado.setImagen(usuarioViejo.getImagen());
+			usuarioActualizado.setPassword(usuarioViejo.getPassword());
+			usuarioActualizado.setTelefono(usuarioViejo.getTelefono());
+			usuarioActualizado.setRol(rolNuevo);
+			usuarioRepositorio.delete(usuarioViejo);
+			usuarioRepositorio.save(usuarioActualizado);
 		}
 	}
 	
@@ -282,38 +247,9 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	private void validarProfesional(String nombre, String apellido, String telefono,
-			String email, String password, String password2,
-			String especialidad) throws MiException
+	private void validarAfiliado(ObraSocial obraSocial, String numAfiliado)
 	{
-		if (nombre == null || nombre.isEmpty())
-		{
-			throw new MiException("El nombre no puede ser nulo o estar vacio");
-		}
-		if (apellido == null || apellido.isEmpty())
-		{
-			throw new MiException("El apellido no puede ser nulo o estar vacio");
-		}
-		if (telefono == null || telefono.isEmpty() || !telefono.matches("[0-9]+"))
-		{
-			throw new MiException("El telefono no puede contener caracteres que no sean numeros, ser nulo o estar vacio");
-		}
-		if (email == null || email.isEmpty())
-		{
-			throw new MiException("El email no puede ser nulo o estar vacio");
-		}
-		if (password == null || password.isEmpty() || password.length() <= 5)
-		{
-			throw new MiException("La contraseña no puede ser nula o estar vacia, y debe tener minimo 6 digitos");
-		}
-		if (password2 == null || password2.isEmpty() || !password.equals(password2))
-		{
-			throw new MiException("Las contraseñas ingresadas deben ser iguales");
-		}
-		if(especialidad == null || especialidad.isEmpty() || Especialidades.buscar(especialidad) != null)
-		{
-			throw new MiException("La especialidad ingresada no es válida");
-		}
+		
 	}
 	
 	public Usuario getOne(String id)
@@ -346,14 +282,13 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	public void darBajaUsuario(String idUsuario)
+	public void eliminarUsuario(String idUsuario)
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
-			usuario.setActivado(false);
-			usuarioRepositorio.save(usuario);
+			usuarioRepositorio.delete(usuario);
 		}
 	}
 }

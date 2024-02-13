@@ -35,8 +35,6 @@ public class Usuario implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
-	
-	private Boolean activado;
 
     @OneToOne
     private Imagen imagen;

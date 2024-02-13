@@ -1,6 +1,5 @@
 package com.Equipo1.sse.entidades;
 
-import com.Equipo1.sse.enumeraciones.Rol;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ public class Paciente extends Usuario {
 
     public Paciente() {
         super();
-		setRol(Rol.PACIENTE);
     }
 
     
