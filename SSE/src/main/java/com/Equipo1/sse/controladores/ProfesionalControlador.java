@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.Equipo1.sse.controladores;
-
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
@@ -51,7 +50,6 @@ public class ProfesionalControlador
 		return "usuario_modificar.html";
 	}
 
-	
 	@PostMapping("/perfil/{id}")
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
@@ -65,6 +63,7 @@ public class ProfesionalControlador
 			if (!editado.equals(usuarioSession))
 			{
 				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
+
 						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
@@ -72,7 +71,9 @@ public class ProfesionalControlador
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
+
 			Profesional profesional = (Profesional) session.getAttribute("usuarioSession");
+
 			modelo.put("especialidades", Especialidades.values());
 			return "usuario_modificar.html";
 		}
