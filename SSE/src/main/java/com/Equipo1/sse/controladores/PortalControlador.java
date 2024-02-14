@@ -12,6 +12,7 @@ import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
+import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ public class PortalControlador
 	private UsuarioServicio usuarioServicio;
 	@Autowired
 	private ObraSocialServicio obraSocialServicio;
+        @Autowired
+	private ProfesionalServicio profesionalServicio;
 
 	@GetMapping("/")
 	public String index(ModelMap modelo)
@@ -119,7 +122,7 @@ public class PortalControlador
 	@GetMapping("/especialidades/{especialidad}")
 	public String especialidad(@PathVariable String especialidad, ModelMap modelo)
 	{
-		List<Profesional> profesionales = usuarioServicio.listarProfesionalesPorEspecialidad(especialidad);
+		List<Profesional> profesionales = profesionalServicio.listarProfesionalesPorEspecialidad(especialidad);
 		modelo.put("profesionales", profesionales);
 		return "especialidad.html";
 	}

@@ -57,8 +57,8 @@ public class ObraSocialControlador {
         return "obraSocial_lista.html";
     }
     
-    @GetMapping("/{id}/eliminar")
-	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo)
+    @GetMapping("/{id}/darBaja")
+	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo) throws MiException
 	{
 		ObraSocial OS = obraSocialServicio.getOne(id);
 		if(OS == null)
@@ -67,8 +67,15 @@ public class ObraSocialControlador {
 		}
 		else
 		{
-			obraSocialServicio.eliminarObraSocial(id);
-			modelo.put("exito", "La Obra Social se eliminó");
+			try
+			{
+				obraSocialServicio.darBaja(OS.getId());
+				modelo.put("exito", "La Obra Social cambió su estado de actividad.");
+			}
+			catch(MiException ex)
+			{
+				modelo.put("error","No se pudo cambiar su estado de actividad.");
+			}
 		}
 		return "redirect:/obraSocial/lista";
 	}

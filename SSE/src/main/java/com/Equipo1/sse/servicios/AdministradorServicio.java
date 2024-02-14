@@ -5,15 +5,10 @@
  */
 package com.Equipo1.sse.servicios;
 
+import com.Equipo1.sse.entidades.Administrador;
 import com.Equipo1.sse.entidades.Imagen;
-import com.Equipo1.sse.entidades.ObraSocial;
-import com.Equipo1.sse.entidades.Paciente;
-import com.Equipo1.sse.entidades.Profesional;
-import com.Equipo1.sse.entidades.Usuario;
-import com.Equipo1.sse.enumeraciones.Especialidades;
-import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
-import com.Equipo1.sse.repositorios.UsuarioRepositorio;
+import com.Equipo1.sse.repositorios.AdministradorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,73 +32,37 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Nico
  */
 @Service
-public class UsuarioServicio implements UserDetailsService
+public class AdministradorServicio implements UserDetailsService
 {
+	@Autowired
+	AdministradorRepositorio administradorRepositorio;
 	
 	@Autowired
-	private UsuarioRepositorio usuarioRepositorio;
-	
-	@Autowired
-	private ImagenServicio imagenServicio;
-	
-	@Autowired
-	private ObraSocialServicio obraSocialServicio;
+	ImagenServicio imagenServicio;
 	
 	@Transactional
 	public void registrar(String nombre, String apellido, String telefono,
-			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
+			String email, String password, String password2, MultipartFile archivo) throws MiException
 	{
-		// Validar datos
-		ObraSocial OS = null;
-		if(obraSocial != null && !obraSocial.isEmpty())
-		{
-			OS = obraSocialServicio.buscarObraSocial(obraSocial);
-			if(numAfiliado == null || numAfiliado.isEmpty())
-			{
-				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
-			}
-		}
-		else
-		{
-			numAfiliado = "";
-		}
 		validar(nombre, apellido, telefono, email, password, password2);
-		// Crear Usuario
-		Usuario usuario = new Paciente();
+		Administrador usuario = new Administrador();
 		
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
-		((Paciente)usuario).setObraSocial(OS);
-		((Paciente)usuario).setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
 		
-		usuarioRepositorio.save(usuario);
+		administradorRepositorio.save(usuario);
 	}
 	
 	@Transactional
 	public void actualizar(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
+			String telefono, String email, String password, String password2, MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
-		// Validar datos
-		ObraSocial OS = null;
-		if(obraSocial != null && !obraSocial.isEmpty())
-		{
-			OS = obraSocialServicio.buscarObraSocial(obraSocial);
-			if(numAfiliado == null || numAfiliado.isEmpty())
-			{
-				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
-			}
-		}
-		else
-		{
-			numAfiliado = "";
-		}
 		if (claveVacia) 
 		{
 			validar(nombre, apellido, telefono, email, "123456", "123456");
@@ -111,27 +70,14 @@ public class UsuarioServicio implements UserDetailsService
 		{
 			validar(nombre, apellido, telefono, email, password, password2);
 		}
-		// Buscar usuario
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		Optional<Administrador> respuesta = administradorRepositorio.findById(idUsuario);
 		if (respuesta.isPresent())
 		{
-			Usuario usuario = respuesta.get();
+			Administrador usuario = respuesta.get();
 			usuario.setNombre(nombre);
 			usuario.setApellido(apellido);
 			usuario.setTelefono(telefono);
 			usuario.setEmail(email);
-			if (usuario instanceof Paciente && usuario.getRol() == Rol.PACIENTE)
-			{
-				((Paciente) usuario).setObraSocial(OS);
-				((Paciente) usuario).setNumAfiliado(numAfiliado);
-			}
-			if(usuario instanceof Profesional && usuario.getRol() == Rol.PROFESIONAL)
-			{
-				/*((Profesional)usuario).setEspecialidad(Especialidades.Pediatria);
-				((Profesional)usuario).setReputacion(Integer.MIN_VALUE);
-				((Profesional)usuario).setTurnos(turnos);
-				((Profesional)usuario).setValorConsulta(Double.NaN);*/
-			}
 			if (!claveVacia)
 			{
 				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -146,23 +92,24 @@ public class UsuarioServicio implements UserDetailsService
 				Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
 				usuario.setImagen(imagen);
 			}
-			usuarioRepositorio.save(usuario);
+			administradorRepositorio.save(usuario);
 		}
-	}	
-
-	public List<Usuario> listarUsuarios()
-	{
-		return usuarioRepositorio.findAll();
 	}
 	
-	public List<Profesional> listarProfesionales()
+	public Administrador getOne(String id)
 	{
-		return usuarioRepositorio.buscarTodosLosProfesionales();
+		return administradorRepositorio.getOne(id);
 	}
 	
-	public List<Usuario> buscarPorNombre(String nombre)
+	public void darBajaAdministrador(String idUsuario)
 	{
-		return usuarioRepositorio.buscarPorNombre(nombre);
+		Optional<Administrador> respuesta = administradorRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+			Administrador usuario = respuesta.get();
+			usuario.setActivado(false);
+			administradorRepositorio.save(usuario);
+		}
 	}
 	
 	private void validar(String nombre, String apellido, String telefono,
@@ -193,16 +140,11 @@ public class UsuarioServicio implements UserDetailsService
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
 		}
 	}
-	
-	public Usuario getOne(String id)
-	{
-		return usuarioRepositorio.getOne(id);
-	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{
-		Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+		Administrador usuario = administradorRepositorio.buscarPorEmail(email);
 		
 		if (usuario != null)
 		{
@@ -223,5 +165,5 @@ public class UsuarioServicio implements UserDetailsService
 			return null;
 		}
 	}
-
+	
 }
