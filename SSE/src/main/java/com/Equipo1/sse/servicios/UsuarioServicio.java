@@ -5,6 +5,7 @@
  */
 package com.Equipo1.sse.servicios;
 
+import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Paciente;
@@ -44,6 +45,9 @@ public class UsuarioServicio implements UserDetailsService
 	private UsuarioRepositorio usuarioRepositorio;
 	
 	@Autowired
+	private CurriculumServicio curriculumServicio;
+	
+	@Autowired
 	private ImagenServicio imagenServicio;
 	
 	@Autowired
@@ -78,9 +82,25 @@ public class UsuarioServicio implements UserDetailsService
 		((Paciente)usuario).setObraSocial(OS);
 		((Paciente)usuario).setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-		usuario.setRol(Rol.PACIENTE);
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
+		
+		usuarioRepositorio.save(usuario);
+	}
+	
+	@Transactional
+	public void registrarProfesional(String nombre, String apellido, String telefono,
+			String email, String password, String password2) throws MiException
+	{
+		validar(nombre, apellido, telefono, email, password, password2);
+		// Crear Usuario
+		Usuario usuario = new Profesional();
+		
+		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setTelefono(telefono);
+		usuario.setEmail(email);
+		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		
 		usuarioRepositorio.save(usuario);
 	}
@@ -125,13 +145,6 @@ public class UsuarioServicio implements UserDetailsService
 				((Paciente) usuario).setObraSocial(OS);
 				((Paciente) usuario).setNumAfiliado(numAfiliado);
 			}
-			if(usuario instanceof Profesional && usuario.getRol() == Rol.PROFESIONAL)
-			{
-				/*((Profesional)usuario).setEspecialidad(Especialidades.Pediatria);
-				((Profesional)usuario).setReputacion(Integer.MIN_VALUE);
-				((Profesional)usuario).setTurnos(turnos);
-				((Profesional)usuario).setValorConsulta(Double.NaN);*/
-			}
 			if (!claveVacia)
 			{
 				usuario.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -150,62 +163,11 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	public void cambiarRol(String id, String rol)
-	{
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-		
-		if (respuesta.isPresent())
-		{
-			Usuario usuarioViejo = respuesta.get();
-			Rol rolNuevo = Rol.buscar(rol);
-			Usuario usuarioActualizado;
-			switch (rolNuevo)
-			{
-				case PROFESIONAL:
-					usuarioActualizado = new Profesional();
-					break;
-				case ADMIN:
-					usuarioActualizado = new Usuario();
-					break;
-				default:
-					usuarioActualizado = new Paciente();
-					break;
-			}
-			usuarioActualizado.setId(usuarioViejo.getId());
-			usuarioActualizado.setNombre(usuarioViejo.getNombre());
-			usuarioActualizado.setApellido(usuarioViejo.getApellido());
-			usuarioActualizado.setEmail(usuarioViejo.getEmail());
-			usuarioActualizado.setImagen(usuarioViejo.getImagen());
-			usuarioActualizado.setPassword(usuarioViejo.getPassword());
-			usuarioActualizado.setTelefono(usuarioViejo.getTelefono());
-			usuarioActualizado.setRol(rolNuevo);
-			usuarioRepositorio.delete(usuarioViejo);
-			usuarioRepositorio.save(usuarioActualizado);
-		}
-	}
 	
-	public void cambiarEspecialidad(String idUsuario, String especialidad)
-	{
-		Especialidades esp = Especialidades.buscar(especialidad);
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
-		if (respuesta.isPresent())
-		{
-			Usuario usuario = respuesta.get();
-			if(usuario instanceof Profesional)
-			{
-				((Profesional)usuario).setEspecialidad(Especialidades.buscar(especialidad));
-			}
-		}
-	}
 	
 	public List<Usuario> listarUsuarios()
 	{
 		return usuarioRepositorio.findAll();
-	}
-	
-	public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad)
-	{
-		return usuarioRepositorio.buscarPorEspecialidad(especialidad);
 	}
 	
 	public List<Profesional> listarProfesionales()
@@ -247,10 +209,6 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	private void validarAfiliado(ObraSocial obraSocial, String numAfiliado)
-	{
-		
-	}
 	
 	public Usuario getOne(String id)
 	{
@@ -282,13 +240,14 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	public void eliminarUsuario(String idUsuario)
+	public void darBajaUsuario(String idUsuario)
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
-			usuarioRepositorio.delete(usuario);
+			usuario.setActivado(false);
+			usuarioRepositorio.save(usuario);
 		}
 	}
 }

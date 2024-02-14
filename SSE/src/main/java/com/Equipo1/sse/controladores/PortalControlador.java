@@ -5,13 +5,14 @@
  */
 package com.Equipo1.sse.controladores;
 
-import com.Equipo1.sse.entidades.ObraSocial;
+import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
+import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ public class PortalControlador
 	private UsuarioServicio usuarioServicio;
 	@Autowired
 	private ObraSocialServicio obraSocialServicio;
+        @Autowired
+	private ProfesionalServicio profesionalServicio;
 
 	@GetMapping("/")
 	public String index(ModelMap modelo)
@@ -57,10 +60,10 @@ public class PortalControlador
 		{
 			return "redirect:/admin/dashboard";
 		}
-                if (logeado.getRol() == Rol.PROFESIONAL)
+		if (logeado.getRol() == Rol.PROFESIONAL)
 		{
 			return "redirect:/profesional/";
-		} 
+		}
 		return "inicio.html";
 	}
 
@@ -75,15 +78,15 @@ public class PortalControlador
 	}
 
 	@GetMapping("/registro")
-	public String registro(ModelMap modelo)
+	public String registro()
 	{
 		return "registro.html";
 	}
 
 	@PostMapping("/registro")
 	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String email, @RequestParam String obraSocial, @RequestParam String numAfiliado, @RequestParam String password, @RequestParam String password2,
-			@RequestParam MultipartFile archivo, ModelMap modelo)
+			@RequestParam String email, String obraSocial, String numAfiliado, @RequestParam String password, @RequestParam String password2,
+			MultipartFile archivo, ModelMap modelo)
 	{
 		try
 		{
@@ -119,7 +122,7 @@ public class PortalControlador
 	@GetMapping("/especialidades/{especialidad}")
 	public String especialidad(@PathVariable String especialidad, ModelMap modelo)
 	{
-		List<Profesional> profesionales = usuarioServicio.listarProfesionalesPorEspecialidad(especialidad);
+		List<Profesional> profesionales = profesionalServicio.listarProfesionalesPorEspecialidad(especialidad);
 		modelo.put("profesionales", profesionales);
 		return "especialidad.html";
 	}
@@ -129,8 +132,31 @@ public class PortalControlador
 	public String perfil(ModelMap modelo, HttpSession session)
 	{
 		Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
-		modelo.put("usuario", usuario);
-		return "perfil_modificar.html";
+		Paciente paciente = null;
+		Profesional profesional = null;
+		if(usuario instanceof Paciente)
+		{
+			paciente = (Paciente)usuario;
+			modelo.put("usuario", paciente);
+		}
+		else if(usuario instanceof Profesional)
+		{
+			profesional = (Profesional)usuario;
+			modelo.put("usuario", profesional);
+		}
+		else
+		{
+			modelo.put("usuario", usuario);
+		}
+		if (usuario instanceof Profesional)
+		{
+			modelo.put("especialidades", Especialidades.values());
+		}
+		if (usuario instanceof Paciente)
+		{
+			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+		}
+		return "usuario_modificar.html";
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
@@ -138,7 +164,7 @@ public class PortalControlador
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono, @RequestParam String email, @RequestParam String obraSocial,
 			@RequestParam String numAfiliado,
-			@RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile archivo, HttpSession session, ModelMap modelo, Authentication authentication)
+			@RequestParam String password, @RequestParam String password2, MultipartFile archivo, HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{
@@ -150,14 +176,22 @@ public class PortalControlador
 						password, password2, archivo);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "inicio.html";
+			return "redirect:/inicio";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
 			Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
 			modelo.put("usuario", usuario);
+			if (usuario instanceof Profesional)
+			{
+				modelo.put("especialidades", Especialidades.values());
+			}
+			if (usuario instanceof Paciente)
+			{
+				modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+			}
 
-			return "perfil_modificar.html";
+			return "usuario_modificar.html";
 		}
 	}
 }
