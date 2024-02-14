@@ -1,6 +1,7 @@
 package com.Equipo1.sse.entidades;
 
 import com.Equipo1.sse.enumeraciones.Especialidades;
+import com.Equipo1.sse.enumeraciones.Rol;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,11 +20,16 @@ public class Profesional extends Usuario {
     private Especialidades especialidad;
 
     private Double valorConsulta;
+	
+	private String matricula;
 
     private Integer reputacion;
+	
+	private Curriculum curriculum;
 
     public Profesional() {
         super();
+		setRol(Rol.PROFESIONAL);
     }
     
     
