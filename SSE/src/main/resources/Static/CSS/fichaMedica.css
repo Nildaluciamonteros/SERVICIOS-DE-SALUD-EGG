@@ -1,0 +1,8 @@
+body {
+    background: radial-gradient(circle, rgb(0, 0, 0) 0%, #00115f 100%);
+}
+
+table {
+    border-radius: 10px;
+    overflow: hidden
+}

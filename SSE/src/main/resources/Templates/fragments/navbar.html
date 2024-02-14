@@ -16,8 +16,8 @@
     </button>
 
     <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-      <a class="navbar-brand col-lg-3 me-0" href="#"
-        ><img th:src="@{/Img/SSE-logo.png}" alt="" class="img-logo-nav"
+      <a class="navbar-brand col-lg-2 me-0" href="#"
+        ><img th:src="@{/Img/SSE-logo.png}" width="52" height="52"  alt="" class="img-logo-nav"
       /></a>
       <ul class="navbar-nav col-lg-6 justify-content-lg-center">
         <li class="nav-item">
@@ -26,17 +26,12 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/turnos">Turnos</a>
+          <a class="nav-link" href="/paciente/turnos">Turnos</a>
         </li> 
 
         </li>
-        <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="nav-link" href="/admin/usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="nav-link" href="/obraSocial/lista">Obras Sociales</a>
-        </li>
-
+       
+       
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -48,29 +43,36 @@
           >
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="/especialidades/clinica"
+              <a class="dropdown-item" href="../especialidad/clinica"
                 >Clinica</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="/especialidades/ginecologia"
+              <a class="dropdown-item" href="/especialidad/ginecologia"
                 >Ginecologia</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="/especialidades/cardiologia"
+              <a class="dropdown-item" href="/especialidad/cardiologia"
                 >Cardiologia</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="/especialidades/pediatria"
+              <a class="dropdown-item" href="/especialidad/pediatria"
                 >Pediatria</a
               >
             </li>
           </ul>
+         
         </li>
+
       </ul>
+      <div class="perfil" >
+        <img
+          th:src="@{/imagen/perfil/__${session.usuarioSession.id}__}"/>
+  </div> 
       <br />
+    
       <div class="d-lg-flex col-lg-3 justify-content-lg-end">
         <a class="btn btn-danger" href="/logout">Salir</a>
       </div>
