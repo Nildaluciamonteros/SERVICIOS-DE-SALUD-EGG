@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package com.Equipo1.sse.controladores;
-
 import com.Equipo1.sse.entidades.Profesional;
-import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
+import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.TurnoServicio;
-import com.Equipo1.sse.servicios.UsuarioServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,7 +35,7 @@ public class ProfesionalControlador
 	private TurnoServicio turnoServicio;
 	
 	@Autowired
-	private UsuarioServicio usuarioServicio;
+	private ProfesionalServicio profesionalServicio;
 	
 	@GetMapping("/")
 	public String profesional()
@@ -52,7 +50,6 @@ public class ProfesionalControlador
 		return "usuario_modificar.html";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_PACIENTE','ROLE_ADMIN','ROLE_PROFESIONAL')")
 	@PostMapping("/perfil/{id}")
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
@@ -62,10 +59,11 @@ public class ProfesionalControlador
 		try
 		{
 			Profesional usuarioSession = (Profesional) session.getAttribute("usuarioSession");
-			Profesional editado = (Profesional) usuarioServicio.getOne(id);
+			Profesional editado = (Profesional) profesionalServicio.getOne(id);
 			if (!editado.equals(usuarioSession))
 			{
-				usuarioServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
+				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
+
 						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
@@ -73,7 +71,9 @@ public class ProfesionalControlador
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
-			Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+
+			Profesional profesional = (Profesional) session.getAttribute("usuarioSession");
+
 			modelo.put("especialidades", Especialidades.values());
 			return "usuario_modificar.html";
 		}

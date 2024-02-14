@@ -163,84 +163,9 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	@Transactional
-	public void actualizarProfesional(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String password, String password2,
-			Double valorConsulta, String especialidad, String matricula,
-			MultipartFile archImagen, MultipartFile archCurriculum) throws MiException
-	{
-		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
-		// Validar datos
-		if (claveVacia) 
-		{
-			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad);
-		} else
-		{
-			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad);
-		}
-		// Buscar usuario
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
-		if (respuesta.isPresent())
-		{
-			Profesional profesional = (Profesional) respuesta.get();
-			profesional.setNombre(nombre);
-			profesional.setApellido(apellido);
-			profesional.setTelefono(telefono);
-			profesional.setEmail(email);
-			Especialidades espe = Especialidades.buscar(especialidad);
-			profesional.setEspecialidad(espe);
-			profesional.setValorConsulta(valorConsulta);
-			
-			if (!claveVacia)
-			{
-				profesional.setPassword(new BCryptPasswordEncoder().encode(password));
-			}
-			if (archImagen != null && !archImagen.isEmpty())
-			{
-				String idImagen = null;
-				if (profesional.getImagen().getId() != null)
-				{
-					idImagen = profesional.getImagen().getId();
-				}
-				Imagen imagen = imagenServicio.actualizar(archImagen, idImagen);
-				profesional.setImagen(imagen);
-			}
-			if (archCurriculum != null && !archCurriculum.isEmpty())
-			{
-				String idCurriculum = null;
-				if (profesional.getCurriculum().getId() != null)
-				{
-					idCurriculum = profesional.getCurriculum().getId();
-				}
-				Curriculum curriculum = curriculumServicio.actualizar(archCurriculum, idCurriculum);
-				profesional.setCurriculum(curriculum);
-			}
-			usuarioRepositorio.save(profesional);
-		}
-	}
-	
-	public void cambiarEspecialidad(String idUsuario, String especialidad)
-	{
-		Especialidades esp = Especialidades.buscar(especialidad);
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
-		if (respuesta.isPresent())
-		{
-			Usuario usuario = respuesta.get();
-			if(usuario instanceof Profesional)
-			{
-				((Profesional)usuario).setEspecialidad(Especialidades.buscar(especialidad));
-			}
-		}
-	}
-	
 	public List<Usuario> listarUsuarios()
 	{
 		return usuarioRepositorio.findAll();
-	}
-	
-	public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad)
-	{
-		return usuarioRepositorio.buscarPorEspecialidad(especialidad);
 	}
 	
 	public List<Profesional> listarProfesionales()
@@ -279,40 +204,6 @@ public class UsuarioServicio implements UserDetailsService
 		if (password2 == null || password2.isEmpty() || !password.equals(password2))
 		{
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
-		}
-	}
-	
-	private void validarProfesional(String nombre, String apellido, String telefono,
-			String email, String password, String password2,
-			String especialidad) throws MiException
-	{
-		if (nombre == null || nombre.isEmpty())
-		{
-			throw new MiException("El nombre no puede ser nulo o estar vacio");
-		}
-		if (apellido == null || apellido.isEmpty())
-		{
-			throw new MiException("El apellido no puede ser nulo o estar vacio");
-		}
-		if (telefono == null || telefono.isEmpty() || !telefono.matches("[0-9]+"))
-		{
-			throw new MiException("El telefono no puede contener caracteres que no sean numeros, ser nulo o estar vacio");
-		}
-		if (email == null || email.isEmpty())
-		{
-			throw new MiException("El email no puede ser nulo o estar vacio");
-		}
-		if (password == null || password.isEmpty() || password.length() <= 5)
-		{
-			throw new MiException("La contraseña no puede ser nula o estar vacia, y debe tener minimo 6 digitos");
-		}
-		if (password2 == null || password2.isEmpty() || !password.equals(password2))
-		{
-			throw new MiException("Las contraseñas ingresadas deben ser iguales");
-		}
-		if(especialidad == null || especialidad.isEmpty() || Especialidades.buscar(especialidad) != null)
-		{
-			throw new MiException("La especialidad ingresada no es válida");
 		}
 	}
 	
