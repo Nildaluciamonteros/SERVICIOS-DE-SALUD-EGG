@@ -163,8 +163,6 @@ public class UsuarioServicio implements UserDetailsService
 		}
 	}
 	
-	
-	
 	public List<Usuario> listarUsuarios()
 	{
 		return usuarioRepositorio.findAll();
@@ -208,7 +206,6 @@ public class UsuarioServicio implements UserDetailsService
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
 		}
 	}
-	
 	
 	public Usuario getOne(String id)
 	{
