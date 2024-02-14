@@ -30,12 +30,8 @@
         </li> 
 
         </li>
-        <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="nav-link" href="/admin/usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="nav-link" href="/obraSocial/lista">Obras Sociales</a>
-        </li>
+       
+       
 
         <li class="nav-item dropdown">
           <a
@@ -48,7 +44,7 @@
           >
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="/especialidades/clinica"
+              <a class="dropdown-item" href="/especilidades/clinica"
                 >Clinica</a
               >
             </li>
