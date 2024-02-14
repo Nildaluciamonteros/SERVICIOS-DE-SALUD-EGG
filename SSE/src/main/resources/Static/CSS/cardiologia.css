@@ -1,17 +1,17 @@
 body {
     padding: 0;
     margin: 0;     
-    background-image: url("/Img/'.web'");
+    background-image: url("/src/main/resources/Static/Img/cardiologia.webp");
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 .body {
-    display: flex;     
+    display: flex;
+    margin: 2%;
     padding: 5%;
     justify-content: space-around;
 }
@@ -25,12 +25,13 @@ body {
 }
 
 h1 {
-    text-align: center; 
+    text-align: center;
+    padding-top: 2%;
     font-size: 100px;
     font-family: sans-serif;
 }
 
-.ginecologia {
+.cardiologia {
     width: 200vh;
     height: 70vh;
     margin: 2%;
@@ -42,27 +43,24 @@ h1 {
     display: flex;
     justify-items: center;
     justify-content: space-between;
-   
 }
 
 
 
 .card-medico {
-    display: flex;
     margin: 12%;
     padding: 2%;
-    
+
 }
 
 .card {
     background-color: rgba(255, 255, 255, 0.296);
     padding: 12%;
-    margin: 2% 30px;
+    margin: 2%;
     width: 35vh;
     height: 65vh;
     border-radius: 20px;
     box-shadow: 2px 6px 2px 6px rgb(119, 116, 116);
-   
 }
 
 .card-img {
@@ -110,9 +108,7 @@ h1 {
     border-radius: 8px;
 
 }
-.card-curriculum{
-    color: white;
-}
+
 
 .rating {    
     display: flex;
