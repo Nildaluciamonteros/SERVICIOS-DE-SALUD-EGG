@@ -7,3 +7,23 @@
     position: relative;
     top: 10px;
 }
+.perfil img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50px;
+  
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    padding-bottom: 10px;
+    width: 100%;
+    z-index: 1;
+}
+.btn-danger{
+    display: flex;
+    justify-content: start;
+}

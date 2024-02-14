@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding:100px 20px 20px 20px;
 }
 .prestadores-cont{
     background-image: url("/Img/fondoInicio3.jpg");
@@ -45,10 +45,18 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+}
+
+.col-lg-4 img{
+    width:150px;
+    height: 150px;
+    border-radius: 50px;
+    object-fit:cover ;
 }
 .row{
+    margin-top: 10px;
     width: 100%;
     height: auto;
     display: flex;
