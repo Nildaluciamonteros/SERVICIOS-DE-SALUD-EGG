@@ -8,11 +8,11 @@
             rel="stylesheet"
             th:href="@{/CSS/especialidad.css}"
             />
-        <style th:text="${'background-image: url(''/Img/' + especialidad + '.webp''); !important'}"></style>
+       
         <title th:text="${especialidad + ' - Especialistas'}"></title>
     </head>
 
-    <body>
+    <body th:style="'background-image: url(' + @{/Img/'.webp'} + ');'">
 
         <div class="body">
             <img
