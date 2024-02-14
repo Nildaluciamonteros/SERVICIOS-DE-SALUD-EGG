@@ -15,9 +15,11 @@ import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,7 +83,16 @@ public class AdminControlador
 		return "usuario_buscar.html";
 	}
 
-	@GetMapping("/usuarios/{id}/darBaja")
+	@PostMapping("/usuarios/{id}/cambiarRol")
+	public String cambiarRol(@PathVariable String id, @RequestParam String rol, HttpSession session, Authentication authentication)
+	{
+		Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
+
+		usuarioServicio.cambiarRol(id, rol);
+		return "redirect:/admin/usuarios";
+	}
+
+	@GetMapping("/usuarios/{id}/eliminar")
 	public String eliminarUsuario(@PathVariable String id, ModelMap modelo)
 	{
 		Usuario usuario = usuarioServicio.getOne(id);
@@ -90,7 +101,7 @@ public class AdminControlador
 			modelo.put("error", "El usuario no se encuentra");
 		} else
 		{
-			usuarioServicio.darBajaUsuario(id);
+			usuarioServicio.eliminarUsuario(id);
 			modelo.put("exito", "El usuario se eliminó");
 		}
 		return "redirect:/admin/usuarios";
@@ -157,34 +168,6 @@ public class AdminControlador
 			modelo.put("usuario", usuario);
 
 			return "usuario_modificar.html";
-		}
-	}
-	
-	@GetMapping("/registrarProfesional")
-	public String registrarProfesional()
-	{
-		return "registro_profesional.html";
-	}
-	@PostMapping("/registrarProfesional")
-	public String registroProfesional(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
-			@RequestParam String email, @RequestParam String password, @RequestParam String password2,ModelMap modelo)
-	{
-		try
-		{
-			usuarioServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2);
-			modelo.put("exito", "Usuario registrado correctamente");
-			return "redirect:/login";
-		}
-		catch (MiException ex)
-		{
-			modelo.put("error", ex.getMessage());
-			modelo.put("nombre", nombre);
-			modelo.put("apellido", apellido);
-			modelo.put("telefono", telefono);
-			modelo.put("email", email);
-			modelo.put("password", password);
-			modelo.put("password2", password2);
-			return "registro.html";
 		}
 	}
 }

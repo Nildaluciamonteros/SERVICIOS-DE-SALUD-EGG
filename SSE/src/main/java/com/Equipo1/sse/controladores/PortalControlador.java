@@ -78,7 +78,7 @@ public class PortalControlador
 	}
 
 	@GetMapping("/registro")
-	public String registro()
+	public String registro(ModelMap modelo)
 	{
 		return "registro.html";
 	}
