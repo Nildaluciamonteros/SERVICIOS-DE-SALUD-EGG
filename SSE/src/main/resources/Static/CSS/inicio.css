@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding:100px 20px 20px 20px;
 }
 .prestadores-cont{
     background-image: url("/Img/fondoInicio3.jpg");
