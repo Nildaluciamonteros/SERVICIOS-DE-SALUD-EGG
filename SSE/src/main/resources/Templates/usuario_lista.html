@@ -18,24 +18,24 @@
     <!-- navbar -->
     <div th:replace="/fragments/status :: div" class="cartel" />
     <!-- Mensaje de exito / error -->
-    
+
     <h1>Usuarios Registrados</h1>
 
     <table class="table">
       <thead>
-        <tr >
-          <th scope="col">Id del Usuario</th>
+        <tr class="titulos-tabla">
           <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
           <th scope="col">Foto de perfil</th>
           <th scope="col">Rol</th>
           <th scope="col">Modificar</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col">Alta/Baja</th>
         </tr>
       </thead>
       <tbody th:each="usuario : ${usuarios}">
-        <tr>
-          <th scope="row" th:text="${usuario.id}"></th>
-          <td th:text="${usuario.nombre}"></td>
+        <tr class="filas">
+          <th scope="row" th:text="${usuario.nombre}"></th>
+          <td th:text="${usuario.apellido}"></td>
           <td>
             <a
               ><img
@@ -46,66 +46,9 @@
                 th:src="@{/imagen/perfil/__${usuario.id}__}"
             /></a>
           </td>
-          
-          <td>
-            <div
-              class="modal fade"
-              th:id="'cambiarRolModal' + ${usuario.id}"
-              tabindex="-1"
-              aria-labelledby="cambiarRolModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <form
-                      th:action="@{/admin/usuarios/__${usuario.id}__/cambiarRol}"
-                      method="post"
-                    >
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="cambiarRolModalLabel">
-                      Seleccione un ROL
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    
-                    <div class="opciones">
-                      <div class="form-check" th:each="rol: ${roles}" >
-                        <input class="form-check-input" type="radio" name="rol" id="flexRadioDefault1" th:value="${rol}" th:checked="${usuario.rol.toString() == rol}">
-                        <label class="form-check-label" th:text="${rol}" ></label>
-                      </div>
-                      </div>
-                     
-                        </label>
-                      </div>
 
-                   
+          <td th:text="${usuario.rol}"></td>
 
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancelar
-                      </button>
-                      <button type="submit" class="btn btn-primary">
-                        Aceptar
-                      </button>
-                    </div>
-
-                  </div>
-                </form>
-                
-                </div>
-              </div>
-            </div>
-          </td>
           <td>
             <a
               th:href="@{/admin/usuarios/__${usuario.id}__/modificar}"
@@ -113,17 +56,27 @@
               >Modificar</a
             >
           </td>
+
           <td>
             <a
-              th:href="@{/admin/usuarios/__${usuario.id}__/eliminar}"
+              th:if="${usuario.activado}"
+              th:href="@{/admin/usuarios/__${usuario.id}__/darBaja}"
               class="btn btn-danger"
-              >Eliminar</a
+              >Baja</a
+            >
+          </td>
+          <td>
+            <a
+              th:if="!${usuario.activado}"
+              th:href="@{/admin/usuarios/__${usuario.id}__/darAlta}"
+              class="btn btn-success"
+              >Alta</a
             >
           </td>
         </tr>
       </tbody>
     </table>
- 
+
     <div th:replace="/fragments/footer :: div" />
     <!-- footer -->
 

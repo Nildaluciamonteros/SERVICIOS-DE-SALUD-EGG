@@ -13,4 +13,24 @@ body{
  .table{
    position: relative;
    top: 60px;
+   background-color: transparent !important;
  }
+ .titulos-tabla{
+   text-align: center;
+ }
+tr,th,td, tbody,thead{
+   text-align: center;
+   background-color: transparent !important;
+}
+tbody th{
+   align-content: center;
+}
+td img{
+    border-radius: 20px;
+}
+a{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
