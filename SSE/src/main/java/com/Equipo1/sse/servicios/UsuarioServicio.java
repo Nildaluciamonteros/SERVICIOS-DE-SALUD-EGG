@@ -245,7 +245,7 @@ public class UsuarioServicio implements UserDetailsService
 		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
-			usuario.setActivado(false);
+			usuario.setActivado(!usuario.getActivado());
 			usuarioRepositorio.save(usuario);
 		}
 	}
