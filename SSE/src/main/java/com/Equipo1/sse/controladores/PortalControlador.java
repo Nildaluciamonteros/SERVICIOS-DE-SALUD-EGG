@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.Equipo1.sse.controladores;
-
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
