@@ -8,9 +8,10 @@ package com.Equipo1.sse.servicios;
 import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.Profesional;
+import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
-import com.Equipo1.sse.repositorios.ProfesionalRepositorio;
+import com.Equipo1.sse.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,15 +38,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProfesionalServicio implements UserDetailsService {
 
     @Autowired
-    private ProfesionalRepositorio profesionalRepositorio;
-
-
-    @Autowired
     private CurriculumServicio curriculumServicio;
 
     @Autowired
     private ImagenServicio imagenServicio;
 
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+    
     @Transactional
     public void actualizarProfesional(String idUsuario, String nombre, String apellido,
             String telefono, String email, String password, String password2,
@@ -59,7 +59,7 @@ public class ProfesionalServicio implements UserDetailsService {
             validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad);
         }
         // Buscar usuario
-        Optional<Profesional> respuesta = profesionalRepositorio.findById(idUsuario);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
         if (respuesta.isPresent()) {
             Profesional profesional = (Profesional) respuesta.get();
             profesional.setNombre(nombre);
@@ -89,7 +89,7 @@ public class ProfesionalServicio implements UserDetailsService {
                 Curriculum curriculum = curriculumServicio.actualizar(archCurriculum, idCurriculum);
                 profesional.setCurriculum(curriculum);
             }
-            profesionalRepositorio.save(profesional);
+            usuarioRepositorio.save(profesional);
         }
     }
 
@@ -121,9 +121,9 @@ public class ProfesionalServicio implements UserDetailsService {
     
     public void cambiarEspecialidad(String idProfesional, String especialidad) {
         Especialidades esp = Especialidades.buscar(especialidad);
-        Optional<Profesional> respuesta = profesionalRepositorio.findById(idProfesional);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idProfesional);
         if (respuesta.isPresent()) {
-            Profesional profesional = respuesta.get();
+            Profesional profesional = (Profesional) respuesta.get();
             if (profesional instanceof Profesional) {
                 ((Profesional) profesional).setEspecialidad(Especialidades.buscar(especialidad));
             }
@@ -131,17 +131,17 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     public void darBajaProfesional(String idProfesional) {
-        Optional<Profesional> respuesta = profesionalRepositorio.findById(idProfesional);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idProfesional);
         if (respuesta.isPresent()) {
-            Profesional profesional = respuesta.get();
+            Profesional profesional = (Profesional) respuesta.get();
             profesional.setActivado(false);
-            profesionalRepositorio.save(profesional);
+            usuarioRepositorio.save(profesional);
         }
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Profesional profesional = (Profesional) profesionalRepositorio.buscarPorEmail(email);
+        Profesional profesional = (Profesional) usuarioRepositorio.buscarPorEmail(email);
 
         if (profesional != null) {
             List<GrantedAuthority> permisos = new ArrayList();
@@ -162,12 +162,12 @@ public class ProfesionalServicio implements UserDetailsService {
     }
     public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad)
 	{
-		return profesionalRepositorio.buscarPorEspecialidad(especialidad);
+		return usuarioRepositorio.buscarPorEspecialidad(especialidad);
 	}
 	
     public Profesional getOne(String id)
 	{
-		return profesionalRepositorio.getOne(id);
+		return (Profesional) usuarioRepositorio.getOne(id);
 	}
 
 }
