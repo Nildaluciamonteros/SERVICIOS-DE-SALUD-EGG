@@ -40,7 +40,7 @@ public class ProfesionalControlador
 	@GetMapping("/")
 	public String profesional()
 	{
-		return "profesional.html";
+		return "panelProfesional.html";
 	}
 	@GetMapping("/perfil")
 	public String perfil(ModelMap modelo, HttpSession session)
@@ -67,7 +67,7 @@ public class ProfesionalControlador
 						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "redirect:/inicio";
+			return "redirect:/profesional";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());

@@ -8,6 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,10 @@ public class Ficha implements Serializable {
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-
-    private String obraSocial;
+    
+    @OneToOne
+    private ObraSocial obraSocial;
+    
+    @OneToOne
+    private Profesional profesional;
 }

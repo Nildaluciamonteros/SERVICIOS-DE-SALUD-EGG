@@ -52,7 +52,9 @@ public class UsuarioServicio implements UserDetailsService
 	
 	@Autowired
 	private ObraSocialServicio obraSocialServicio;
-	
+	@Autowired
+        private HistorialClinicoServicio historialClinicoServicio;
+        
 	@Transactional
 	public void registrar(String nombre, String apellido, String telefono,
 			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
@@ -73,18 +75,18 @@ public class UsuarioServicio implements UserDetailsService
 		}
 		validar(nombre, apellido, telefono, email, password, password2);
 		// Crear Usuario
-		Usuario usuario = new Paciente();
+		Paciente usuario = new Paciente();
 		
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
-		((Paciente)usuario).setObraSocial(OS);
-		((Paciente)usuario).setNumAfiliado(numAfiliado);
+		(usuario).setObraSocial(OS);
+		(usuario).setNumAfiliado(numAfiliado);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
-		
+		historialClinicoServicio.crearHistorial(usuario);
 		usuarioRepositorio.save(usuario);
 	}
 	
