@@ -95,6 +95,8 @@ public class AdminControlador
 		}
 		return "redirect:/admin/usuarios";
 	}
+          
+	
 
 	@GetMapping("/usuarios/{id}/modificar")
 	public String modificarUsuario(@PathVariable String id, ModelMap modelo)
