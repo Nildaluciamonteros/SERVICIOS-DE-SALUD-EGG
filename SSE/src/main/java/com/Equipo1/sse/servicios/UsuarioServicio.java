@@ -213,7 +213,7 @@ public class UsuarioServicio implements UserDetailsService {
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if (respuesta.isPresent()) {
 			Usuario usuario = respuesta.get();
-			usuario.setActivado(false);
+			usuario.setActivado(!usuario.getActivado());
 			usuarioRepositorio.save(usuario);
 		}
 	}
