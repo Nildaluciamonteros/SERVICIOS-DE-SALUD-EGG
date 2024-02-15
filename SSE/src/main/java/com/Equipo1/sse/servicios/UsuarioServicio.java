@@ -40,6 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UsuarioServicio implements UserDetailsService {
 
+
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 
