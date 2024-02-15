@@ -40,7 +40,7 @@ public class ProfesionalControlador
 	@GetMapping("/")
 	public String profesional()
 	{
-		return "profesional.html";
+		return "panelProfesional.html";
 	}
 	@GetMapping("/perfil")
 	public String perfil(ModelMap modelo, HttpSession session)
