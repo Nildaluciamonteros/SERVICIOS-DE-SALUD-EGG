@@ -41,11 +41,11 @@
             </li>
             <br>
             <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link  text-white-50 h5" href="/admin/usuarios">Turnos Pendientes</a>
+              <a class="btn btn-link  text-white-50 h5" href="#">Turnos Pendientes</a>
             </li>
             <br>
             <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link text-white-50 h5" style="text-decoration: none; font-weight: 700;" href="/admin/usuarios">Turnos Atendidos</a>
+              <a class="btn btn-link text-white-50 h5" style="text-decoration: none; font-weight: 700;" href="#">Turnos Atendidos</a>
             </li>
           
           <hr>
