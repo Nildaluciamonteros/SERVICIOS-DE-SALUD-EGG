@@ -34,3 +34,7 @@ a{
    align-items: center;
    flex-direction: column;
 }
+.titleUsuario{
+   padding: 100px 0px 0px 30px;
+   text-align: center;
+}
