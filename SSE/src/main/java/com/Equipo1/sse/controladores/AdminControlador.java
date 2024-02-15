@@ -80,9 +80,9 @@ public class AdminControlador
 
 		return "usuario_buscar.html";
 	}
-
+        
 	@GetMapping("/usuarios/{id}/darBaja")
-	public String eliminarUsuario(@PathVariable String id, ModelMap modelo)
+	public String darBajaUsuario(@PathVariable String id, ModelMap modelo)
 	{
 		Usuario usuario = usuarioServicio.getOne(id);
 		if (usuario == null)
