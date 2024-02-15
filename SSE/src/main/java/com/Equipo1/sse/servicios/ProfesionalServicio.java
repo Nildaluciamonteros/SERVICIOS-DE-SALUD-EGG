@@ -8,6 +8,7 @@ package com.Equipo1.sse.servicios;
 import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.Profesional;
+import com.Equipo1.sse.entidades.Turno;
 import com.Equipo1.sse.entidades.Usuario;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
@@ -169,5 +170,15 @@ public class ProfesionalServicio implements UserDetailsService {
 	{
 		return (Profesional) usuarioRepositorio.getOne(id);
 	}
+
+    public void agregarTurno(String idProfesional, Turno turno) {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idProfesional);
+        if (respuesta.isPresent()) {
+            Profesional profesional = (Profesional) respuesta.get();
+            List<Turno> turnos = profesional.getTurnos();
+            turnos.add(turno);
+            usuarioRepositorio.save(profesional);
+        }
+    }
 
 }
