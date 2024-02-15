@@ -29,7 +29,7 @@ public class TurnoServicio
 	TurnoRepositorio turnoRepositorio;
 
 	@Transactional
-	public void crearTurno(Date fecha, Paciente paciente) throws MiException
+	public Turno crearTurno(Date fecha, Paciente paciente) throws MiException
 	{
 		Turno turno = new Turno();
 		
@@ -38,6 +38,7 @@ public class TurnoServicio
 		turno.setPaciente(paciente);
 
 		turnoRepositorio.save(turno);
+                return turno;
 	}
 
 	public List<Turno> listarTurnos()
@@ -54,7 +55,7 @@ public class TurnoServicio
 		return turnoRepositorio.buscarPorNumeroAfiliado(numAfiliado);
 	}
 
-	public void modificarEditorial(String id, Date fecha, Paciente paciente) throws MiException
+	public void modificarTurno(String id, Date fecha, Paciente paciente) throws MiException
 	{
 		validar(fecha, paciente);
 		Optional<Turno> respuesta = turnoRepositorio.findById(id);

@@ -53,12 +53,15 @@ public class HistorialClinicoServicio {
     public HistorialClinico buscarHistorialPorPaciente(Paciente paciente) {
         return historialClinicoRepositorio.buscarPorPaciente(paciente);
     }
-    
-    public List<Ficha> leerHistorial (HistorialClinico historial){
+
+    public List<Ficha> leerHistorial(HistorialClinico historial) {
         return historial.getFichas();
     }
-    
-     public HistorialClinico getOne(String id) {
+
+    public HistorialClinico getOne(String id) {
         return historialClinicoRepositorio.getOne(id);
+    }
+    public List<HistorialClinico> listarHistorial(){
+        return historialClinicoRepositorio.findAll();
     }
 }

@@ -30,10 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 @PreAuthorize("hasRole('ROLE_PROFESIONAL')")
 @RequestMapping("/profesional")
 public class ProfesionalControlador
-{
-	@Autowired
-	private TurnoServicio turnoServicio;
-	
+{	
 	@Autowired
 	private ProfesionalServicio profesionalServicio;
 	

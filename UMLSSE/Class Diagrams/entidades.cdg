@@ -46,7 +46,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Ficha" package="" visibility="public" xPosition="195.0" yPosition="53.0">
+    <Class name="Ficha" package="" visibility="public" xPosition="230.0" yPosition="37.0">
       <Fields>
         <Field name="id" type="String" visibility="private"/>
         <Field name="diagnostico" type="String" visibility="private"/>
