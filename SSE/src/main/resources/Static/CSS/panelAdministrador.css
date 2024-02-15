@@ -10,3 +10,7 @@ body{
   h1{
     text-align: center;
   }
+  .adminTitle{
+   color: #bab5b5;
+   font-weight: 800;
+  }

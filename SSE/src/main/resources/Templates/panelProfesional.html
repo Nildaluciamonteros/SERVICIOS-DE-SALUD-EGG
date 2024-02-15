@@ -32,19 +32,19 @@
           </a>
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
+            <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
               <a class="btn btn-primary" href="/obraSocial/lista">Obras Sociales</a>
             </li>
             <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
+            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
               <a class="btn btn-primary " href="/admin/usuarios">Usuarios</a>
             </li>
             <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
+            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
               <a class="btn btn-link  text-white-50 h5" href="/admin/usuarios">Turnos Pendientes</a>
             </li>
             <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
+            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
               <a class="btn btn-link text-white-50 h5" style="text-decoration: none; font-weight: 700;" href="/admin/usuarios">Turnos Atendidos</a>
             </li>
           
