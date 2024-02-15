@@ -18,16 +18,16 @@
     <!-- navbar -->
     <div th:replace="/fragments/status :: div" class="cartel" />
     <!-- Mensaje de exito / error -->
+    
     <h1>Usuarios Registrados</h1>
 
-    <table class="table table-gradient">
+    <table class="table">
       <thead>
-        <tr>
+        <tr >
           <th scope="col">Id del Usuario</th>
           <th scope="col">Nombre</th>
           <th scope="col">Foto de perfil</th>
           <th scope="col">Rol</th>
-          <th scope="col">Cambiar Rol</th>
           <th scope="col">Modificar</th>
           <th scope="col">Eliminar</th>
         </tr>
@@ -46,12 +46,8 @@
                 th:src="@{/imagen/perfil/__${usuario.id}__}"
             /></a>
           </td>
-          <td th:text="${usuario.rol}" class="roltxt"></td>
+          
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#cambiarRolModal' + ${usuario.id}">
-              Cambiar Rol
-            </button>
-
             <div
               class="modal fade"
               th:id="'cambiarRolModal' + ${usuario.id}"
@@ -127,7 +123,7 @@
         </tr>
       </tbody>
     </table>
-
+ 
     <div th:replace="/fragments/footer :: div" />
     <!-- footer -->
 

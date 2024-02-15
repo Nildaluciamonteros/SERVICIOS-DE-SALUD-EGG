@@ -10,3 +10,7 @@ body{
  .roltxt{
     font-weight: 700;
  }
+ .table{
+   position: relative;
+   top: 60px;
+ }
