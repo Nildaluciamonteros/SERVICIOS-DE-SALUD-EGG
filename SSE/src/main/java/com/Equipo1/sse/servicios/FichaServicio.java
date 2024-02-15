@@ -29,7 +29,7 @@ public class FichaServicio {
     private FichaRepositorio fichaRepositorio;
 
     @Transactional
-    public void crearFicha(String diagnostico, ObraSocial obraSocial, Profesional profesional) throws MiException {
+    public Ficha crearFicha(String diagnostico, ObraSocial obraSocial, Profesional profesional) throws MiException {
         Ficha ficha = new Ficha();
 
         validar(diagnostico, profesional);
@@ -39,6 +39,7 @@ public class FichaServicio {
         ficha.setProfesional(profesional);
 
         fichaRepositorio.save(ficha);
+        return ficha;
     }
 
     public List<Ficha> listarFichas() {
