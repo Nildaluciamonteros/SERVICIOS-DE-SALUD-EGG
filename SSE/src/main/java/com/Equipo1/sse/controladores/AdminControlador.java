@@ -121,7 +121,8 @@ public class AdminControlador {
 		if (usuario instanceof Paciente) {
 			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		}
-		return "redirect:/admin/usuarios";
+                return "usuario_modificar.html";
+		
 	}
 
 	@PostMapping("/usuarios/{id}/modificar")
@@ -135,7 +136,7 @@ public class AdminControlador {
 			usuarioServicio.actualizar(id, nombre, apellido,
 					telefono, email, obraSocial, numAfiliado, password, password2, archivo);
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "inicio.html";
+			return "redirect:/admin/usuarios";
 		} catch (MiException ex) {
 			modelo.put("error", ex.getMessage());
 			Usuario usuario = (Usuario) usuarioServicio.getOne(id);
