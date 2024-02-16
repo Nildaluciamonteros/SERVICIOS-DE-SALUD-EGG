@@ -3,7 +3,7 @@ body{
     justify-content: center;
     position: relative;
     flex-direction: column;
-    background-image: url(../Img/OS.jpg);
+    background-image: url(../Img/fondoUsuarioLista.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }
