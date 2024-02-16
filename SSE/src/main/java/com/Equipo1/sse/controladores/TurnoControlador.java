@@ -49,7 +49,7 @@ public class TurnoControlador {
             List<Turno> turnos = turnoServicio.listarTurnos();
             modelo.put("turnos", turnos);
         }
-        return "turnos.hmtl";
+        return "turnos.html";
     }
 
     @GetMapping("/buscar/{id}")
