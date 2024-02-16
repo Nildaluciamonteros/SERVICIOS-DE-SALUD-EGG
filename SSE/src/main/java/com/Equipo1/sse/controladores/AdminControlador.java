@@ -12,6 +12,7 @@ import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
+import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,9 @@ public class AdminControlador {
 
 	@Autowired
 	private UsuarioServicio usuarioServicio;
+	
+	@Autowired
+	private ProfesionalServicio profesionalServicio;
 
 	@Autowired
 	private ObraSocialServicio obraSocialServicio;
@@ -121,7 +125,8 @@ public class AdminControlador {
 		if (usuario instanceof Paciente) {
 			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		}
-		return "redirect:/admin/usuarios";
+                return "usuario_modificar.html";
+		
 	}
 
 	@PostMapping("/usuarios/{id}/modificar")
@@ -135,7 +140,7 @@ public class AdminControlador {
 			usuarioServicio.actualizar(id, nombre, apellido,
 					telefono, email, obraSocial, numAfiliado, password, password2, archivo);
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "inicio.html";
+			return "redirect:/admin/usuarios";
 		} catch (MiException ex) {
 			modelo.put("error", ex.getMessage());
 			Usuario usuario = (Usuario) usuarioServicio.getOne(id);
@@ -159,10 +164,10 @@ public class AdminControlador {
 	@PostMapping("/registrarProfesional")
 	public String registroProfesional(@RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono,
-			@RequestParam String email, @RequestParam String password, @RequestParam String password2,
+			@RequestParam String email, @RequestParam String password, @RequestParam String especialidad, @RequestParam String password2,
 			ModelMap modelo) {
 		try {
-			usuarioServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2);
+			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad);
 			modelo.put("exito", "Usuario registrado correctamente");
 			return "redirect:/login";
 		} catch (MiException ex) {
@@ -173,6 +178,7 @@ public class AdminControlador {
 			modelo.put("email", email);
 			modelo.put("password", password);
 			modelo.put("password2", password2);
+			modelo.put("especialidad", especialidad);
 			return "registro.html";
 		}
 	}
