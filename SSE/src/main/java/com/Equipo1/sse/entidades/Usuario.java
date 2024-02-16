@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Data
 @AllArgsConstructor
 
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

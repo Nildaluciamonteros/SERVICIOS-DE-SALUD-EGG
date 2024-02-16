@@ -1,14 +1,12 @@
 body {
     padding: 0;
     margin: 0;     
-    background-image: url("/Img/'.web'");
-    background-size: cover;
+    background-size: cover !important;
     background-repeat: no-repeat;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 .body {
     display: flex;     
@@ -16,8 +14,9 @@ body {
     justify-content: space-around;
 }
 .body-img {
-    height: 15vh;
-    position: relative;
+    width: 15%;
+    height: 27%;
+
 }
 .card-curriculum{
     text-decoration: none;
@@ -25,8 +24,10 @@ body {
 
 h1 {
     text-align: center; 
-    font-size: 100px;
-    font-family: sans-serif;
+    padding-top: 100px;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: sans-serif
 }
 
 .ginecologia {
