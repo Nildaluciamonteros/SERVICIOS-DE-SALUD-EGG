@@ -47,6 +47,24 @@ public class ProfesionalServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
     
+	@Transactional
+	public void registrarProfesional(String nombre, String apellido, String telefono,
+			String email, String password, String password2, String especialidad) throws MiException
+	{
+		validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad);
+		// Crear Usuario
+		Usuario usuario = new Profesional();
+
+		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setTelefono(telefono);
+		usuario.setEmail(email);
+		usuario.setActivado(Boolean.TRUE);
+		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+
+		usuarioRepositorio.save(usuario);
+	}
+	
     @Transactional
     public void actualizarProfesional(String idUsuario, String nombre, String apellido,
             String telefono, String email, String password, String password2,
