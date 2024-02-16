@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,8 +5,8 @@
  */
 package com.Equipo1.sse.repositorios;
 
-import com.Equipo1.sse.entidades.Profesional;
-import java.util.List;
+import com.Equipo1.sse.entidades.HistorialClinico;
+import com.Equipo1.sse.entidades.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,11 +17,8 @@ import org.springframework.stereotype.Repository;
  * @author Aldan
  */
 @Repository
-public interface ProfesionalRepositorio extends JpaRepository<Profesional, String> {
+public interface HistorialClinicoRepositorio extends JpaRepository<HistorialClinico, String> {
     
-    @Query("SELECT p FROM Usuario p WHERE p.email = :email")
-    public Profesional buscarPorEmail(@Param("email") String email);
-
-   
+    @Query("SELECT h FROM HistorialClinico h WHERE h.paciente = :paciente")
+    public HistorialClinico buscarPorPaciente(@Param("paciente") Paciente paciente);
 }
-

@@ -1,11 +1,15 @@
 body {
-    padding: 0;
-    margin: 0;  
-    background-size: cover;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url(../Img/fondoTurnos1.jpg);
     background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
 }
 
-.bg-img{
+.bg-img {
     height: 100vh;
     width: 100vw;
     object-fit: cover;
@@ -13,11 +17,11 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index:-1;
+    z-index: -1;
 }
 
 .body {
-    display: flex;   
+    display: flex;
     justify-content: space-around;
 }
 
@@ -26,20 +30,21 @@ body {
     height: 27%;
 }
 
-.form-title{
+.form-title {
+    padding: 20px;
     text-align: center;
-  font-family: sans-serif;
-  font-size: 30px;
+    font-family: sans-serif;
+    font-size: 30px;
 }
 
-.body-title{
+.body-title {
     text-align: center;
     font-size: 60px;
     font-family: sans-serif;
     padding: 5%
 }
 
-.form-check{
+.form-check {
     background-color: rgba(0, 0, 255, 0.169);
     margin: 3%;
     padding: 8%;
@@ -47,8 +52,12 @@ body {
     border-radius: 15px;
     box-shadow: 5px 8px 5px 8px grey;
 }
+.check{
+    margin-bottom: 20px;
+    padding: 20px;
+}
 
-.radio-grl{
+.radio-grl {
     text-align: center;
     background-color: rgba(0, 0, 255, 0.169);
     margin: 3%;
@@ -57,4 +66,28 @@ body {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 8px 5px 8px grey;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+   align-items: center;
+}
+.btn-active {
+    margin: 10px;
+    width: 100px;
+    height: 50px;
+    border: 2px solid #315cfd;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-size: 1em;
+    font-weight: 550;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-active:hover {
+    background: #315cfd;
+    color: white;
+    font-size: 1.2em;
 }
