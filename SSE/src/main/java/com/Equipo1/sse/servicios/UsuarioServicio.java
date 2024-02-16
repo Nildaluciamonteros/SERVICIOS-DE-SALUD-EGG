@@ -5,13 +5,11 @@
  */
 package com.Equipo1.sse.servicios;
 
-import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
-import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.repositorios.UsuarioRepositorio;
@@ -76,28 +74,13 @@ public class UsuarioServicio implements UserDetailsService {
 		usuario.setApellido(apellido);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
-		(usuario).setObraSocial(OS);
-		(usuario).setNumAfiliado(numAfiliado);
+		usuario.setObraSocial(OS);
+		usuario.setNumAfiliado(numAfiliado);
+		usuario.setActivado(Boolean.TRUE);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
 		historialClinicoServicio.crearHistorial(usuario);
-		usuarioRepositorio.save(usuario);
-	}
-
-	@Transactional
-	public void registrarProfesional(String nombre, String apellido, String telefono,
-			String email, String password, String password2) throws MiException {
-		validar(nombre, apellido, telefono, email, password, password2);
-		// Crear Usuario
-		Usuario usuario = new Profesional();
-
-		usuario.setNombre(nombre);
-		usuario.setApellido(apellido);
-		usuario.setTelefono(telefono);
-		usuario.setEmail(email);
-		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-
 		usuarioRepositorio.save(usuario);
 	}
 
