@@ -85,6 +85,8 @@ public class AdminControlador {
 		}
 		return "redirect:/admin/usuarios";
 	}
+          
+	
 
 	@GetMapping("/usuarios/{id}/darAlta")
 	public String darAltaUsuario(@PathVariable String id, ModelMap modelo) {
@@ -119,7 +121,7 @@ public class AdminControlador {
 		if (usuario instanceof Paciente) {
 			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		}
-		return "usuario_modificar.html";
+		return "redirect:/admin/usuarios";
 	}
 
 	@PostMapping("/usuarios/{id}/modificar")
