@@ -51,22 +51,16 @@ body {
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 8px 5px 8px grey;
+    display:flex;
 }
 .check{
     margin-bottom: 20px;
     padding: 20px;
+    justify-content: center;
+    align-content: center;
 }
 
-.radio-grl {
-    text-align: center;
-    background-color: rgba(0, 0, 255, 0.169);
-    margin: 3%;
-    margin-top: 8%;
-    padding: 8%;
-    border: 2px solid black;
-    border-radius: 15px;
-    box-shadow: 5px 8px 5px 8px grey;
-}
+
 .btn{
     display: flex;
     justify-content: center;
