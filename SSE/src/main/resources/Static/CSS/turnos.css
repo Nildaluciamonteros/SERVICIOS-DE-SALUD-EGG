@@ -58,3 +58,26 @@ body {
     font-weight: 800;
     padding: 5px;
 }
+.seleccionar-turno{
+    width: 100%;
+    height: 10rem;
+    text-align: center;
+    background: rgba(0,0,0,.1);
+    backdrop-filter: blur(40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.input-turno-fecha{
+    border-radius: 6px;
+    background: transparent;
+    color: #000;
+    width: 200px;
+}
+.input-turno-hora{
+    border-radius: 6px;
+    background: transparent;
+    color: #000;
+    width: 200px;
+}

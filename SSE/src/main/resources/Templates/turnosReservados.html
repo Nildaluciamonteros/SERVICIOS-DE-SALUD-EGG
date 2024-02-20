@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservaciones</title>
+  </head>
+  <body>
+    <div class="contenedorTReservados">
+      <h1>Lista De Turnos Recervados</h1>
+      <table class="table">
+        <thead>
+          <tr class="titulos-tabla">
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Foto de perfil</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Modificar</th>
+            <th scope="col">Alta/Baja</th>
+          </tr>
+        </thead>
+        <tbody th:each="usuario : ${usuarios}">
+          <tr class="filas">
+            <th scope="row" th:text="${usuario.nombre}"></th>
+            <td th:text="${usuario.apellido}"></td>
+            <td>
+              <a
+                ><img
+                  th:if="${usuario.imagen != null}"
+                  width="100"
+                  height="100"
+                  class="logo"
+                  th:src="@{/imagen/perfil/__${usuario.id}__}"
+              /></a>
+            </td>
+
+            <td th:text="${usuario.rol}"></td>
+
+            <td>
+              <a
+                th:href="@{/admin/usuarios/__${usuario.id}__/modificar}"
+                class="btn btn-primary"
+                >Modificar</a
+              >
+            </td>
+
+            <td>
+              <a
+                th:if="${usuario.activado}"
+                th:href="@{/admin/usuarios/__${usuario.id}__/darBaja}"
+                class="btn btn-danger"
+                >Baja</a
+              >
+            </td>
+            <td>
+              <a
+                th:if="!${usuario.activado}"
+                th:href="@{/admin/usuarios/__${usuario.id}__/darAlta}"
+                class="btn btn-success"
+                >Alta</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
