@@ -6,6 +6,7 @@
 package com.Equipo1.sse.servicios;
 
 import com.Equipo1.sse.entidades.Curriculum;
+import com.Equipo1.sse.entidades.Hora;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Turno;
@@ -199,4 +200,71 @@ public class ProfesionalServicio implements UserDetailsService {
         }
     }
 
+	
+	public List<Hora[]>[] listarHorarios(String id)
+	{
+		return usuarioRepositorio.buscarHorarios(id);
+	}
+	
+	public void agregarHorario(String id, Integer dia, Hora hora1, Hora hora2) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Profesional profesional = (Profesional) respuesta.get();
+			if(dia < 1 || dia > 7)
+			{
+				throw new MiException("El dia solo puede estar entre 1 y 7");
+			}
+            List<Hora[]>[] horarios = profesional.getHorario();
+			if(hora1.compareTo(hora2) != -1)
+			{
+				throw new MiException("La hora de inicio no puede estar despues de la de fin");
+			}
+			Hora[] horario = new Hora[2];
+			horario[0] = hora1;		// Desde
+			horario[1] = hora2;		// Hasta
+			horarios[dia-1].add(horario);
+			profesional.setHorario(horarios);
+			usuarioRepositorio.save(profesional);
+        }
+	}
+	
+	public void actualizarHorario(String id, Integer idHo, Integer dia, Hora hora1, Hora hora2) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Profesional profesional = (Profesional) respuesta.get();
+			if(dia < 1 || dia > 7)
+			{
+				throw new MiException("El dia solo puede estar entre 1 y 7");
+			}
+            List<Hora[]>[] horarios = profesional.getHorario();
+			if(hora1.compareTo(hora2) != -1)
+			{
+				throw new MiException("La hora de inicio no puede estar despues de la de fin");
+			}
+			Hora[] horario = new Hora[2];
+			horario[0] = hora1;		// Desde
+			horario[1] = hora2;		// Hasta
+			horarios[dia-1].set(idHo, horario);
+			profesional.setHorario(horarios);
+			usuarioRepositorio.save(profesional);
+        }
+	}
+	
+	public void quitarHorario(String idPro, Integer dia, Integer idHo) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idPro);
+        if (respuesta.isPresent()) {
+            Profesional profesional = (Profesional) respuesta.get();
+			List<Hora[]>[] horarios = profesional.getHorario();
+			if(idHo < 0 || idHo > horarios.length)
+			{
+				throw new MiException("No se encuentra el horario");
+			}
+			horarios[dia].remove(horarios[dia].get(idHo));
+			profesional.setHorario(horarios);
+			usuarioRepositorio.save(profesional);
+        }
+	}
 }
