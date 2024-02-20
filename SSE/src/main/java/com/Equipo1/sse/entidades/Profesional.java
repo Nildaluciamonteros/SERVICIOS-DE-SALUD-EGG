@@ -7,10 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Entity @Data @AllArgsConstructor 
+@Entity @Data
 public class Profesional extends Usuario {
     
     @OneToMany
@@ -26,11 +25,11 @@ public class Profesional extends Usuario {
     private Integer reputacion;
 	
 	private Curriculum curriculum;
+	
+	private List<Hora[]>[] horario;
 
     public Profesional() {
         super();
 		setRol(Rol.PROFESIONAL);
     }
-    
-    
 }
