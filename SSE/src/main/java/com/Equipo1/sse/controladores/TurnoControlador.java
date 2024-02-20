@@ -36,7 +36,7 @@ public class TurnoControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    @GetMapping("/")
+    @GetMapping("/registrados/")
     public String turnos(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
         if (usuario instanceof Paciente) {

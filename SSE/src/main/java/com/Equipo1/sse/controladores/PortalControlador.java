@@ -56,7 +56,7 @@ public class PortalControlador {
 			return "redirect:/admin/dashboard";
 		}
 		if (logeado.getRol() == Rol.PROFESIONAL) {
-			return "redirect:/profesional/panelProfesional/";
+			return "redirect:/profesional/dashboard/";
 		}
 		return "inicio.html";
 	}
@@ -96,7 +96,7 @@ public class PortalControlador {
 		}
 	}
 
-	@GetMapping("/especialidades")
+	@GetMapping("/profesionales")
 	public String especialidades(ModelMap modelo) {
 		List<String> especialidades = new ArrayList();
 		for (Especialidades e : Especialidades.values()) {
@@ -106,7 +106,7 @@ public class PortalControlador {
 		return "especialidades.html";
 	}
 
-	@GetMapping("/especialidades/{especialidad}")
+	@GetMapping("/profesionales/{especialidad}")
 	public String especialidad(@PathVariable String especialidad, ModelMap modelo) {
 		List<Profesional> profesionales = profesionalServicio.listarProfesionalesPorEspecialidad(especialidad);
 		modelo.put("profesionales", profesionales);
