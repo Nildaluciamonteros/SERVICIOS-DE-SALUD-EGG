@@ -14,8 +14,13 @@
     <link rel="stylesheet" th:href="@{/CSS/fragments/status.css}" />
     <link rel="stylesheet" th:href="@{/CSS/fragments/calendar.css}" />
 
-    <title>Sacar Turnos</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" th:href="@{/CSS/turnos.css}" />
+  <link rel="stylesheet" th:href="@{/fragments/navbar.css}" />
 
   <body>
     <nav th:replace="/fragments/navbar :: nav" />
@@ -87,7 +92,12 @@
         <p class="txt-form-turnos">Seleccione la Opcion Deseada</p>
       </div>
     </div>
-
+    <div class="seleccionar-turno">
+      <label for="turno-fecha">Seleccione la Fecha</label>
+      <input type="date" name="" id="turno-fecha" class="input-turno-fecha" />
+      <label for="turno-hora">Seleccione el horario</label>
+      <input type="datetime" name="" id="turno-hora" class="input-turno-hora" />
+    </div>
     <div th:replace="/fragments/footer :: div" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

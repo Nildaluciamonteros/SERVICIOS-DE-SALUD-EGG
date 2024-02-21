@@ -34,5 +34,4 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT p FROM Usuario p WHERE p.reputacion = :reputacion")
     public List<Profesional> buscarProfesionalPorReputacion(@Param("reputacion") Integer reputacion);
-
 }
