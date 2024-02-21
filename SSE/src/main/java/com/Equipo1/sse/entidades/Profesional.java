@@ -26,6 +26,9 @@ public class Profesional extends Usuario {
 	
 	private Curriculum curriculum;
 	
+	@OneToMany
+	private List<Horario> horarios;
+	
 	public Profesional() {
         super();
 		setRol(Rol.PROFESIONAL);

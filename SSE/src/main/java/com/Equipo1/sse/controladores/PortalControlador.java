@@ -56,7 +56,7 @@ public class PortalControlador {
 			return "redirect:/admin/dashboard";
 		}
 		if (logeado.getRol() == Rol.PROFESIONAL) {
-			return "redirect:/profesional/dashboard/";
+			return "redirect:/profesional/dashboard";
 		}
 		return "inicio.html";
 	}
