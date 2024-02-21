@@ -5,9 +5,11 @@
  */
 package com.Equipo1.sse.controladores;
 
+import com.Equipo1.sse.entidades.Horario;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
+import com.Equipo1.sse.servicios.HorarioServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class ProfesionalControlador
 
 	@Autowired
 	private ProfesionalServicio profesionalServicio;
+	
+	@Autowired
+	private HorarioServicio horarioServicio;
 
 	@GetMapping("/dashboard")
 	public String profesional()
@@ -77,7 +82,7 @@ public class ProfesionalControlador
 		}
 	}
 
-	/*@GetMapping("/horario")
+	@GetMapping("/horario")
 	public String horario(HttpSession session, ModelMap modelo)
 	{
 		Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
@@ -96,28 +101,9 @@ public class ProfesionalControlador
 	{
 		try
 		{
-			if(diaI == null)
-			{
-				throw new MiException("El día de inicio/unico no puede ser nulo");
-			}
-			Hora hD = horaServicio.registrar(horasD, minutosD);
-			Hora hH = horaServicio.registrar(horasH, minutosH);
+			Horario horario = horarioServicio.registrar(horasD,minutosD,horasH,minutosH,diaI,diaF);
 			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
-			if(diaF == null)
-			{
-				profesionalServicio.agregarHorario(usuario.getId(), diaI, hD, hH);
-			}
-			else
-			{
-				if(diaI > diaF)
-				{
-					throw new MiException("El día de inicio no puede ser mayor al del final");
-				}
-				for(int dia = diaI; dia <= diaF; dia++)
-				{
-					profesionalServicio.agregarHorario(usuario.getId(), dia, hD, hH);
-				}
-			}
+			profesionalServicio.agregarHorario(usuario.getId(),horario);
 			modelo.put("exito","El horario se agregó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
@@ -136,48 +122,36 @@ public class ProfesionalControlador
 		}
 	}
 	
-	@GetMapping("/horario/modificar")
-	public String modificarHorario()
+	@GetMapping("/horario/{id}/modificar")
+	public String modificarHorario(@PathVariable String id)
 	{
+		Horario horario = horarioServicio.getOne(id);
+		
 		return "horario_modificar.html";
 	}
 	
-	@PostMapping("/horario/modificar")
-	public String modificoHorario(Integer dia, Integer idHo, Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, HttpSession session, ModelMap modelo)
+	@PostMapping("/horario/{id}/modificar")
+	public String modificoHorario(@PathVariable String id, Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, Integer diaI,Integer diaF, HttpSession session, ModelMap modelo)
 	{
 		try
 		{
-			if(dia == null)
-			{
-				throw new MiException("El día no puede ser nulo");
-			}
-			Hora hD = horaServicio.registrar(horasD, minutosD);
-			Hora hH = horaServicio.registrar(horasH, minutosH);
-			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
-			List<Hora[]>[] horarios = profesionalServicio.listarHorarios(usuario.getId());
-			profesionalServicio.actualizarHorario(usuario.getId(), idHo, dia, hD, hH);
+			horarioServicio.actualizar(id, horasD, minutosD, horasH, minutosH, diaI,diaF);
 			modelo.put("exito","El horario se agregó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
-			modelo.put("horasD",horasD);
-			modelo.put("minutosD",minutosD);
-			modelo.put("horasH",horasH);
-			modelo.put("minutosH",minutosH);
-			modelo.put("dia",dia);
-			modelo.put("idHo",idHo);
 			return "horario_modificar.html";
 		}
 	}
 	
-	@PostMapping("/horario/quitar")
-	public String quitarHorario(Integer dia, Integer idHo, ModelMap modelo, HttpSession session)
+	@PostMapping("/horario/{id}/quitar")
+	public String quitarHorario(@PathVariable String id, ModelMap modelo, HttpSession session)
 	{
 		try
 		{
 			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
-			profesionalServicio.quitarHorario(usuario.getId(), dia, idHo);
+			profesionalServicio.quitarHorario(usuario.getId(), id);
 			modelo.put("exito","El horario se quitó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
@@ -185,5 +159,5 @@ public class ProfesionalControlador
 			modelo.put("error", ex.getMessage());
 			return "horario_form.html";
 		}
-	}*/
+	}
 }

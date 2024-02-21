@@ -6,6 +6,7 @@
 package com.Equipo1.sse.servicios;
 
 import com.Equipo1.sse.entidades.Curriculum;
+import com.Equipo1.sse.entidades.Horario;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Turno;
@@ -14,6 +15,7 @@ import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -41,6 +43,9 @@ public class ProfesionalServicio implements UserDetailsService
 
 	@Autowired
 	private CurriculumServicio curriculumServicio;
+	
+	@Autowired
+	private HorarioServicio horarioServicio;
 
 	@Autowired
 	private ImagenServicio imagenServicio;
@@ -216,7 +221,7 @@ public class ProfesionalServicio implements UserDetailsService
 		return (Profesional) usuarioRepositorio.getOne(id);
 	}
 
-	public void agregarTurno(String idProfesional, Turno turno)
+	public void agregarTurno(String idProfesional, Turno turno) throws MiException
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idProfesional);
 		if (respuesta.isPresent())
@@ -225,6 +230,86 @@ public class ProfesionalServicio implements UserDetailsService
 			List<Turno> turnos = profesional.getTurnos();
 			turnos.add(turno);
 			usuarioRepositorio.save(profesional);
+		}
+		else
+		{
+			throw new MiException("No se encontró el profesional");
+		}
+	}
+	
+	public List<Horario> listarHorarios(String id)
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+		if (respuesta.isPresent())
+		{
+			Profesional profesional = (Profesional) respuesta.get();
+			return profesional.getHorarios();
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public void agregarHorario(String id, Horario horario) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+		if (respuesta.isPresent())
+		{
+			Profesional profesional = (Profesional) respuesta.get();
+			List<Horario> horarios = profesional.getHorarios();
+			horarios.add(horario);
+			usuarioRepositorio.save(profesional);
+		}
+		else
+		{
+			throw new MiException("No se encontró el profesional");
+		}
+	}
+	public void actualizarHorario(String id, Horario horario) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+		if (respuesta.isPresent())
+		{
+			Profesional profesional = (Profesional) respuesta.get();
+			List<Horario> horarios = profesional.getHorarios();
+			horarios.add(horario);
+			usuarioRepositorio.save(profesional);
+		}
+		else
+		{
+			throw new MiException("No se encontró el profesional");
+		}
+	}
+	public void quitarHorario(String idProfesional, String idHorario) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idProfesional);
+		if (respuesta.isPresent())
+		{
+			Profesional profesional = (Profesional) respuesta.get();
+			List<Horario> horarios = profesional.getHorarios();
+			Iterator<Horario> horarioIt = horarios.iterator();
+			boolean encontrado = false;
+			while(horarioIt.hasNext() && !encontrado)
+			{
+				Horario horario = horarioIt.next();
+				if(horario.getId().equals(idHorario))
+				{
+					horarioServicio.quitar(idHorario);
+					horarioIt.remove();
+					encontrado = true;
+				}
+			}
+			if(!encontrado)
+			{
+				throw new MiException("No se encontró el horario");
+			}
+			profesional.setHorarios(horarios);
+			usuarioRepositorio.save(profesional);
+		}
+		else
+		{
+			throw new MiException("No se encontró el profesional");
 		}
 	}
 }
