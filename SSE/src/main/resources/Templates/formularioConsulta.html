@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../Static/CSS/formularioConsulta.css">
+    
+    <title>formularioConsulta</title>
+</head>
+<body>
+    <div class="conteiner">
+        <form action="" class="form">
+            <header class="header">
+
+                <h1>FORMULARIO CONSULTA</h1>
+
+            </header>
+            
+            <label for="" class="form__label">Fecha:</label>
+            
+            <input type="text" class="form__input" name="fecha" id="name" placeholder="dd/mm/aa">
+        
+            <label for="" class="form__label">Nombre Paciente:</label>
+            <input type="text" class="form__input" name="fecha" id="nombre Paciente" placeholder="Apellido, Nombre">
+
+            <label for="" class="form__label">Mutual:</label>
+            <input type="text" class="form__input" name="fecha" id="Mutual" placeholder="Mutual">
+
+            <label for="" class="form__label">Numero de afiliado:</label>
+            <input type="text" class="form__input" name="fecha" id="Numero afiliado" placeholder="Num">
+
+            <label for="" class="form__label">Diagnostico:</label>
+            <input type="text" class="form__input" name="fecha" id="Diagnostico" placeholder="Ingrese Diagnostico">
+
+            <textarea class="form__text" name="comentario" id="comentario"  placeholder="Observaciones y/o tratamiento"></textarea>
+
+            <input type="submit" class="guardar" value="Guardar Consulta">
+        </form>
+    </div>
+</body>
+</html>

@@ -5,13 +5,10 @@
  */
 package com.Equipo1.sse.controladores;
 
-import com.Equipo1.sse.entidades.Hora;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
-import com.Equipo1.sse.servicios.HoraServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,9 +34,6 @@ public class ProfesionalControlador
 
 	@Autowired
 	private ProfesionalServicio profesionalServicio;
-
-	@Autowired
-	private HoraServicio horaServicio;
 
 	@GetMapping("/dashboard")
 	public String profesional()
@@ -83,7 +77,7 @@ public class ProfesionalControlador
 		}
 	}
 
-	@GetMapping("/horario")
+	/*@GetMapping("/horario")
 	public String horario(HttpSession session, ModelMap modelo)
 	{
 		Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
@@ -191,5 +185,5 @@ public class ProfesionalControlador
 			modelo.put("error", ex.getMessage());
 			return "horario_form.html";
 		}
-	}
+	}*/
 }

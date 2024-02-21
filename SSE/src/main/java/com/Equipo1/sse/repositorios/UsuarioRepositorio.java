@@ -5,7 +5,6 @@
  */
 package com.Equipo1.sse.repositorios;
 
-import com.Equipo1.sse.entidades.Hora;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
 import java.util.List;
@@ -35,7 +34,4 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT p FROM Usuario p WHERE p.reputacion = :reputacion")
     public List<Profesional> buscarProfesionalPorReputacion(@Param("reputacion") Integer reputacion);
-
-	@Query("SELECT p.horario FROM Usuario p WHERE p.id = :id")
-	public List<Hora[]>[] buscarHorarios(@Param("id") String id);
 }

@@ -26,9 +26,7 @@ public class Profesional extends Usuario {
 	
 	private Curriculum curriculum;
 	
-	private List<Hora[]>[] horario;
-
-    public Profesional() {
+	public Profesional() {
         super();
 		setRol(Rol.PROFESIONAL);
     }
