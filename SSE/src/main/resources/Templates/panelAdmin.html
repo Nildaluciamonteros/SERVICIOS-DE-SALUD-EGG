@@ -12,17 +12,23 @@
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
 
     <link rel="stylesheet" th:href="@{/CSS/panelAdministrador.css}" />
+
     <title>Dashboard</title>
   </head>
   <body>
     <nav th:replace="/fragments/navbar :: nav" />
     <!-- navbar -->
+
     <div th:replace="/fragments/status :: div" />
     <!-- Mensaje de exito / error -->
-    <div th:replace="/fragments/sidebar :: div" />
+
+    <div class="sidebar" th:replace="/fragments/sidebar :: div" />
+    <!-- sidebar -->
+
     <div class="contenidoAdmin">
-      <h1 class="adminTitle">Bienvenido Mr Admin</h1>
+      <h1 class="adminTitle text-dark">¡¡¡Bienvenido ADMIN!!!</h1>
     </div>
+
     <div th:replace="/fragments/footer :: div" />
     <!-- footer -->
 
