@@ -23,7 +23,12 @@
     width: 100%;
     z-index: 1;
 }
-.btn-danger{
+.btn-salir{
     display: flex;
-    justify-content: start;
+    justify-content: center;
+    position: relative;
+    right: 10rem;
+    border-radius: 6px;
+    background-color: red;
+    width: 70px;
 }
