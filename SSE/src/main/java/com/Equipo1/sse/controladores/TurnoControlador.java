@@ -59,8 +59,9 @@ public class TurnoControlador {
             Profesional profesional = profesionalServicio.getOne(id);
             List<Turno> turnos = profesional.getTurnos();
             modelo.put("turnos", turnos);
+            modelo.put("profesional", profesional);
         }
-        return "turnos.html";/* Se corrige el .html */
+        return "turnos_buscar.html";/* Se corrige el .html */
     }
 
     @PostMapping("/sacarTurno")
