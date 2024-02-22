@@ -17,11 +17,11 @@
         </li>
         <br>
         <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="btn btn-link  text-white h5" href="/admin/usuarios">Turnos Pendientes</a>
+          <a class="btn btn-link  text-white h5" href="/admin/registrarProfesional">Registrar Profesional</a>
         </li>
         <br>
         <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('ADMIN')">
-          <a class="btn btn-link text-white h5"; href="/admin/usuarios">Turnos Atendidos</a>
+          <a class="btn btn-link text-white h5"; href="/admin/profesionalLista">Lista de Profesionales</a>
         </li>
       
       <hr>
