@@ -36,7 +36,7 @@ public class TurnoControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    @GetMapping("/registrados/")
+    @GetMapping("/registrados")
     public String turnos(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
         if (usuario instanceof Paciente) {
@@ -60,7 +60,7 @@ public class TurnoControlador {
             List<Turno> turnos = profesional.getTurnos();
             modelo.put("turnos", turnos);
         }
-        return "turnos_buscar.html";/* Se corrige el .html */
+        return "turnos.html";/* Se corrige el .html */
     }
 
     @PostMapping("/sacarTurno")
@@ -84,7 +84,7 @@ public class TurnoControlador {
         return "redirect:" + referer;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_PROFESIONAL')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/abrirTurnos")
     public String abrirTurnos(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");

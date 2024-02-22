@@ -23,12 +23,4 @@
     width: 100%;
     z-index: 1;
 }
-.btn-salir{
-    display: flex;
-    justify-content: center;
-    position: relative;
-    right: 10rem;
-    border-radius: 6px;
-    background-color: red;
-    width: 70px;
-}
+
