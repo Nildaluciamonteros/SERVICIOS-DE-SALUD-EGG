@@ -1,11 +1,12 @@
 body {
+    background-image: url(../Img/fondoTurnos.jpg);
     padding: 0;
     margin: 0;  
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.bg-img{
+/* .bg-img{
     height: 100vh;
     width: 100vw;
     object-fit: cover;
@@ -14,7 +15,7 @@ body {
     top: 0;
     left: 0;
     z-index:-1;
-}
+} */
 
 .body {
     display: flex;   
@@ -36,17 +37,17 @@ body {
     text-align: center;
     font-size: 60px;
     font-family: sans-serif;
-    padding: 5%
+    padding: 100px
 }
 
-.form-check{
+/* .form-check{
     background-color: rgba(0, 0, 255, 0.169);
     margin: 3%;
     padding: 8%;
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 5px 8px 5px 8px grey;
-}
+} */
 
 .radio-grl{
     text-align: center;
