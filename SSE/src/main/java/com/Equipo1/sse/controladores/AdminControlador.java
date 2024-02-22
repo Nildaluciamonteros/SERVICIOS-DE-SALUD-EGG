@@ -16,13 +16,16 @@ import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,4 +185,19 @@ public class AdminControlador {
         }
     }
 
+	
+	@ModelAttribute("listaDiasMap")
+	public Map<String, String> listaDiasMap()
+	{
+		Map<String, String> dias= new HashMap<String, String>();
+		dias.put("DIA_LUNES","lunes");
+		dias.put("DIA_MARTES","martes");
+		dias.put("DIA_MIERCOLES","miercoles");
+		dias.put("DIA_JUEVES","jueves");
+		dias.put("DIA_VIERNES","viernes");
+		dias.put("DIA_SABADO","sabado");
+		dias.put("DIA_DOMINGO","domingo");
+		dias.put("DIA_FERIADO","feriado");
+		return dias;
+    }
 }
