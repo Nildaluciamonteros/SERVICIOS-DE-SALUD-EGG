@@ -43,7 +43,7 @@
             Bienvenido al mejor servicio de salud de Egg ¡¡¡somos el equipo N°1!!!
           </p>
 
-          <a class="btn btn-outline-light rounded-pill px-3 w-100" href="/turnos">
+          <a class="btn btn-outline-light rounded-pill px-3 w-100" href="/turnos/">
             Turnos
           </a>
       
@@ -55,7 +55,7 @@
         <div class="col-lg-4">
           <h2 class="fw-normal">Clinica</h2>
             <image
-              th:src="@{/Img/clinica.jpg}"/>
+              th:src="@{/Img/fondoClinica.jpg}"/>
           
           
           <p>
@@ -63,13 +63,13 @@
             campo de la medicina, asegurando un diagnóstico preciso y un
             tratamiento efectivo para una amplia gama de condiciones médicas.
           </p>
-          <p><a class="btn btn-primary" href="#">Especialistas &raquo;</a></p>
+          <p><a class="btn btn-primary" href="/profesionales/clinica">Especialistas &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
         <div class="col-lg-4">
          <h2 class="fw-normal ">Pediatria</h2>
             <image
-              th:src="@{/Img/Pediatra.jpg}"
+              th:src="@{/Img/fondoPediatria.jpg}"
             />
 
           
@@ -79,30 +79,30 @@
             dedicación y enfoque especializado garantizan un cuidado de alta
             calidad.
           </p>
-          <p><a class="btn btn-primary" href="#">Especialistas &raquo;</a></p>
+          <p><a class="btn btn-primary" href="/profesionales/pediatria">Especialistas &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 text-center">
          <h2 class="fw-normal">Cardiologia</h2>
             <image
-              th:src="@{/Img/cardiologia.jpg}"
+              th:src="@{/Img/fondoCardiologia.jpg}"
             />
           </svg>
          
-          <p>
+          <p class="">
             Nuestro cardiólogo cuenta con una sólida formación y experiencia en
             el diagnóstico y tratamiento de condiciones cardiovasculares. Desde
             enfermedades cardíacas comunes hasta casos más complejos, estamos
             aquí para cuidar de tu corazón.
           </p>
-          <p><a class="btn btn-primary" href="#">Especialistas &raquo;</a></p>
+          <p><a class="btn btn-primary" href="/profesionales/cardiologia">Especialistas &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <h2 class="fw-normal">Ginecologia</h2>
             <image
-              th:src="@{/Img/ginecologia.jpg}"
+              th:src="@{/Img/fondoGinecologia.jpg}"
             />
           
           <p>
@@ -111,7 +111,7 @@
             estamos aquí para abordar tus necesidades ginecológicas con
             comprensión y expertise.
           </p>
-          <p><a class="btn btn-primary" href="#">Especialistas&raquo;</a></p>
+          <p><a class="btn btn-primary" href="/profesionales/ginecologia">Especialistas&raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
       </div>
@@ -145,12 +145,12 @@
               Red de Prestadores mas grande del Pais
             </h3>
             <p>Médicos y centros de diagnóstico.</p>
-            <button
+            <a th:href="@{/pdf/Prestadores.pdf}"><button
               class="btn btn-primary rounded-pill px-3 w-100"
               type="button"
             >
-              Turnos
-            </button>
+              Leer Mas...
+            </button></a>
           </div>
           <div class="feature col align-items-center">
             <div
@@ -177,12 +177,12 @@
               Todos los planes cuentan con cobertura en consultas y prácticas
               médicas, internación al 100% y emergencias médicas a domicilio
             </p>
-            <button
+            <a th:href="@{/pdf/CoberturaMedica.pdf}"><button
               class="btn btn-primary rounded-pill px-3 w-100"
               type="button"
             >
-              Turnos
-            </button>
+              Leer Mas...
+            </button></a>
           </div>
           <div class="feature col align-items-center">
             <div
@@ -209,12 +209,12 @@
               Servicio de atención médica en domicilio, urgencias y emergencias
               médicas las 24 hs
             </p>
-            <button
+            <a th:href="@{/pdf/EmergenciasMedicas.pdf}"><button
               class="btn btn-primary rounded-pill px-3 w-100"
               type="button"
             >
-              Turnos
-            </button>
+              Leer Mas...
+            </button></a>
           </div>
           <div class="feature col align-items-center">
             <div
@@ -235,12 +235,12 @@
             </div>
             <h3 class="fs-2 text-white ">Gestiones online</h3>
             <p>Autorizaciones, Consultá tu factura, Imprimí tu credencial</p>
-            <button
+            <a th:href="@{/pdf/GestionesOnline.pdf}"><button
               class="btn btn-primary rounded-pill px-3 w-100"
               type="button"
             >
-              Turnos
-            </button>
+              Leer Mas...
+            </button></a>
           </div>
         </div>
         <h4 class="seguinos">No te olvides de seguirnos en nuestras Redes</h4>

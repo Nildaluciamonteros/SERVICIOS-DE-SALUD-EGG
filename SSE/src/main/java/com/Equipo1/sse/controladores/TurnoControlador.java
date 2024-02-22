@@ -36,7 +36,7 @@ public class TurnoControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    @GetMapping("/")
+    @GetMapping("/registrados")
     public String turnos(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
         if (usuario instanceof Paciente) {
@@ -60,11 +60,12 @@ public class TurnoControlador {
             List<Turno> turnos = profesional.getTurnos();
             modelo.put("turnos", turnos);
         }
-        return "turnos_buscar.hmtl";
+        return "turnos_buscar.html";/* Se corrige el .html */
     }
 
     @PostMapping("/sacarTurno")
-    public String sacarTurno(@RequestParam String idTurno, ModelMap modelo, HttpSession session, HttpServletRequest request) {
+    public String sacarTurno(@RequestParam String idTurno, ModelMap modelo, HttpSession session,
+            HttpServletRequest request) {
         try {
             Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
             if (usuario instanceof Paciente) {
@@ -83,7 +84,7 @@ public class TurnoControlador {
         return "redirect:" + referer;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_PROFESIONAL')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/abrirTurnos")
     public String abrirTurnos(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
@@ -112,7 +113,7 @@ public class TurnoControlador {
                         nuevo.setHours(ahora.getHours() + i);
                         nuevo.setDate(ahora.getDate() + j);
                         Turno turno = turnoServicio.crearTurno(nuevo, null);
-                        profesionalServicio.agregarTurno(usuario.getId(),turno);
+                        profesionalServicio.agregarTurno(usuario.getId(), turno);
                     }
                 }
             }
