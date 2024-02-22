@@ -60,7 +60,7 @@ public class TurnoControlador {
             List<Turno> turnos = profesional.getTurnos();
             modelo.put("turnos", turnos);
         }
-        return "turnos_buscar.html";/* Se corrige el .html */
+        return "turnos.html";/* Se corrige el .html */
     }
 
     @PostMapping("/sacarTurno")
