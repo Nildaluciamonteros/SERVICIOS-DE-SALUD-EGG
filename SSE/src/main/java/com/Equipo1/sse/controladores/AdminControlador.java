@@ -95,11 +95,14 @@ public class AdminControlador {
 	@GetMapping("/usuarios/{id}/darAlta")
 	public String darAltaUsuario(@PathVariable String id, ModelMap modelo) {
 		Usuario usuario = usuarioServicio.getOne(id);
-		if (usuario == null) {
-			modelo.put("error", "El usuario no se encuentra");
-		} else {
+		try
+		{
 			usuarioServicio.darAltaUsuario(id);
 			modelo.put("exito", "El usuario se dio de alta");
+		}
+		catch(MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
 		}
 		return "redirect:/admin/usuarios";
 	}

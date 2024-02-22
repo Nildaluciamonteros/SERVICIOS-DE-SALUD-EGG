@@ -13,6 +13,8 @@ import com.Equipo1.sse.servicios.HorarioServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -39,7 +41,7 @@ public class ProfesionalControlador
 	
 	@Autowired
 	private HorarioServicio horarioServicio;
-
+	
 	@GetMapping("/dashboard")
 	public String profesional()
 	{
