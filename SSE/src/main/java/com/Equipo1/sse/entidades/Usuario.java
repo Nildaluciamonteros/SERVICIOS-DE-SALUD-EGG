@@ -40,6 +40,8 @@ public abstract class Usuario implements Serializable {
 
     @OneToOne
     private Imagen imagen;
+	
+	private Recuperacion recuperacionPendiente;
 
     public Usuario() {
     }
