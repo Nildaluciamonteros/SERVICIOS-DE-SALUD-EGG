@@ -182,7 +182,7 @@ public class AdminControlador {
 			modelo.put("password", password);
 			modelo.put("password2", password2);
 			modelo.put("especialidad", especialidad);
-			return "registro.html";
+			return "registrar_profesional.html";
 		}
 	}
 
