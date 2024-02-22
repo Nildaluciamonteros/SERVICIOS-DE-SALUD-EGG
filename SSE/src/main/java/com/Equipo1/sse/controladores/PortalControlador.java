@@ -5,6 +5,7 @@
  */
 package com.Equipo1.sse.controladores;
 
+import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Recuperacion;
@@ -91,8 +92,9 @@ public class PortalControlador
 	}
 
 	@GetMapping("/registro")
-	public String registro()
+	public String registro(ModelMap modelo)
 	{
+		modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		return "registro.html";
 	}
 
@@ -110,6 +112,8 @@ public class PortalControlador
 			return "redirect:/login";
 		} catch (MiException ex)
 		{
+			modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
+			modelo.put("obraSocial",obraSocial);
 			modelo.put("error", ex.getMessage());
 			modelo.put("nombre", nombre);
 			modelo.put("apellido", apellido);
