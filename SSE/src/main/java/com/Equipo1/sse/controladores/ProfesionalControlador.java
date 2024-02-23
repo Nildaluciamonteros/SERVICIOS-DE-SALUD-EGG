@@ -59,7 +59,8 @@ public class ProfesionalControlador
 			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
 			@RequestParam String password, @RequestParam String password2, MultipartFile imagen, MultipartFile curriculum,
 			@RequestParam String especialidad, @RequestParam String matricula, @RequestParam Integer horasI,
-			@RequestParam Integer horasF, @RequestParam String[] diasSemana, HttpSession session, ModelMap modelo, Authentication authentication)
+			@RequestParam Integer horasF, @RequestParam String lunes, @RequestParam String martes, @RequestParam String miercoles, @RequestParam String jueves,
+			@RequestParam String viernes, @RequestParam String sabado, @RequestParam String domingo, HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{
@@ -68,7 +69,8 @@ public class ProfesionalControlador
 			if (!editado.equals(usuarioSession))
 			{
 				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
-						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum,horasI,horasF,diasSemana);
+						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum,horasI,horasF,
+						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
 			return "redirect:/profesional";

@@ -5,7 +5,6 @@
  */
 package com.Equipo1.sse.controladores;
 
-import com.Equipo1.sse.entidades.Horario;
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
@@ -17,16 +16,13 @@ import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -168,9 +164,12 @@ public class AdminControlador {
     public String registroProfesional(@RequestParam String nombre, @RequestParam String apellido,
             @RequestParam String telefono,
             @RequestParam String email, @RequestParam String password, @RequestParam String especialidad, @RequestParam String password2,
-            ModelMap modelo, @RequestParam Double valorConsulta, @RequestParam Integer horasI, @RequestParam Integer horasF, @RequestParam String[] diasSemana) {
+            ModelMap modelo, @RequestParam Double valorConsulta, @RequestParam Integer horasI, @RequestParam Integer horasF, 
+			@RequestParam String lunes, @RequestParam String martes, @RequestParam String miercoles, @RequestParam String jueves,
+			@RequestParam String viernes, @RequestParam String sabado, @RequestParam String domingo) {
         try {
-			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
+			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, 
+					lunes, martes, miercoles, jueves, viernes, sabado, domingo);
             modelo.put("exito", "Usuario registrado correctamente");
             return "redirect:/admin/dashboard";
         } catch (MiException ex) {
@@ -193,7 +192,6 @@ public class AdminControlador {
 		String[] caracteristicas = {"2273","2325","11","221"};
 		String[] especialidades = {"Clinica", "Pediatria", "Ginecologia", "Cardiologia"};
 		String[] dominios = {"hotmail.com", "gmail.com", "live.com", "yahoo.com.ar"};
-		String[] diasSemana = {"lunes","martes","miércoles","jueves","viernes","sàbado","domingo"};
 		Integer cantidad = 100;
 		for(int i = 0; i < cantidad; i++)
 		{
@@ -211,9 +209,16 @@ public class AdminControlador {
 			Integer horasF = horasI + 8;
 			String password = "123123";
 			String password2 = password;
-			
+			String lunes = String.valueOf(((int)(Math.random()) * 2) + 1);
+			String martes = String.valueOf(((int)(Math.random()) * 2) + 2);
+			String miercoles = String.valueOf(((int)(Math.random()) * 2) + 3);
+			String jueves = String.valueOf(((int)(Math.random()) * 2) + 4);
+			String viernes = String.valueOf(((int)(Math.random()) * 2) + 5);
+			String sabado = String.valueOf(((int)(Math.random()) * 2) + 6);
+			String domingo = String.valueOf(((int)(Math.random()) * 2) + 7);
 			try {
-				profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
+				profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF,
+						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
 				modelo.put("exito", "Usuario registrado correctamente");
 			}
 			catch (MiException ex)
