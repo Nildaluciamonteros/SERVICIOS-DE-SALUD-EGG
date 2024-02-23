@@ -11,7 +11,7 @@
   </head>
   <body>
     <form class="form" th:action="@{/logincheck}" method="POST">
-      <div th:replace="/fragments/status :: div" />
+      <div th:replace="/fragments/status :: div"  />
       <!-- Mensaje de exito / error -->
       <p class="form-title">Ingresa a tu Cuenta</p>
       <div class="LogoBlanco">
@@ -69,6 +69,10 @@
       <p class="signup-link">
         ¿No tienes una Cuenta?
         <a th:href="@{/registro}">Registrarse</a>
+      </p>
+	  <p class="signup-link">
+        ¿Se olvidó su clave?
+        <a th:href="@{/recuperarClave}">Recuperala</a>
       </p>
     </form>
   </body>

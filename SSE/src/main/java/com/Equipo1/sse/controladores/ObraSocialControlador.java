@@ -13,11 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author ALEXIS.R.L
@@ -57,8 +52,8 @@ public class ObraSocialControlador {
         return "obraSocial_lista.html";
     }
     
-    @GetMapping("/{id}/eliminar")
-	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo)
+    @GetMapping("/{id}/darBaja")
+	public String eliminarObraSocial(@PathVariable String id, ModelMap modelo) throws MiException
 	{
 		ObraSocial OS = obraSocialServicio.getOne(id);
 		if(OS == null)
@@ -67,8 +62,15 @@ public class ObraSocialControlador {
 		}
 		else
 		{
-			obraSocialServicio.eliminarObraSocial(id);
-			modelo.put("exito", "La Obra Social se eliminó");
+			try
+			{
+				obraSocialServicio.darBaja(OS.getId());
+				modelo.put("exito", "La Obra Social cambió su estado de actividad.");
+			}
+			catch(MiException ex)
+			{
+				modelo.put("error","No se pudo cambiar su estado de actividad.");
+			}
 		}
 		return "redirect:/obraSocial/lista";
 	}

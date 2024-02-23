@@ -56,6 +56,21 @@ public class ObraSocialServicio
 	{
 		return obraSocialRepositorio.buscarPorNombre(nombre);
 	}
+	
+	public void darBaja(String idOS) throws MiException
+	{
+		Optional<ObraSocial> respuesta = obraSocialRepositorio.findById(idOS);
+		if (respuesta.isPresent())
+		{
+			ObraSocial obraSocial = respuesta.get();
+			obraSocial.setActivado(!obraSocial.getActivado());
+			obraSocialRepositorio.save(obraSocial);
+		}
+		else
+		{
+			throw new MiException("No se encontró la obra social");
+		}
+	}
 
 	private void validar(String nombre) throws MiException
 	{

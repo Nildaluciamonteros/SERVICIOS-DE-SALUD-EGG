@@ -3,7 +3,11 @@ body{
     justify-content: center;
     position: relative;
     flex-direction: column;
-    background-image: url(../Img/obraSocial_lista.css);
+    background-image: url(../Img/fondoProfesional.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+  }
+  h1{
+    text-align: center;
+    padding: 100px 0px 60px 0px;
   }

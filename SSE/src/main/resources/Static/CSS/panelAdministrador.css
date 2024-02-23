@@ -6,7 +6,12 @@ body{
     background-image: url(../Img/fondoAdmin.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-  }
+    padding-top: 100px;
+}
   h1{
     text-align: center;
+  }
+  .adminTitle{
+   color: #bab5b5;
+   font-weight: 800;
   }

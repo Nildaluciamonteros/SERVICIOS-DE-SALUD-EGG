@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{/CSS/usuario_lista.css}" />
+    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+    <title>Sacar Turno</title>
+  </head>
+  <body>
+    <nav th:replace="/fragments/navbar :: nav" />
+    <!-- navbar -->
+    <div th:replace="/fragments/status :: div" class="cartel" />
+    <!-- Mensaje de exito / error -->
+
+    <h1 class="titleUsuario">Solicitar Turno</h1>
+    <h3
+      th:text="'Dr/a : ' + ${profesional.nombre} + ${profesional.apellido}"
+    ></h3>
+
+    <table class="table">
+      <thead>
+        <tr class="titulos-tabla">
+          <th scope="col">Horario</th>
+          <th scope="col">Dia/Fecha</th>
+          <th scope="col">Reservar</th>
+        </tr>
+      </thead>
+      <tbody th:each="turno : ${turnos}">
+        <tr class="filas">
+          <th scope="row" th:text="${turno.fecha}"></th>
+          <td th:text="${turno.fecha}"></td>
+          <td>
+            <form th:action="@{/turnos/sacarTurno/}">
+              <input type="text" hidden name="id" th:value="${turno.id}" />
+              <button type="submit" class="btn btn-primary">Confirmar</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div th:replace="/fragments/footer :: div" />
+    <!-- footer -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
