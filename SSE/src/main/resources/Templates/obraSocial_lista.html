@@ -11,45 +11,47 @@
     />
     <link rel="stylesheet" th:href="@{/CSS/obraSocial_lista.css}" />
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
-    <title>Dashboard</title>
+    <title>Obra Social</title>
   </head>
   <body>
     <nav th:replace="/fragments/navbar :: nav" />
     <!-- navbar -->
     <div th:replace="/fragments/status :: div" class="cartel" />
     <!-- Mensaje de exito / error -->
-    <h1>Obras Sociales Afiliadas</h1>
+    <h1 class="titulo-Os">Obras Sociales Afiliadas</h1>
 
-    <table class="table table-gradient">
+    <table class="table">
       <thead>
+        <div class="filas-obraSocial"></div>
         <tr>
           <th scope="col">Obra Social</th>
           <th scope="col">Modificar</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col" class="colEliminar">Eliminar</th>
         </tr>
       </thead>
       <tbody th:each="obraSocial : ${obraSociales}">
         <tr>
           <th scope="row" th:text="${obraSocial.nombre}"></th>
-
-          <td>
-            <a
-              th:href="@{/obraSocial/__${obraSocial.id}__/modificar}"
-              class="btn btn-primary"
-              >Modificar</a
-            >
-          </td>
-          <td>
-            <a
-              th:href="@{/obraSocial/__${obraSocial.id}__/eliminar}"
-              class="btn btn-danger"
-              >Eliminar</a
-            >
-          </td>
+          
+            <td>
+              <a
+                th:href="@{/obraSocial/__${obraSocial.id}__/modificar}"
+                class="btn btn-primary"
+                >Modificar</a
+              >
+            </td>
+            <td>
+              <a
+                th:href="@{/obraSocial/__${obraSocial.id}__/eliminar}"
+                class="btn btn-danger"
+                >Eliminar</a
+              >
+            </td>
+          </div>
         </tr>
       </tbody>
     </table>
-    <a href="/obraSocial/registrar" class="btn btn-primary">Agregar OS</a>
+    <a href="/obraSocial/registrar" class="btn btn-primary">Agregar</a>
     <div th:replace="/fragments/footer :: div" />
     <!-- footer -->
 

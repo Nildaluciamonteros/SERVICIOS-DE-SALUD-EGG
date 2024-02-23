@@ -1,0 +1,35 @@
+body{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    background-image: url(../Img/fondoObraSocialLista.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .titulo-Os{
+    font-family: sans-serif;
+    font-weight: 700;
+    padding: 100px 0px 60px 0px;
+  }
+
+  tr, th, td, tbody,thead{
+    text-align: center;
+    background-color: transparent !important;
+ }
+ a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+}
+.filas-obraSocial{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.colEliminar{
+  position: relative;
+  right: 100px;
+}

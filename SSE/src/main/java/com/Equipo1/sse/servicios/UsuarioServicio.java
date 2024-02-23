@@ -5,13 +5,11 @@
  */
 package com.Equipo1.sse.servicios;
 
-import com.Equipo1.sse.entidades.Curriculum;
 import com.Equipo1.sse.entidades.Imagen;
 import com.Equipo1.sse.entidades.ObraSocial;
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
-import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.enumeraciones.Rol;
 import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.repositorios.UsuarioRepositorio;
@@ -40,91 +38,74 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UsuarioServicio implements UserDetailsService
 {
-	
+
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
-	
-	@Autowired
-	private CurriculumServicio curriculumServicio;
-	
+
 	@Autowired
 	private ImagenServicio imagenServicio;
-	
+
 	@Autowired
 	private ObraSocialServicio obraSocialServicio;
-	
+	@Autowired
+	private HistorialClinicoServicio historialClinicoServicio;
+
 	@Transactional
 	public void registrar(String nombre, String apellido, String telefono,
-			String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
+			String email, String obraSocial, String numAfiliado, String password, String password2,
+			MultipartFile archivo) throws MiException
 	{
 		// Validar datos
 		ObraSocial OS = null;
-		if(obraSocial != null && !obraSocial.isEmpty())
+		if (obraSocial != null && !obraSocial.isEmpty())
 		{
 			OS = obraSocialServicio.buscarObraSocial(obraSocial);
-			if(numAfiliado == null || numAfiliado.isEmpty())
+			if (numAfiliado == null || numAfiliado.isEmpty())
 			{
 				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
 			}
-		}
-		else
+		} else
 		{
 			numAfiliado = "";
 		}
 		validar(nombre, apellido, telefono, email, password, password2);
 		// Crear Usuario
-		Usuario usuario = new Paciente();
-		
+		Paciente usuario = new Paciente();
+
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
 		usuario.setTelefono(telefono);
 		usuario.setEmail(email);
-		((Paciente)usuario).setObraSocial(OS);
-		((Paciente)usuario).setNumAfiliado(numAfiliado);
+		usuario.setObraSocial(OS);
+		usuario.setNumAfiliado(numAfiliado);
+		usuario.setActivado(Boolean.TRUE);
 		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 		Imagen imagen = imagenServicio.guardar(archivo);
 		usuario.setImagen(imagen);
-		
+		historialClinicoServicio.crearHistorial(usuario);
 		usuarioRepositorio.save(usuario);
 	}
-	
-	@Transactional
-	public void registrarProfesional(String nombre, String apellido, String telefono,
-			String email, String password, String password2) throws MiException
-	{
-		validar(nombre, apellido, telefono, email, password, password2);
-		// Crear Usuario
-		Usuario usuario = new Profesional();
-		
-		usuario.setNombre(nombre);
-		usuario.setApellido(apellido);
-		usuario.setTelefono(telefono);
-		usuario.setEmail(email);
-		usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-		
-		usuarioRepositorio.save(usuario);
-	}
-	
+
 	@Transactional
 	public void actualizar(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2, MultipartFile archivo) throws MiException
+			String telefono, String email, String obraSocial, String numAfiliado, String password, String password2,
+			MultipartFile archivo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
 		// Validar datos
 		ObraSocial OS = null;
-		if(obraSocial != null && !obraSocial.isEmpty())
+		if (obraSocial != null && !obraSocial.isEmpty())
 		{
 			OS = obraSocialServicio.buscarObraSocial(obraSocial);
-			if(numAfiliado == null || numAfiliado.isEmpty())
+			if (numAfiliado == null || numAfiliado.isEmpty())
 			{
 				throw new MiException("El número de afiliado no puede ser nulo o estar vacio.");
 			}
-		}
-		else
+		} else
 		{
 			numAfiliado = "";
 		}
-		if (claveVacia) 
+		if (claveVacia)
 		{
 			validar(nombre, apellido, telefono, email, "123456", "123456");
 		} else
@@ -162,22 +143,27 @@ public class UsuarioServicio implements UserDetailsService
 			usuarioRepositorio.save(usuario);
 		}
 	}
-	
+
 	public List<Usuario> listarUsuarios()
 	{
 		return usuarioRepositorio.findAll();
 	}
-	
+
 	public List<Profesional> listarProfesionales()
 	{
 		return usuarioRepositorio.buscarTodosLosProfesionales();
 	}
-	
+
 	public List<Usuario> buscarPorNombre(String nombre)
 	{
 		return usuarioRepositorio.buscarPorNombre(nombre);
 	}
 	
+	public Usuario buscarPorEmail(String email)
+	{
+		return usuarioRepositorio.buscarPorEmail(email);
+	}
+
 	private void validar(String nombre, String apellido, String telefono,
 			String email, String password, String password2) throws MiException
 	{
@@ -191,12 +177,18 @@ public class UsuarioServicio implements UserDetailsService
 		}
 		if (telefono == null || telefono.isEmpty() || !telefono.matches("[0-9]+"))
 		{
-			throw new MiException("El telefono no puede contener caracteres que no sean numeros, ser nulo o estar vacio");
+			throw new MiException(
+					"El telefono no puede contener caracteres que no sean numeros, ser nulo o estar vacio");
 		}
 		if (email == null || email.isEmpty())
 		{
 			throw new MiException("El email no puede ser nulo o estar vacio");
 		}
+		validarClaves(password,password2);
+	}
+	
+	public void validarClaves(String password, String password2) throws MiException
+	{
 		if (password == null || password.isEmpty() || password.length() <= 5)
 		{
 			throw new MiException("La contraseña no puede ser nula o estar vacia, y debe tener minimo 6 digitos");
@@ -206,45 +198,96 @@ public class UsuarioServicio implements UserDetailsService
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
 		}
 	}
-	
+
 	public Usuario getOne(String id)
 	{
 		return usuarioRepositorio.getOne(id);
 	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{
 		Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-		
+
 		if (usuario != null)
 		{
 			List<GrantedAuthority> permisos = new ArrayList();
 			GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-			
+
 			permisos.add(p);
-			
+
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-			
+
 			HttpSession session = attr.getRequest().getSession();
-			
+
 			session.setAttribute("usuarioSession", usuario);
-			
+
 			return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 		} else
 		{
 			return null;
 		}
 	}
-	
+
 	public void darBajaUsuario(String idUsuario)
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if (respuesta.isPresent())
 		{
 			Usuario usuario = respuesta.get();
-			usuario.setActivado(false);
+			usuario.setActivado(!usuario.getActivado());
 			usuarioRepositorio.save(usuario);
+		}
+	}
+
+	public void darAltaUsuario(String idUsuario) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+			Usuario usuario = respuesta.get();
+			if (usuario.getActivado() == false)
+			{
+				usuario.setActivado(true);
+				usuarioRepositorio.save(usuario);
+
+			}
+
+		}
+		else
+		{
+			throw new MiException("No se encuentra el usuario");
+		}
+	}
+
+	public void bajaRecuperacion(String idUsuario) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+			Usuario usuario = respuesta.get();
+			usuario.setRecuperacionPendiente(null);
+			usuarioRepositorio.save(usuario);
+		}
+		else
+		{
+			throw new MiException("No se encuentra el usuario");
+		}
+	}
+	
+	public void cambiarClave(String idUsuario, String password, String password2) throws MiException
+	{
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+			Usuario usuario = (Usuario)respuesta.get();
+			validarClaves(password,password2);
+			usuario.setPassword(password);
+			usuarioRepositorio.save(usuario);
+		}
+		else
+		{
+			throw new MiException("No se encuentra el usuario");
 		}
 	}
 }

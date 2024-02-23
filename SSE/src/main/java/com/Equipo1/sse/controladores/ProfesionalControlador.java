@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package com.Equipo1.sse.controladores;
+
+import com.Equipo1.sse.entidades.Horario;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.enumeraciones.Especialidades;
 import com.Equipo1.sse.excepciones.MiException;
+import com.Equipo1.sse.servicios.HorarioServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
-import com.Equipo1.sse.servicios.TurnoServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -31,17 +35,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/profesional")
 public class ProfesionalControlador
 {
-	@Autowired
-	private TurnoServicio turnoServicio;
-	
+
 	@Autowired
 	private ProfesionalServicio profesionalServicio;
 	
-	@GetMapping("/")
+	@Autowired
+	private HorarioServicio horarioServicio;
+	
+	@GetMapping("/dashboard")
 	public String profesional()
 	{
-		return "profesional.html";
+		return "panelProfesional.html";
 	}
+
 	@GetMapping("/perfil")
 	public String perfil(ModelMap modelo, HttpSession session)
 	{
@@ -63,11 +69,10 @@ public class ProfesionalControlador
 			if (!editado.equals(usuarioSession))
 			{
 				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
-
 						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
-			return "redirect:/inicio";
+			return "redirect:/profesional";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
@@ -76,6 +81,85 @@ public class ProfesionalControlador
 
 			modelo.put("especialidades", Especialidades.values());
 			return "usuario_modificar.html";
+		}
+	}
+
+	@GetMapping("/horario")
+	public String horario(HttpSession session, ModelMap modelo)
+	{
+		Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
+		modelo.put("horarios", profesionalServicio.listarHorarios(usuario.getId()));
+		return "horario.html";
+	}
+
+	@GetMapping("/horario/agregar")
+	public String agregarHorario()
+	{
+		return "horario_form.html";
+	}
+
+	@PostMapping("/horario/agregar")
+	public String agregoHorario(Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, Integer diaI, Integer diaF, HttpSession session, ModelMap modelo)
+	{
+		try
+		{
+			Horario horario = horarioServicio.registrar(horasD,minutosD,horasH,minutosH,diaI,diaF);
+			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
+			profesionalServicio.agregarHorario(usuario.getId(),horario);
+			modelo.put("exito","El horario se agregó correctamente");
+			return "redirect:/profesional/horario";
+		} catch (MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
+			modelo.put("horasD",horasD);
+			modelo.put("minutosD",minutosD);
+			modelo.put("horasH",horasH);
+			modelo.put("minutosH",minutosH);
+			modelo.put("diaI",diaI);
+			if(diaF != null)
+			{
+				modelo.put("diaF",diaF);
+			}
+			return "horario_form.html";
+		}
+	}
+	
+	@GetMapping("/horario/{id}/modificar")
+	public String modificarHorario(@PathVariable String id)
+	{
+		Horario horario = horarioServicio.getOne(id);
+		
+		return "horario_modificar.html";
+	}
+	
+	@PostMapping("/horario/{id}/modificar")
+	public String modificoHorario(@PathVariable String id, Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, Integer diaI,Integer diaF, HttpSession session, ModelMap modelo)
+	{
+		try
+		{
+			horarioServicio.actualizar(id, horasD, minutosD, horasH, minutosH, diaI,diaF);
+			modelo.put("exito","El horario se agregó correctamente");
+			return "redirect:/profesional/horario";
+		} catch (MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
+			return "horario_modificar.html";
+		}
+	}
+	
+	@PostMapping("/horario/{id}/quitar")
+	public String quitarHorario(@PathVariable String id, ModelMap modelo, HttpSession session)
+	{
+		try
+		{
+			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
+			profesionalServicio.quitarHorario(usuario.getId(), id);
+			modelo.put("exito","El horario se quitó correctamente");
+			return "redirect:/profesional/horario";
+		} catch (MiException ex)
+		{
+			modelo.put("error", ex.getMessage());
+			return "horario_form.html";
 		}
 	}
 }
