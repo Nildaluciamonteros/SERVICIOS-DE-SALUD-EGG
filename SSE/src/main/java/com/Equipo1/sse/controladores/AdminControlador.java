@@ -160,7 +160,7 @@ public class AdminControlador {
 
     @GetMapping("/registrarProfesional")
     public String registrarProfesional() {
-        return "registro_profesional.html";
+        return "registrar_profesional.html";
     }
 
     @PostMapping("/registrarProfesional")
