@@ -31,6 +31,7 @@ public class ObraSocialServicio
 		validar(nombre);
 		ObraSocial obraSocial = new ObraSocial();
 		obraSocial.setNombre(nombre);
+		obraSocial.setActivado(true);
 		obraSocialRepositorio.save(obraSocial);
 	}
 
@@ -43,6 +44,7 @@ public class ObraSocialServicio
 		{
 			ObraSocial obraSocial = respuesta.get();
 			obraSocial.setNombre(nombre);
+			obraSocial.setActivado(true);
 			obraSocialRepositorio.save(obraSocial);
 		}
 	}
@@ -63,7 +65,10 @@ public class ObraSocialServicio
 		if (respuesta.isPresent())
 		{
 			ObraSocial obraSocial = respuesta.get();
-			obraSocial.setActivado(!obraSocial.getActivado());
+			if(obraSocial.getActivado() != null)
+			{
+				obraSocial.setActivado(!obraSocial.getActivado());
+			}
 			obraSocialRepositorio.save(obraSocial);
 		}
 		else
