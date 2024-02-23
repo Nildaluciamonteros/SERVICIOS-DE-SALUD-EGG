@@ -184,7 +184,7 @@ public class ProfesionalServicio implements UserDetailsService
 		{
 			throw new MiException("Las contraseñas ingresadas deben ser iguales");
 		}
-		if (especialidad == null || especialidad.isEmpty() || Especialidades.buscar(especialidad) != null)
+		if (especialidad == null || especialidad.isEmpty() || Especialidades.buscar(especialidad) == null)
 		{
 			throw new MiException("La especialidad ingresada no es válida");
 		}
