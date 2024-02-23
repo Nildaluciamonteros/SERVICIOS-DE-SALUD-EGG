@@ -13,8 +13,6 @@ import com.Equipo1.sse.servicios.HorarioServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -60,7 +58,9 @@ public class ProfesionalControlador
 	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
 			@RequestParam String password, @RequestParam String password2, MultipartFile imagen, MultipartFile curriculum,
-			String especialidad, String matricula, HttpSession session, ModelMap modelo, Authentication authentication)
+			@RequestParam String especialidad, @RequestParam String matricula, @RequestParam Integer horasI,
+			@RequestParam Integer horasF, @RequestParam String lunes, @RequestParam String martes, @RequestParam String miercoles, @RequestParam String jueves,
+			@RequestParam String viernes, @RequestParam String sabado, @RequestParam String domingo, HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{
@@ -69,7 +69,8 @@ public class ProfesionalControlador
 			if (!editado.equals(usuarioSession))
 			{
 				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
-						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum);
+						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum,horasI,horasF,
+						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
 			return "redirect:/profesional";

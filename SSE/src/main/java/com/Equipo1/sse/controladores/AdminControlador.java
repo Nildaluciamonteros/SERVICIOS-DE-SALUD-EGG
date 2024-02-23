@@ -5,7 +5,6 @@
  */
 package com.Equipo1.sse.controladores;
 
-import com.Equipo1.sse.entidades.Horario;
 import com.Equipo1.sse.entidades.Paciente;
 import com.Equipo1.sse.entidades.Profesional;
 import com.Equipo1.sse.entidades.Usuario;
@@ -15,17 +14,15 @@ import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
+import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,18 +157,21 @@ public class AdminControlador {
 
     @GetMapping("/registrarProfesional")
     public String registrarProfesional() {
-        return "registro_profesional.html";
+        return "registrar_profesional.html";
     }
 
     @PostMapping("/registrarProfesional")
     public String registroProfesional(@RequestParam String nombre, @RequestParam String apellido,
             @RequestParam String telefono,
             @RequestParam String email, @RequestParam String password, @RequestParam String especialidad, @RequestParam String password2,
-            ModelMap modelo, Double valorConsulta, Integer horasI, Integer horasF) {
+            ModelMap modelo, @RequestParam Double valorConsulta, @RequestParam Integer horasI, @RequestParam Integer horasF, 
+			@RequestParam String lunes, @RequestParam String martes, @RequestParam String miercoles, @RequestParam String jueves,
+			@RequestParam String viernes, @RequestParam String sabado, @RequestParam String domingo) {
         try {
-            profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
+			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, 
+					lunes, martes, miercoles, jueves, viernes, sabado, domingo);
             modelo.put("exito", "Usuario registrado correctamente");
-            return "redirect:/login";
+            return "redirect:/admin/dashboard";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -184,20 +184,54 @@ public class AdminControlador {
             return "registrar_profesional.html";
         }
     }
-
-	
-	@ModelAttribute("listaDiasMap")
-	public Map<String, String> listaDiasMap()
+	@GetMapping("/generarProfesionales")
+	public String generarProfesionales(ModelMap modelo)
 	{
-		Map<String, String> dias= new HashMap<String, String>();
-		dias.put("DIA_LUNES","lunes");
-		dias.put("DIA_MARTES","martes");
-		dias.put("DIA_MIERCOLES","miercoles");
-		dias.put("DIA_JUEVES","jueves");
-		dias.put("DIA_VIERNES","viernes");
-		dias.put("DIA_SABADO","sabado");
-		dias.put("DIA_DOMINGO","domingo");
-		dias.put("DIA_FERIADO","feriado");
-		return dias;
+		String[] apellidos = {"García","Rodríguez","Martínez","López","Fernández","González","Pérez","Sánchez","Ramírez","Torres","Flores","Gutiérrez","Díaz","Vázquez","Romero","Navarro","Muñoz","Ruiz","Castillo","Ramos","Álvarez","Morales","Ortega","Jiménez","Moreno","Herrera","Molina","Castro","Soto","Silva","Medina","León","Prieto","Mendoza","Delgado","Herrera","Aguilar","Nieto","Ortiz","Cárdenas","Guerrero","Rivera","Ríos","Cabrera","Ponce","Reyes","Miranda","Peña","Salazar","Vargas","Guzmán","Núñez","Valencia","Zamora","Cervantes","Del Valle","Quintero","Peralta","Benítez","Gallego","Roldán","Serrano","Vidal","Ibarra","Rosales","Espinoza","Franco","Lugo","Escobar","Tovar","Gómez","Calderón","Aguayo","Del Río","Cortés","Lozano","Rosario","Ochoa","Vela","Sandoval","Bautista","Espinosa","Parra","Rojas","Monroy","Galindo","Rangel","Huerta","Solís","Osorio","Chávez","Aguilar","Bernal","Palacios","Avila","Cisneros","Montes","Rivas","Contreras","Maldonado"};
+		String[] nombres = {"Alejandro","Sofía","Juan","Valentina","Carlos","María","Andrés","Camila","Javier","Isabella","Luis","Valeria","Diego","Ana","José","Gabriela","Miguel","Natalia","Daniel","Laura","Pablo","Andrea","Fernando","Paula","Antonio","Daniela","Manuel","Sara","Francisco","Julia","Javier","Marta","Jorge","Elena","Raúl","Patricia","Roberto","Clara","Rubén","Lucía","Sergio","Martina","Oscar","Adriana","David","Inés","Ignacio","Victoria","Germán","Marina","Emilio","Carmen","Mateo","Beatriz","Guillermo","Lorena","Ricardo","Isabel","Gabriel","Esther","Emilio","Natalia","Iván","Lorena","Ángel","Claudia","Víctor","Miriam","Álvaro","Lorena","Raúl","Lorena","Sergio","Belén","Juan Pablo","Adriana","Enrique","Marisol","Jorge","Margarita","Pedro","Marta","Fernando","Lorena","Ricardo","Leticia","Xavier","Laura","Diego","Carolina","Raúl","Paloma","José Luis","Luciana","Alfonso","Rocío","Ángel","Elena","Marcos","Violeta"};
+		String[] caracteristicas = {"2273","2325","11","221"};
+		String[] especialidades = {"Clinica", "Pediatria", "Ginecologia", "Cardiologia"};
+		String[] dominios = {"hotmail.com", "gmail.com", "live.com", "yahoo.com.ar"};
+		Integer cantidad = 100;
+		for(int i = 0; i < cantidad; i++)
+		{
+			String nombre = nombres[(((int)(Math.random())) * nombres.length)];
+			String apellido = apellidos[(((int)(Math.random())) * apellidos.length)];
+			Integer edad = ((int)(Math.random()) * 40) + 25;
+			String caracteristica = caracteristicas[(((int)(Math.random())) * caracteristicas.length)];
+			String numero = String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10)));
+			String telefono = caracteristica + "" + numero;
+			String especialidad = especialidades[(((int)(Math.random())) * especialidades.length)];
+			Double valorConsulta = (Math.random() * 100) + 50;
+			String dominio = dominios[(((int)(Math.random())) * dominios.length)];
+			String email = quitarTildes(nombre) + quitarTildes(apellido) + "@" + dominio;
+			Integer horasI = (int)(Math.random() * 14);
+			Integer horasF = horasI + 8;
+			String password = "123123";
+			String password2 = password;
+			String lunes = String.valueOf(((int)(Math.random()) * 2) + 1);
+			String martes = String.valueOf(((int)(Math.random()) * 2) + 2);
+			String miercoles = String.valueOf(((int)(Math.random()) * 2) + 3);
+			String jueves = String.valueOf(((int)(Math.random()) * 2) + 4);
+			String viernes = String.valueOf(((int)(Math.random()) * 2) + 5);
+			String sabado = String.valueOf(((int)(Math.random()) * 2) + 6);
+			String domingo = String.valueOf(((int)(Math.random()) * 2) + 7);
+			try {
+				profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF,
+						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
+				modelo.put("exito", "Usuario registrado correctamente");
+			}
+			catch (MiException ex)
+			{
+				modelo.put("error", ex.getMessage());
+			}
+		}
+		return "panelAdmin.html";
+	}
+	
+	public String quitarTildes(String textoConTildes)
+	{
+        return Normalizer.normalize(textoConTildes, Normalizer.Form.NFD)
+            .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 }
