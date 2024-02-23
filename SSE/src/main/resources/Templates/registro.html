@@ -92,6 +92,7 @@
 
               <option
                 th:each="oS : ${obrasSociales}"
+				th:if="oS.activado"
                 th:value="${oS.id}"
                 th:selected="${obraSocial == oS.id}"
                 th:text="${oS.nombre}"
