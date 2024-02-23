@@ -184,7 +184,6 @@ public class AdminControlador {
             return "registrar_profesional.html";
         }
     }
-	
 	@GetMapping("/generarProfesionales")
 	public String generarProfesionales()
 	{
