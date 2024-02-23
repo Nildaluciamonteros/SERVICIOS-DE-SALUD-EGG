@@ -56,30 +56,30 @@
           <tr>
             <td class="bg-dark bg-opacity-25">
               <div class="text-center">
-                <input class="form-check-input" type="radio" name="pregunta1" id="1" value="option1"
-                  th:checked="${especialidad == 'option1'}">
-                <label class="form-check-label" for="option1"></label>
+                <input class="form-check-input" type="radio" name="especialidad" id="1" value="cardiologia"
+                  th:checked="${especialidad == 'cardiologia'}">
+                <label class="form-check-label" for="cardiologia"></label>
               </div>
             </td>
             <td class="bg-dark bg-opacity-25">
               <div class="text-center">
-                <input class="form-check-input" type="radio" name="pregunta1" id="2" value="option2"
-                  th:checked="${especialidad == 'option2'}">
-                <label class="form-check-label" for="option2"></label>
+                <input class="form-check-input" type="radio" name="especialidad" id="2" value="clinica"
+                  th:checked="${especialidad == 'clinica'}">
+                <label class="form-check-label" for="clinica"></label>
               </div>
             </td>
             <td class="bg-dark bg-opacity-25">
               <div class="text-center">
-                <input class="form-check-input" type="radio" name="pregunta1" id="3" value="option3"
-                  th:checked="${especialidad == 'option3'}">
-                <label class="form-check-label" for="option3"></label>
+                <input class="form-check-input" type="radio" name="especialidad" id="3" value="ginecologia"
+                  th:checked="${especialidad == 'ginecologia'}">
+                <label class="form-check-label" for="ginecologia"></label>
               </div>
             </td>
             <td class="bg-dark bg-opacity-25">
               <div class="text-center">
-                <input class="form-check-input" type="radio" name="pregunta1" id="4" value="option4"
-                  th:checked="${especialidad == 'option4'}">
-                <label class="form-check-label" for="option4"></label>
+                <input class="form-check-input" type="radio" name="especialidad" id="4" value="pediatria"
+                  th:checked="${especialidad == 'pediatria'}">
+                <label class="form-check-label" for="pediatria"></label>
               </div>
             </td>
           </tr>
@@ -93,52 +93,52 @@
       <div class="row">
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="lunes">
-                  <label class="form-check-label" for="inlineCheckbox1">lunes</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" th:value="lunes" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">lunes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="martes">
-                  <label class="form-check-label" for="inlineCheckbox2">martes</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" th:value="martes" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">martes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="miércoles">
-                  <label class="form-check-label" for="inlineCheckbox3">miércoles</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" th:value="miércoles" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">miércoles</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="jueves">
-                  <label class="form-check-label" for="inlineCheckbox4">jueves</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" th:value="jueves" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">jueves</label>
               </div>
           </div>
       </div>
       <div class="row">
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="viernes">
-                  <label class="form-check-label" for="inlineCheckbox5">viernes</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" th:value="viernes" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">viernes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="sábado">
-                  <label class="form-check-label" for="inlineCheckbox6">sábado</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" th:value="sábado" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">sábado</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="domingo">
-                  <label class="form-check-label" for="inlineCheckbox7">domingo</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" th:value="domingo" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">domingo</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="feriado">
-                  <label class="form-check-label" for="inlineCheckbox8">feriado</label>
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" th:value="feriado" name="diasSemana">
+                  <label class="form-check-label" for="diasSemana">feriado</label>
               </div>
           </div>
       </div>
@@ -153,14 +153,16 @@
             <span class="input-group-text bg-dark text-white">Entrada</span>
             <span class="input-group-text bg-dark text-white">0hs-24hs</span>
           </div>
-          <input id="entrada" type="number" class="form-control col-6 bg-dark text-light bg-opacity-50" min="0"
+          <input name="entrada" id="entrada" type="number" class="form-control col-6 bg-dark text-light bg-opacity-50" min="0"
             max="24">
+            <label for="entrada"></label>
         </div>
       </div>
 
       <div class="col-6">
         <div class="col-6 input-group">
-          <input id="salida" type="number" class="form-control col-6 bg-dark text-light bg-opacity-50" min="0" max="24">
+          <input name="salida" id="salida" type="number" class="form-control col-6 bg-dark text-light bg-opacity-50" min="0" max="24">
+          <label for="salida"></label>
           <div class="col-6 input-group-append">
             <span class="input-group-text bg-dark text-white">Salida</span>
             <span class="input-group-text bg-dark text-white">0hs-24hs</span>
@@ -173,15 +175,27 @@
       <p class="h5 text-white text-center p-2">Precio por consulta</p>
       <div class="input-group mb-3 align-self-center">
         <div class="input-group-prepend">
-          <span class="input-group-text bg-dark bg text-white">$</span>
+          <span class="input-group-text bg-dark bg text-white">u$$</span>
         </div>
-        <input type="text" class="form-control bg-dark bg-opacity-50 text-white" min="0">
+        <input name="consulta" type="text" class="form-control bg-dark bg-opacity-50 text-white" min="0">
         <div class="input-group-append">
-          <span class="input-group-text bg-dark bg text-white">.00</span>
+          <span class="input-group-text bg-dark bg text-white">dolares</span>
         </div>
       </div>
     </div>
 
+    <p class="h5 text-light text-center p-2 bg-gradient">Curriculum</p>
+    <label class="custum-file-upload align-self-center text-center" for="file">
+      <div class="icon" style="width: 8vw;">
+        <img class="col-4" th:src="@{../Img/PDF.png}" alt="" />
+      </div>
+      <div class="text">
+        <span>Ingrese un PDF</span>
+      </div>
+      <input type="file" id="file" name="archivo" />
+    </label>
+
+    <p class="h5 text-light text-center p-2 bg-gradient">Imagen de perfíl</p>
     <label class="custum-file-upload align-self-center text-center" for="file">
       <div class="icon" style="width: 8vw;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
