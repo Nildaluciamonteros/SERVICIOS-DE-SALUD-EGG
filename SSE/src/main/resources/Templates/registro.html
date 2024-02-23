@@ -78,13 +78,29 @@
         <input type="checkbox" checked />
         <div class="inputs-hidden">
           <label>
-            <input
+            <select
+              name="obraSocial"
+              class="form-select options"
+              aria-label="Default select example"
+            >
+              <option hidden disabled="true" selected="selected" value="">
+                Obra Social
+              </option>
+
+              <option
+                th:each="oS : ${obrasSociales}"
+                th:value="${oS.id}"
+                th:selected="${obraSocial == oS.id}"
+                th:text="${oS.nombre}"
+              />
+            </select>
+            <!--  <input
               type="text"
               class="input"
               placeholder="Nombre de la Obra Social"
               th:value="${obraSocial}"
               name="obraSocial"
-            />
+            /> -->
           </label>
 
           <label>
