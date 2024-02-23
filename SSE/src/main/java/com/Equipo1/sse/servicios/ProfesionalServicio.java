@@ -56,45 +56,17 @@ public class ProfesionalServicio implements UserDetailsService
 	@Transactional
 	public void registrarProfesional(String nombre, String apellido, String telefono,
 			String email, String password, String password2, String especialidad, Double valorConsulta,
-			Integer horasI, Integer horasF, String[] diasSemana) throws MiException
+			Integer horasI, Integer horasF, String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) throws MiException
 	{
-		validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
+		validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
 		// Crear Usuario
 		Profesional usuario = new Profesional();
 		List<Horario> horarios = new ArrayList();
 		Horario horario = new Horario();
 		Boolean[] dias =
 		{
-			false, false, false, false, false, false, false
+			lunes.equals("1"), martes.equals("2"), miercoles.equals("3"), jueves.equals("4"), viernes.equals("5"), sabado.equals("6"), domingo.equals("7")
 		};
-
-		for (String dia : diasSemana)
-		{
-			switch (dia)
-			{
-				case "lunes":
-					dias[0] = true;
-					break;
-				case "martes":
-					dias[1] = true;
-					break;
-				case "miércoles":
-					dias[2] = true;
-					break;
-				case "jueves":
-					dias[3] = true;
-					break;
-				case "viernes":
-					dias[4] = true;
-					break;
-				case "sábado":
-					dias[5] = true;
-					break;
-				case "domingo":
-					dias[6] = true;
-					break;
-			}
-		}
 		horario.setDias(dias);
 		horario.setHorasDesde(horasI);
 		horario.setMinutosDesde(0);
@@ -119,16 +91,17 @@ public class ProfesionalServicio implements UserDetailsService
 	public void actualizarProfesional(String idUsuario, String nombre, String apellido,
 			String telefono, String email, String password, String password2,
 			Double valorConsulta, String especialidad, String matricula,
-			MultipartFile archImagen, MultipartFile archCurriculum, Integer horasI, Integer horasF, String[] diasSemana) throws MiException
+			MultipartFile archImagen, MultipartFile archCurriculum, Integer horasI, Integer horasF, 
+			String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) throws MiException
 	{
 		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
 		// Validar datos
 		if (claveVacia)
 		{
-			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad, valorConsulta, horasI, horasF, diasSemana);
+			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad, valorConsulta, horasI, horasF);
 		} else
 		{
-			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
+			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
 		}
 		// Buscar usuario
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
@@ -138,36 +111,8 @@ public class ProfesionalServicio implements UserDetailsService
 			Horario horario = new Horario();
 			Boolean[] dias =
 			{
-				false, false, false, false, false, false, false
+				lunes.equals("1"), martes.equals("2"), miercoles.equals("3"), jueves.equals("4"), viernes.equals("5"), sabado.equals("6"), domingo.equals("7")
 			};
-
-			for (String dia : diasSemana)
-			{
-				switch (dia)
-				{
-					case "lunes":
-						dias[0] = true;
-						break;
-					case "martes":
-						dias[1] = true;
-						break;
-					case "miércoles":
-						dias[2] = true;
-						break;
-					case "jueves":
-						dias[3] = true;
-						break;
-					case "viernes":
-						dias[4] = true;
-						break;
-					case "sábado":
-						dias[5] = true;
-						break;
-					case "domingo":
-						dias[6] = true;
-						break;
-				}
-			}
 			horario.setDias(dias);
 			horario.setHorasDesde(horasI);
 			horario.setMinutosDesde(0);
@@ -213,7 +158,7 @@ public class ProfesionalServicio implements UserDetailsService
 
 	private void validarProfesional(String nombre, String apellido, String telefono,
 			String email, String password, String password2,
-			String especialidad, Double valorConsulta, Integer horasI, Integer horasF, String[] dias) throws MiException
+			String especialidad, Double valorConsulta, Integer horasI, Integer horasF) throws MiException
 	{
 		if (nombre == null || nombre.isEmpty())
 		{
@@ -254,10 +199,6 @@ public class ProfesionalServicio implements UserDetailsService
 		if (horasF == null || horasF < 0 || horasF > 23)
 		{
 			throw new MiException("La horas de salida ingresada no es válida");
-		}
-		if (dias == null || dias.length <= 0)
-		{
-			throw new MiException("Tiene que ingresar los días que va a atender");
 		}
 	}
 
