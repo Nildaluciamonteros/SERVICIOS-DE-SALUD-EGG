@@ -27,7 +27,7 @@
         <tr>
           <th scope="col">Obra Social</th>
           <th scope="col">Modificar</th>
-          <th scope="col" class="colEliminar">Eliminar</th>
+          <th scope="col" class="colEliminar">Alta / Baja</th>
         </tr>
       </thead>
       <tbody th:each="obraSocial : ${obraSociales}">
@@ -41,11 +41,21 @@
                 >Modificar</a
               >
             </td>
+         
             <td>
               <a
+                th:if="${obraSocial.activado}"
                 th:href="@{/obraSocial/__${obraSocial.id}__/darBaja}"
                 class="btn btn-danger"
-                >Eliminar</a
+                >Baja</a
+              >
+            </td>
+            <td>
+              <a
+                th:if="!${obraSocial.activado}"
+                th:href="@{/obraSocial/__${obraSocial.id}__/darBaja}"
+                class="btn btn-success"
+                >Alta</a
               >
             </td>
           </div>
@@ -54,7 +64,7 @@
     </table>
     <a href="/obraSocial/registrar" class="btn btn-primary">Agregar</a>
 
-    <div>
+    <div class="contenedor-footer">
     <footer th:replace="/fragments/footer :: footer" />
     <!-- footer -->
     </div>

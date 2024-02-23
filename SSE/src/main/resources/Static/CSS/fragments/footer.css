@@ -1,6 +1,14 @@
-.redes{
+.contenedor-footer{
     width: 100%;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.redes{
+    width: 20%;
+    height: 10%;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -9,8 +17,7 @@
 .redes svg{
     width: 50px;
     height: 50px;
-    display: flex;
-    
+    display: flex; 
     justify-content: space-between;
     background: rgba(0,0,0,.1);
     border-radius: 20px;
@@ -26,3 +33,11 @@
     align-items: center;
     padding: 10px;
 }
+.menu-footer{
+   width: 100%;
+   display: flex;
+   justify-content: end;
+  
+}
+
+
