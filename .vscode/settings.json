@@ -1,5 +1,6 @@
 {
   "livePreview.defaultPreviewPath": "/SSE/src/main/resources/Templates/Registro.html",
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "disabled"
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "liveServer.settings.port": 5502
 }
