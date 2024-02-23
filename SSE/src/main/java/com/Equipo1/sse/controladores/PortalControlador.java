@@ -102,6 +102,12 @@ public class PortalControlador
 	{
 		return "faq.html";
 	}
+	
+	@GetMapping("/contactanos")
+	public String contactanos()
+	{
+		return "contactanos.html";
+	}
 
 	@PostMapping("/registro")
 	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
