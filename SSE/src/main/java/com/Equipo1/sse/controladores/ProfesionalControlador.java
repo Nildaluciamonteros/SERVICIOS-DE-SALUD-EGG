@@ -59,11 +59,25 @@ public class ProfesionalControlador
 			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
 			@RequestParam String password, @RequestParam String password2, MultipartFile imagen, MultipartFile curriculum,
 			@RequestParam String especialidad, @RequestParam String matricula, @RequestParam Integer horasI,
-			@RequestParam Integer horasF, @RequestParam String lunes, @RequestParam String martes, @RequestParam String miercoles, @RequestParam String jueves,
-			@RequestParam String viernes, @RequestParam String sabado, @RequestParam String domingo, HttpSession session, ModelMap modelo, Authentication authentication)
+			@RequestParam Integer horasF, @RequestParam(required = false) String lunes, @RequestParam(required = false) String martes, @RequestParam(required = false) String miercoles, @RequestParam(required = false) String jueves,
+			@RequestParam(required = false) String viernes, @RequestParam(required = false) String sabado, @RequestParam(required = false) String domingo, HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{
+			if(lunes == null)
+				lunes = "0";
+			if(martes == null)
+				martes = "0";
+			if(miercoles == null)
+				miercoles = "0";
+			if(jueves == null)
+				jueves = "0";
+			if(viernes == null)
+				viernes = "0";
+			if(sabado == null)
+				sabado = "0";
+			if(domingo == null)
+				domingo = "0";
 			Profesional usuarioSession = (Profesional) session.getAttribute("usuarioSession");
 			Profesional editado = (Profesional) profesionalServicio.getOne(id);
 			if (!editado.equals(usuarioSession))
