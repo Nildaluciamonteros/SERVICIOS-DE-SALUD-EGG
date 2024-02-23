@@ -17,6 +17,7 @@ import com.Equipo1.sse.servicios.UsuarioServicio;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -193,29 +194,30 @@ public class AdminControlador {
 		String[] especialidades = {"Clinica", "Pediatria", "Ginecologia", "Cardiologia"};
 		String[] dominios = {"hotmail.com", "gmail.com", "live.com", "yahoo.com.ar"};
 		Integer cantidad = 100;
+		Random random = new Random(System.currentTimeMillis());
 		for(int i = 0; i < cantidad; i++)
 		{
-			String nombre = nombres[(((int)(Math.random())) * nombres.length)];
-			String apellido = apellidos[(((int)(Math.random())) * apellidos.length)];
-			Integer edad = ((int)(Math.random()) * 40) + 25;
-			String caracteristica = caracteristicas[(((int)(Math.random())) * caracteristicas.length)];
-			String numero = String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10)));
+			String nombre = nombres[(int)(random.nextDouble() * nombres.length)];
+			String apellido = apellidos[(int)(random.nextDouble() * apellidos.length)];
+			Integer edad = (int)(random.nextDouble() * 40) + 25;
+			String caracteristica = caracteristicas[(int)(random.nextDouble() * caracteristicas.length)];
+			String numero = String.valueOf(((int)(random.nextDouble() * 10))) + String.valueOf(((int)(random.nextDouble() * 10))) + String.valueOf(((int)(random.nextDouble() * 10))) + String.valueOf(((int)(random.nextDouble() * 10))) + String.valueOf(((int)(random.nextDouble() * 10))) + String.valueOf(((int)(random.nextDouble() * 10)));
 			String telefono = caracteristica + "" + numero;
-			String especialidad = especialidades[(((int)(Math.random())) * especialidades.length)];
-			Double valorConsulta = (Math.random() * 100) + 50;
-			String dominio = dominios[(((int)(Math.random())) * dominios.length)];
+			String especialidad = especialidades[(int)(random.nextDouble() * especialidades.length)];
+			Double valorConsulta = (random.nextDouble() * 100) + 50;
+			String dominio = dominios[(int)(random.nextDouble() * dominios.length)];
 			String email = quitarTildes(nombre) + quitarTildes(apellido) + "@" + dominio;
-			Integer horasI = (int)(Math.random() * 14);
+			Integer horasI = (int)(random.nextDouble() * 14);
 			Integer horasF = horasI + 8;
 			String password = "123123";
 			String password2 = password;
-			String lunes = String.valueOf(((int)(Math.random()) * 2) + 1);
-			String martes = String.valueOf(((int)(Math.random()) * 2) + 2);
-			String miercoles = String.valueOf(((int)(Math.random()) * 2) + 3);
-			String jueves = String.valueOf(((int)(Math.random()) * 2) + 4);
-			String viernes = String.valueOf(((int)(Math.random()) * 2) + 5);
-			String sabado = String.valueOf(((int)(Math.random()) * 2) + 6);
-			String domingo = String.valueOf(((int)(Math.random()) * 2) + 7);
+			String lunes = String.valueOf((int)(random.nextDouble() * 2) + 1);
+			String martes = String.valueOf((int)(random.nextDouble() * 2) + 2);
+			String miercoles = String.valueOf((int)(random.nextDouble() * 2) + 3);
+			String jueves = String.valueOf((int)(random.nextDouble() * 2) + 4);
+			String viernes = String.valueOf((int)(random.nextDouble() * 2) + 5);
+			String sabado = String.valueOf((int)(random.nextDouble() * 2) + 6);
+			String domingo = String.valueOf((int)(random.nextDouble() * 2) + 7);
 			try {
 				profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF,
 						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
