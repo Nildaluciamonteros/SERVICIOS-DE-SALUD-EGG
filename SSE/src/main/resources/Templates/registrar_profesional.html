@@ -12,7 +12,7 @@
 
 <body>
   
-  <form class="form" th:action="@{/registrarProfesional}" method="POST" enctype="multipart/form-data" style="max-width: 80vw;">
+  <form class="form" th:action="@{/admin/registrarProfesional}" method="POST" enctype="multipart/form-data" style="max-width: 80vw;">
     <p class="title">Registro de Profesional</p>
     <div class="registroLogo">
       <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
@@ -96,25 +96,25 @@
       <div class="row">
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" th:value="lunes" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" th:value="1" name="lunes">
                   <label class="form-check-label" for="diasSemana">lunes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" th:value="martes" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" th:value="2" name="martes">
                   <label class="form-check-label" for="diasSemana">martes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" th:value="miércoles" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" th:value="3" name="miercoles">
                   <label class="form-check-label" for="diasSemana">miércoles</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" th:value="jueves" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" th:value="4" name="jueves">
                   <label class="form-check-label" for="diasSemana">jueves</label>
               </div>
           </div>
@@ -122,25 +122,25 @@
       <div class="row">
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" th:value="viernes" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" th:value="5" name="viernes">
                   <label class="form-check-label" for="diasSemana">viernes</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" th:value="sábado" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" th:value="6" name="sabado">
                   <label class="form-check-label" for="diasSemana">sábado</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" th:value="domingo" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" th:value="7" name="domingo">
                   <label class="form-check-label" for="diasSemana">domingo</label>
               </div>
           </div>
           <div class="col-6 col-sm-3">
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" th:value="feriado" name="diasSemana">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" th:value="8" name="feriado">
                   <label class="form-check-label" for="diasSemana">feriado</label>
               </div>
           </div>
@@ -226,7 +226,7 @@
       <span>Confirmar Contraseña</span>
     </label>
     <button class="submit">Enviar</button>
-    <p class="signin">¿que ? <a href="/admin/dashboard">Ingresar</a></p>
+    <p class="signin"> <a href="/admin/dashboard">Volver</a></p>
   </form>
   <script>
     document.getElementById("entrada").addEventListener("input", function () {
