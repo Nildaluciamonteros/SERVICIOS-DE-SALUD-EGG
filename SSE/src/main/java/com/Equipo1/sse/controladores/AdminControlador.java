@@ -160,7 +160,7 @@ public class AdminControlador {
 
     @GetMapping("/registrarProfesional")
     public String registrarProfesional() {
-        return "registro_profesional.html";
+        return "registrar_profesional.html";
     }
 
     @PostMapping("/registrarProfesional")
@@ -184,4 +184,23 @@ public class AdminControlador {
             return "registrar_profesional.html";
         }
     }
+	
+	@GetMapping("/generarProfesionales")
+	public String generarProfesionales()
+	{
+		String[] apellidos = {"García","Rodríguez","Martínez","López","Fernández","González","Pérez","Sánchez","Ramírez","Torres","Flores","Gutiérrez","Díaz","Vázquez","Romero","Navarro","Muñoz","Ruiz","Castillo","Ramos","Álvarez","Morales","Ortega","Jiménez","Moreno","Herrera","Molina","Castro","Soto","Silva","Medina","León","Prieto","Mendoza","Delgado","Herrera","Aguilar","Nieto","Ortiz","Cárdenas","Guerrero","Rivera","Ríos","Cabrera","Ponce","Reyes","Miranda","Peña","Salazar","Vargas","Guzmán","Núñez","Valencia","Zamora","Cervantes","Del Valle","Quintero","Peralta","Benítez","Gallego","Roldán","Serrano","Vidal","Ibarra","Rosales","Espinoza","Franco","Lugo","Escobar","Tovar","Gómez","Calderón","Aguayo","Del Río","Cortés","Lozano","Rosario","Ochoa","Vela","Sandoval","Bautista","Espinosa","Parra","Rojas","Monroy","Galindo","Rangel","Huerta","Solís","Osorio","Chávez","Aguilar","Bernal","Palacios","Avila","Cisneros","Montes","Rivas","Contreras","Maldonado"};
+		String[] nombres = {"Alejandro","Sofía","Juan","Valentina","Carlos","María","Andrés","Camila","Javier","Isabella","Luis","Valeria","Diego","Ana","José","Gabriela","Miguel","Natalia","Daniel","Laura","Pablo","Andrea","Fernando","Paula","Antonio","Daniela","Manuel","Sara","Francisco","Julia","Javier","Marta","Jorge","Elena","Raúl","Patricia","Roberto","Clara","Rubén","Lucía","Sergio","Martina","Oscar","Adriana","David","Inés","Ignacio","Victoria","Germán","Marina","Emilio","Carmen","Mateo","Beatriz","Guillermo","Lorena","Ricardo","Isabel","Gabriel","Esther","Emilio","Natalia","Iván","Lorena","Ángel","Claudia","Víctor","Miriam","Álvaro","Lorena","Raúl","Lorena","Sergio","Belén","Juan Pablo","Adriana","Enrique","Marisol","Jorge","Margarita","Pedro","Marta","Fernando","Lorena","Ricardo","Leticia","Xavier","Laura","Diego","Carolina","Raúl","Paloma","José Luis","Luciana","Alfonso","Rocío","Ángel","Elena","Marcos","Violeta"};
+		String[] caracteristicas = {"2273","2325","11","221"};
+		Integer cantidad = 100;
+		for(int i = 0; i < cantidad; i++)
+		{
+			Integer edad = ((int)(Math.random()) * 40) + 25;
+			String caracteristica = caracteristicas[((int)(Math.random() * caracteristicas.length))];
+			String numero = String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10)));
+			String telefono = caracteristica + "" + numero;
+			String apellido = apellidos[(((int)(Math.random())) * apellidos.length)];
+			String nombre = nombres[(((int)(Math.random())) * nombres.length)];
+		}
+		return "panelAdmin.html";
+	}
 }
