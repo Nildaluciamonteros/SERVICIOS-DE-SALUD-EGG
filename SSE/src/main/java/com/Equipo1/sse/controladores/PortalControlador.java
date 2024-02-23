@@ -96,6 +96,12 @@ public class PortalControlador
 		modelo.put("obrasSociales", obraSocialServicio.listarObraSociales());
 		return "registro.html";
 	}
+	
+	@GetMapping("/faqs")
+	public String faqs()
+	{
+		return "faq.html";
+	}
 
 	@PostMapping("/registro")
 	public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String telefono,
