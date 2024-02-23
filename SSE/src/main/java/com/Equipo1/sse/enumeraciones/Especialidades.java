@@ -9,7 +9,7 @@ public enum Especialidades
 	{
 		for (Especialidades v : values())
 		{
-			if (v.name().equals(val))
+			if (v.name().toLowerCase().equals(val.toLowerCase()))
 			{
 				return v;
 			}
