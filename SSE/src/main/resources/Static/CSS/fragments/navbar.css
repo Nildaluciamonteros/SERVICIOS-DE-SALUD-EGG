@@ -23,4 +23,7 @@
     width: 100%;
     z-index: 1;
 }
-
+#btn-salir{
+    position: relative;
+    right: 7rem;
+}
