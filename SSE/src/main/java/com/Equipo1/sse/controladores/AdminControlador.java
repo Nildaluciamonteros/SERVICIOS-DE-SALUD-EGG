@@ -15,6 +15,7 @@ import com.Equipo1.sse.excepciones.MiException;
 import com.Equipo1.sse.servicios.ObraSocialServicio;
 import com.Equipo1.sse.servicios.ProfesionalServicio;
 import com.Equipo1.sse.servicios.UsuarioServicio;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -185,21 +186,47 @@ public class AdminControlador {
         }
     }
 	@GetMapping("/generarProfesionales")
-	public String generarProfesionales()
+	public String generarProfesionales(ModelMap modelo)
 	{
 		String[] apellidos = {"García","Rodríguez","Martínez","López","Fernández","González","Pérez","Sánchez","Ramírez","Torres","Flores","Gutiérrez","Díaz","Vázquez","Romero","Navarro","Muñoz","Ruiz","Castillo","Ramos","Álvarez","Morales","Ortega","Jiménez","Moreno","Herrera","Molina","Castro","Soto","Silva","Medina","León","Prieto","Mendoza","Delgado","Herrera","Aguilar","Nieto","Ortiz","Cárdenas","Guerrero","Rivera","Ríos","Cabrera","Ponce","Reyes","Miranda","Peña","Salazar","Vargas","Guzmán","Núñez","Valencia","Zamora","Cervantes","Del Valle","Quintero","Peralta","Benítez","Gallego","Roldán","Serrano","Vidal","Ibarra","Rosales","Espinoza","Franco","Lugo","Escobar","Tovar","Gómez","Calderón","Aguayo","Del Río","Cortés","Lozano","Rosario","Ochoa","Vela","Sandoval","Bautista","Espinosa","Parra","Rojas","Monroy","Galindo","Rangel","Huerta","Solís","Osorio","Chávez","Aguilar","Bernal","Palacios","Avila","Cisneros","Montes","Rivas","Contreras","Maldonado"};
 		String[] nombres = {"Alejandro","Sofía","Juan","Valentina","Carlos","María","Andrés","Camila","Javier","Isabella","Luis","Valeria","Diego","Ana","José","Gabriela","Miguel","Natalia","Daniel","Laura","Pablo","Andrea","Fernando","Paula","Antonio","Daniela","Manuel","Sara","Francisco","Julia","Javier","Marta","Jorge","Elena","Raúl","Patricia","Roberto","Clara","Rubén","Lucía","Sergio","Martina","Oscar","Adriana","David","Inés","Ignacio","Victoria","Germán","Marina","Emilio","Carmen","Mateo","Beatriz","Guillermo","Lorena","Ricardo","Isabel","Gabriel","Esther","Emilio","Natalia","Iván","Lorena","Ángel","Claudia","Víctor","Miriam","Álvaro","Lorena","Raúl","Lorena","Sergio","Belén","Juan Pablo","Adriana","Enrique","Marisol","Jorge","Margarita","Pedro","Marta","Fernando","Lorena","Ricardo","Leticia","Xavier","Laura","Diego","Carolina","Raúl","Paloma","José Luis","Luciana","Alfonso","Rocío","Ángel","Elena","Marcos","Violeta"};
 		String[] caracteristicas = {"2273","2325","11","221"};
+		String[] especialidades = {"Clinica", "Pediatria", "Ginecologia", "Cardiologia"};
+		String[] dominios = {"hotmail.com", "gmail.com", "live.com", "yahoo.com.ar"};
+		String[] diasSemana = {"lunes","martes","miércoles","jueves","viernes","sàbado","domingo"};
 		Integer cantidad = 100;
 		for(int i = 0; i < cantidad; i++)
 		{
+			String nombre = nombres[(((int)(Math.random())) * nombres.length)];
+			String apellido = apellidos[(((int)(Math.random())) * apellidos.length)];
 			Integer edad = ((int)(Math.random()) * 40) + 25;
-			String caracteristica = caracteristicas[((int)(Math.random() * caracteristicas.length))];
+			String caracteristica = caracteristicas[(((int)(Math.random())) * caracteristicas.length)];
 			String numero = String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10))) + String.valueOf(((int)(Math.random() * 10)));
 			String telefono = caracteristica + "" + numero;
-			String apellido = apellidos[(((int)(Math.random())) * apellidos.length)];
-			String nombre = nombres[(((int)(Math.random())) * nombres.length)];
+			String especialidad = especialidades[(((int)(Math.random())) * especialidades.length)];
+			Double valorConsulta = (Math.random() * 100) + 50;
+			String dominio = dominios[(((int)(Math.random())) * dominios.length)];
+			String email = quitarTildes(nombre) + quitarTildes(apellido) + "@" + dominio;
+			Integer horasI = (int)(Math.random() * 14);
+			Integer horasF = horasI + 8;
+			String password = "123123";
+			String password2 = password;
+			
+			try {
+				profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
+				modelo.put("exito", "Usuario registrado correctamente");
+			}
+			catch (MiException ex)
+			{
+				modelo.put("error", ex.getMessage());
+			}
 		}
 		return "panelAdmin.html";
 	}
+	
+	public String quitarTildes(String textoConTildes)
+	{
+        return Normalizer.normalize(textoConTildes, Normalizer.Form.NFD)
+            .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    }
 }
