@@ -11,13 +11,16 @@
 </head>
 
 <body>
-  <div th:replace="/fragments/status :: div" />
-  <!-- Mensaje de exito / error -->
+  
   <form class="form" th:action="@{/registrarProfesional}" method="POST" enctype="multipart/form-data" style="max-width: 80vw;">
     <p class="title">Registro de Profesional</p>
     <div class="registroLogo">
       <img th:src="@{../Img/LogoBlanco.svg}" alt="" />
     </div>
+
+    <div th:replace="/fragments/status :: div" />
+  <!-- Mensaje de exito / error -->
+
     <p class="message">Agregue los datos del profesional</p>
     <div class="flex">
       <label>
