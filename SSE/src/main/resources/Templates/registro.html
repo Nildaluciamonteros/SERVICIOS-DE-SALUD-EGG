@@ -80,7 +80,7 @@
           <label>
             <select
               name="obraSocial"
-              class="form-select"
+              class="form-select options"
               aria-label="Default select example"
             >
               <option hidden disabled="true" selected="selected" value="">
@@ -93,8 +93,6 @@
                 th:selected="${obraSocial == oS.id}"
                 th:text="${oS.nombre}"
               />
-
-              <option value="3"></option>
             </select>
             <!--  <input
               type="text"

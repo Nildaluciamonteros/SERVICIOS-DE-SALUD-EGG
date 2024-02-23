@@ -341,3 +341,14 @@ body{
     gap: 30px;    
   }  
 
+.options{
+  background: rgba(0,0,0, .3);
+  width: 200px;
+  height: 40px;
+  border-radius: 7px;
+  color: #fff;
+}
+select option{
+  color: #000;
+  background: rgba(0,0,0, .3);
+}
