@@ -172,7 +172,7 @@ public class AdminControlador {
         try {
 			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
             modelo.put("exito", "Usuario registrado correctamente");
-            return "redirect:/login";
+            return "redirect:/admin/dashboard";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
