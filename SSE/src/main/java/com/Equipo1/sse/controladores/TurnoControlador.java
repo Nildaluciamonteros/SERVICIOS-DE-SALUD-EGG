@@ -55,12 +55,10 @@ public class TurnoControlador {
     @GetMapping("/buscar/{id}")
     public String turnos(@PathVariable String id, ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
-        if (usuario instanceof Paciente) {
-            Profesional profesional = profesionalServicio.getOne(id);
-            List<Turno> turnos = profesional.getTurnos();
-            modelo.put("turnos", turnos);
-            modelo.put("profesional", profesional);
-        }
+        Profesional profesional = profesionalServicio.getOne(id);
+        List<Turno> turnos = profesional.getTurnos();
+        modelo.put("turnos", turnos);
+        modelo.put("profesional", profesional);
         return "turnos_buscar.html";/* Se corrige el .html */
     }
 
