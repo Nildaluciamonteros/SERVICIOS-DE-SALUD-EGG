@@ -167,9 +167,9 @@ public class AdminControlador {
     public String registroProfesional(@RequestParam String nombre, @RequestParam String apellido,
             @RequestParam String telefono,
             @RequestParam String email, @RequestParam String password, @RequestParam String especialidad, @RequestParam String password2,
-            ModelMap modelo, Double valorConsulta, Integer horasI, Integer horasF) {
+            ModelMap modelo, @RequestParam Double valorConsulta, @RequestParam Integer horasI, @RequestParam Integer horasF, @RequestParam String[] diasSemana) {
         try {
-            profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
+			profesionalServicio.registrarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF, diasSemana);
             modelo.put("exito", "Usuario registrado correctamente");
             return "redirect:/login";
         } catch (MiException ex) {
@@ -183,21 +183,5 @@ public class AdminControlador {
             modelo.put("especialidad", especialidad);
             return "registrar_profesional.html";
         }
-    }
-
-	
-	@ModelAttribute("listaDiasMap")
-	public Map<String, String> listaDiasMap()
-	{
-		Map<String, String> dias= new HashMap<String, String>();
-		dias.put("DIA_LUNES","lunes");
-		dias.put("DIA_MARTES","martes");
-		dias.put("DIA_MIERCOLES","miercoles");
-		dias.put("DIA_JUEVES","jueves");
-		dias.put("DIA_VIERNES","viernes");
-		dias.put("DIA_SABADO","sabado");
-		dias.put("DIA_DOMINGO","domingo");
-		dias.put("DIA_FERIADO","feriado");
-		return dias;
     }
 }
