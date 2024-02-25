@@ -10,7 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
-
+    <link rel="stylesheet" th:href="@{/CSS/fragments/footer.css}" />
     <link rel="stylesheet" th:href="@{/CSS/panelProfesional.css}" />
     <title>Dashboard Profesional</title>
   </head>
@@ -33,11 +33,11 @@
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-primary" href="/obraSocial/lista">Obras Sociales</a>
+              <a class="btn btn-link text-white-50 h5" href="/obraSocial/lista">Obras Sociales</a>
             </li>
             <br>
             <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-primary " href="/admin/usuarios">Usuarios</a>
+              <a class="btn btn-link text-white-50 h5" href="/admin/usuarios">Usuarios</a>
             </li>
             <br>
             <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
@@ -49,20 +49,6 @@
             </li>
           
           <hr>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>mdo</strong>
-             
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-          </div>
         </div>
     </div>
     <div th:replace="/fragments/footer :: div" />
