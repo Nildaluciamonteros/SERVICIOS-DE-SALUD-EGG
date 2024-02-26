@@ -16,6 +16,20 @@
     border-radius: 50px;
   
 }
+.perfil{/* contenedor de imagen de perfil y lapiz de edicion */
+    width: 5rem;
+    height: auto;
+    display: flex;
+
+}
+.icono-editar{/* //este es el contenedor del lapiz que aparece al lado de la foto de perfil// */
+display: flex;
+align-items: end;
+}
+.icono-editar svg{/* //este es el lapiz que aparece al lado de la foto de perfil// */
+    width: 1rem;
+    height: 1rem;
+}
 .navbar{
     position: fixed;
     top: 0;

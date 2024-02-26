@@ -1,0 +1,13 @@
+body{
+    background-image: url(../Img/fondoContacto.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.redes-2{
+    display: flex;
+    justify-content: start;
+    
+}
+.modal{
+    padding: 200px 0px 50px 0px;
+}
