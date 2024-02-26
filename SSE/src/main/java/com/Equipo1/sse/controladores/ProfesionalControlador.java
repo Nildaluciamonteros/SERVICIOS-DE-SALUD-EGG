@@ -36,10 +36,10 @@ public class ProfesionalControlador
 
 	@Autowired
 	private ProfesionalServicio profesionalServicio;
-	
+
 	@Autowired
 	private HorarioServicio horarioServicio;
-	
+
 	@GetMapping("/dashboard")
 	public String profesional()
 	{
@@ -55,36 +55,71 @@ public class ProfesionalControlador
 	}
 
 	@PostMapping("/perfil/{id}")
-	public String actualizar(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam String telefono, @RequestParam String email, @RequestParam Double valorConsulta,
-			@RequestParam String password, @RequestParam String password2, MultipartFile imagen, MultipartFile curriculum,
-			@RequestParam String especialidad, @RequestParam String matricula, @RequestParam Integer horasI,
-			@RequestParam Integer horasF, @RequestParam(required = false) String lunes, @RequestParam(required = false) String martes, @RequestParam(required = false) String miercoles, @RequestParam(required = false) String jueves,
-			@RequestParam(required = false) String viernes, @RequestParam(required = false) String sabado, @RequestParam(required = false) String domingo, HttpSession session, ModelMap modelo, Authentication authentication)
+	public String actualizar(@PathVariable String id,
+			@RequestParam(required = false) String nombre,
+			@RequestParam(required = false) String apellido,
+			@RequestParam(required = false) String telefono,
+			@RequestParam(required = false) String email,
+			@RequestParam(required = false) Double valorConsulta,
+			@RequestParam(required = false) String password,
+			@RequestParam(required = false) String password2,
+			@RequestParam(required = false) MultipartFile archivo,
+			@RequestParam(required = false) MultipartFile curriculum,
+			@RequestParam(required = false) String especialidad,
+			@RequestParam(required = false) String matricula,
+			@RequestParam(required = false) String actualizarHorario,
+			@RequestParam(required = false) Integer horasI,
+			@RequestParam(required = false) Integer horasF,
+			@RequestParam(required = false) String lunes,
+			@RequestParam(required = false) String martes,
+			@RequestParam(required = false) String miercoles,
+			@RequestParam(required = false) String jueves,
+			@RequestParam(required = false) String viernes,
+			@RequestParam(required = false) String sabado,
+			@RequestParam(required = false) String domingo,
+			HttpSession session, ModelMap modelo, Authentication authentication)
 	{
 		try
 		{
-			if(lunes == null)
+			if (lunes == null)
+			{
 				lunes = "0";
-			if(martes == null)
+			}
+			if (martes == null)
+			{
 				martes = "0";
-			if(miercoles == null)
+			}
+			if (miercoles == null)
+			{
 				miercoles = "0";
-			if(jueves == null)
+			}
+			if (jueves == null)
+			{
 				jueves = "0";
-			if(viernes == null)
+			}
+			if (viernes == null)
+			{
 				viernes = "0";
-			if(sabado == null)
+			}
+			if (sabado == null)
+			{
 				sabado = "0";
-			if(domingo == null)
+			}
+			if (domingo == null)
+			{
 				domingo = "0";
+			}
 			Profesional usuarioSession = (Profesional) session.getAttribute("usuarioSession");
 			Profesional editado = (Profesional) profesionalServicio.getOne(id);
 			if (!editado.equals(usuarioSession))
 			{
 				profesionalServicio.actualizarProfesional(id, nombre, apellido, telefono, email,
-						password, password2, valorConsulta, especialidad, matricula, imagen, curriculum,horasI,horasF,
-						lunes, martes, miercoles, jueves, viernes, sabado, domingo);
+						password, password2, valorConsulta, especialidad, matricula, archivo, curriculum);
+				if (actualizarHorario != null && actualizarHorario.equals("si"))
+				{
+					profesionalServicio.actualizarHorario(id, horasI, horasF,
+							lunes, martes, miercoles, jueves, viernes, sabado, domingo);
+				}
 			}
 			modelo.put("exito", "Usuario actualizado correctamente");
 			return "redirect:/profesional";
@@ -118,42 +153,42 @@ public class ProfesionalControlador
 	{
 		try
 		{
-			Horario horario = horarioServicio.registrar(horasD,minutosD,horasH,minutosH,diaI,diaF);
+			Horario horario = horarioServicio.registrar(horasD, minutosD, horasH, minutosH, diaI, diaF);
 			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
-			profesionalServicio.agregarHorario(usuario.getId(),horario);
-			modelo.put("exito","El horario se agregó correctamente");
+			profesionalServicio.agregarHorario(usuario.getId(), horario);
+			modelo.put("exito", "El horario se agregó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
 		{
 			modelo.put("error", ex.getMessage());
-			modelo.put("horasD",horasD);
-			modelo.put("minutosD",minutosD);
-			modelo.put("horasH",horasH);
-			modelo.put("minutosH",minutosH);
-			modelo.put("diaI",diaI);
-			if(diaF != null)
+			modelo.put("horasD", horasD);
+			modelo.put("minutosD", minutosD);
+			modelo.put("horasH", horasH);
+			modelo.put("minutosH", minutosH);
+			modelo.put("diaI", diaI);
+			if (diaF != null)
 			{
-				modelo.put("diaF",diaF);
+				modelo.put("diaF", diaF);
 			}
 			return "horario_form.html";
 		}
 	}
-	
+
 	@GetMapping("/horario/{id}/modificar")
 	public String modificarHorario(@PathVariable String id)
 	{
 		Horario horario = horarioServicio.getOne(id);
-		
+
 		return "horario_modificar.html";
 	}
-	
+
 	@PostMapping("/horario/{id}/modificar")
-	public String modificoHorario(@PathVariable String id, Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, Integer diaI,Integer diaF, HttpSession session, ModelMap modelo)
+	public String modificoHorario(@PathVariable String id, Integer horasD, Integer minutosD, Integer horasH, Integer minutosH, Integer diaI, Integer diaF, HttpSession session, ModelMap modelo)
 	{
 		try
 		{
-			horarioServicio.actualizar(id, horasD, minutosD, horasH, minutosH, diaI,diaF);
-			modelo.put("exito","El horario se agregó correctamente");
+			horarioServicio.actualizar(id, horasD, minutosD, horasH, minutosH, diaI, diaF);
+			modelo.put("exito", "El horario se agregó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
 		{
@@ -161,7 +196,7 @@ public class ProfesionalControlador
 			return "horario_modificar.html";
 		}
 	}
-	
+
 	@PostMapping("/horario/{id}/quitar")
 	public String quitarHorario(@PathVariable String id, ModelMap modelo, HttpSession session)
 	{
@@ -169,7 +204,7 @@ public class ProfesionalControlador
 		{
 			Profesional usuario = (Profesional) session.getAttribute("usuarioSession");
 			profesionalServicio.quitarHorario(usuario.getId(), id);
-			modelo.put("exito","El horario se quitó correctamente");
+			modelo.put("exito", "El horario se quitó correctamente");
 			return "redirect:/profesional/horario";
 		} catch (MiException ex)
 		{
