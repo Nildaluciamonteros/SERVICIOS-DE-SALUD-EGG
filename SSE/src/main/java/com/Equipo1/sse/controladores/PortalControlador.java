@@ -285,4 +285,28 @@ public class PortalControlador
 			return "mensaje.html";
 		}
 	}
+	
+	@GetMapping("/coberturaMedica")
+	public String coberturaMedica()
+	{
+		return "coberturaMedica.html";
+	}
+	
+	@GetMapping("/emergenciasMedicas")
+	public String emergenciasMedicas()
+	{
+		return "emergenciasMedicas.html";
+	}
+	
+	@GetMapping("/gestionesOnline")
+	public String gestionesOnline()
+	{
+		return "gestionesOnline.html";
+	}
+	
+	@GetMapping("/prestadores")
+	public String prestadores()
+	{
+		return "prestadores.html";
+	}
 }
