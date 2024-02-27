@@ -21,36 +21,14 @@
     <!-- Mensaje de exito / error -->
    
     <div class="contenidoAdmin" >
-       <h1>Profesional</h1>
+       <h1 th:text="${'Bienvenido Dr/a : ' + session.usuarioSession.nombre}">  </h1>
       <main class="d-flex flex-nowrap">
-        <h1 class="visually-hidden">Tareas</h1>
-      
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Turnos Pendientes</span>
-          </a>
-          <hr>
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item" th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link text-white-50 h5" href="/obraSocial/lista">Obras Sociales</a>
-            </li>
-            <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link text-white-50 h5" href="/admin/usuarios">Usuarios</a>
-            </li>
-            <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link  text-white-50 h5" href="#">Turnos Pendientes</a>
-            </li>
-            <br>
-            <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-              <a class="btn btn-link text-white-50 h5" style="text-decoration: none; font-weight: 700;" href="#">Turnos Atendidos</a>
-            </li>
-          
-          <hr>
-        </div>
+        
+        <div class="sidebar" th:replace="/fragments/sidebarProfesional :: div" />
+        <!-- sidebar -->
+        
     </div>
+    
     <div th:replace="/fragments/footer :: div" />
     <!-- footer -->
 
