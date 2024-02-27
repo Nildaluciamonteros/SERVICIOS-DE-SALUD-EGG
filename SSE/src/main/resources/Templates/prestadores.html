@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Static/CSS/prestadores.css">
+    <link rel="stylesheet" th:href="@{/CSS/prestadores.css}">
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
 
     <title>Red de Prestadores</title>
@@ -42,7 +42,7 @@
         </div>
     </div>
     <h1 class="titlePrestadores">Cobertura Médica</h1>
-    <img class="obraSociales" src="../Static/Img/ObrasSociales.png" alt="">
+    <img class="obraSociales" th:src="@{/Img/ObrasSociales.png}" alt="">
     <!--footer-->
     <div th:replace="/fragments/footer :: div" />
 </body>
