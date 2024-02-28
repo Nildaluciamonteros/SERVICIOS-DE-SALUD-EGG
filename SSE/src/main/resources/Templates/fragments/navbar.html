@@ -1,86 +1,86 @@
 <nav
-  class="navbar navbar-expand-lg bg-body-tertiary bg-opacity-50 rounded"
-  aria-label="Thirteenth navbar example"
->
-  <div class="container-fluid ">
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarsExample11"
-      aria-controls="navbarsExample11"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+    class="navbar navbar-expand-lg bg-body-tertiary bg-opacity-50 rounded"
+    aria-label="Thirteenth navbar example"
     >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse d-lg-flex " id="navbarsExample11">
-      <a class="navbar-brand col-lg-2 me-0" href="#"
-        ><img th:src="@{/Img/SSE-logo.png}" width="52" height="52"  alt="" class="img-logo-nav"
-      /></a>
-      <ul class="navbar-nav col-lg-6 justify-content-lg-center ">
-        <li class="nav-item">
-          <a class="nav-link active text-grey fw-medium" aria-current="page" href="/inicio"
-            >Inicio</a
-          >
-
-        </li>
-       
-       
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-grey fw-medium"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
+    <div class="container-fluid ">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarsExample11"
+            aria-controls="navbarsExample11"
             aria-expanded="false"
-            >Especialidades</a
-          >
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="/profesionales/clinica"
-                >Clinica</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="/profesionales/ginecologia"
-                >Ginecologia</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="/profesionales/cardiologia"
-                >Cardiologia</a
-              >
-            </li>
-            <li>
-              <a class="dropdown-item" href="/profesionales/pediatria"
-                >Pediatria</a
-              >
-            </li>
-          </ul>
-        
-        </li>
+            aria-label="Toggle navigation"
+            >
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      </ul>
-      <div class="perfil misDatos" >
-        <div class="icono-editar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-        </svg>
-      </div>
-        <a href="/perfil" class="perfil">
-        <img
-          th:src="@{/imagen/perfil/__${session.usuarioSession.id}__}"/>
-         </a>
-  </div> 
-   </a>
-      <br />
-    
-      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <a class="btn btn-outline-danger" id="btn-salir" href="/logout">Salir</a>
-      </div>
+        <div class="collapse navbar-collapse d-lg-flex " id="navbarsExample11">
+            <a class="navbar-brand col-lg-2 me-0" href="#"
+               ><img th:src="@{/Img/SSE-logo.png}" width="52" height="52"  alt="" class="img-logo-nav"
+                  /></a>
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center ">
+                <li class="nav-item">
+                    <a class="nav-link active text-grey fw-medium" aria-current="page" href="/inicio"
+                       >Inicio</a
+                    >
+
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle text-grey fw-medium"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        >Especialidades</a
+                    >
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/profesionales/clinica"
+                               >Clinica</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/profesionales/ginecologia"
+                               >Ginecologia</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/profesionales/cardiologia"
+                               >Cardiologia</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/profesionales/pediatria"
+                               >Pediatria</a
+                            >
+                        </li>
+                    </ul>
+
+                </li>
+
+            </ul>
+            <div class="perfil misDatos" >
+                <div class="icono-editar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                    </svg>
+                </div>
+                <a href="/perfil" class="perfil">
+                    <img
+                        th:src="@{/imagen/perfil/__${session.usuarioSession.id}__}"/>
+                </a>
+            </div> 
+            </a>
+            <br />
+
+            <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+                <a class="btn btn-outline-danger" id="btn-salir" href="/logout">Salir</a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>

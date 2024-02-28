@@ -58,7 +58,8 @@ public class ProfesionalServicio implements UserDetailsService
 			String email, String password, String password2, String especialidad, Double valorConsulta,
 			Integer horasI, Integer horasF, String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) throws MiException
 	{
-		validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
+		validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta);
+		validarHorario(horasI, horasF);
 		// Crear Usuario
 		Profesional usuario = new Profesional();
 		List<Horario> horarios = new ArrayList();
@@ -83,30 +84,20 @@ public class ProfesionalServicio implements UserDetailsService
 		usuario.setHorarios(horarios);
 		usuario.setValorConsulta(valorConsulta);
 		usuario.setActivado(Boolean.TRUE);
-		
+
 		usuarioRepositorio.save(usuario);
 	}
 
 	@Transactional
-	public void actualizarProfesional(String idUsuario, String nombre, String apellido,
-			String telefono, String email, String password, String password2,
-			Double valorConsulta, String especialidad, String matricula,
-			MultipartFile archImagen, MultipartFile archCurriculum, Integer horasI, Integer horasF, 
+	public void actualizarHorario(String id, Integer horasI, Integer horasF,
 			String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String domingo) throws MiException
 	{
-		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
-		// Validar datos
-		if (claveVacia)
-		{
-			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad, valorConsulta, horasI, horasF);
-		} else
-		{
-			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta, horasI, horasF);
-		}
-		// Buscar usuario
-		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		validarHorario(horasI, horasF);
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
 		if (respuesta.isPresent())
 		{
+
+			Profesional profesional = (Profesional) respuesta.get();
 			List<Horario> horarios = new ArrayList();
 			Horario horario = new Horario();
 			Boolean[] dias =
@@ -118,6 +109,30 @@ public class ProfesionalServicio implements UserDetailsService
 			horario.setMinutosDesde(0);
 			horario.setHorasHasta(horasF);
 			horario.setMinutosHasta(0);
+			profesional.setHorarios(horarios);
+		}
+	}
+
+	@Transactional
+	public void actualizarProfesional(String idUsuario, String nombre, String apellido,
+			String telefono, String email, String password, String password2,
+			Double valorConsulta, String especialidad, String matricula,
+			MultipartFile archImagen, MultipartFile archCurriculum) throws MiException
+	{
+		boolean claveVacia = (password == null || password.isEmpty() && password2 == null || password2.isEmpty());
+		// Validar datos
+		if (claveVacia)
+		{
+			validarProfesional(nombre, apellido, telefono, email, "123456", "123456", especialidad, valorConsulta);
+		} else
+		{
+			validarProfesional(nombre, apellido, telefono, email, password, password2, especialidad, valorConsulta);
+		}
+		// Buscar usuario
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+		if (respuesta.isPresent())
+		{
+
 			Profesional profesional = (Profesional) respuesta.get();
 			profesional.setNombre(nombre);
 			profesional.setApellido(apellido);
@@ -126,7 +141,6 @@ public class ProfesionalServicio implements UserDetailsService
 			Especialidades espe = Especialidades.buscar(especialidad);
 			profesional.setEspecialidad(espe);
 			profesional.setValorConsulta(valorConsulta);
-			profesional.setHorarios(horarios);
 
 			if (!claveVacia)
 			{
@@ -135,30 +149,52 @@ public class ProfesionalServicio implements UserDetailsService
 			if (archImagen != null && !archImagen.isEmpty())
 			{
 				String idImagen = null;
-				if (profesional.getImagen().getId() != null)
+				Imagen imagen;
+				if (profesional.getImagen() != null && profesional.getImagen().getId() != null)
 				{
 					idImagen = profesional.getImagen().getId();
+					imagen = imagenServicio.actualizar(archImagen, idImagen);
 				}
-				Imagen imagen = imagenServicio.actualizar(archImagen, idImagen);
+				else
+				{
+					imagen = imagenServicio.guardar(archImagen);
+				}
 				profesional.setImagen(imagen);
 			}
 			if (archCurriculum != null && !archCurriculum.isEmpty())
 			{
 				String idCurriculum = null;
-				if (profesional.getCurriculum().getId() != null)
+				Curriculum curriculum;
+				if (profesional.getCurriculum() != null && profesional.getCurriculum().getId() != null)
 				{
 					idCurriculum = profesional.getCurriculum().getId();
+					curriculum = curriculumServicio.actualizar(archCurriculum, idCurriculum);
 				}
-				Curriculum curriculum = curriculumServicio.actualizar(archCurriculum, idCurriculum);
+				else
+				{
+					curriculum = curriculumServicio.guardar(archImagen);
+				}
 				profesional.setCurriculum(curriculum);
 			}
 			usuarioRepositorio.save(profesional);
 		}
 	}
 
+	private void validarHorario(Integer horasI, Integer horasF) throws MiException
+	{
+		if (horasI == null || horasI < 0 || horasI > 23)
+		{
+			throw new MiException("La horas de ingreso ingresada no es válida");
+		}
+		if (horasF == null || horasF < 0 || horasF > 23)
+		{
+			throw new MiException("La horas de salida ingresada no es válida");
+		}
+	}
+
 	private void validarProfesional(String nombre, String apellido, String telefono,
 			String email, String password, String password2,
-			String especialidad, Double valorConsulta, Integer horasI, Integer horasF) throws MiException
+			String especialidad, Double valorConsulta) throws MiException
 	{
 		if (nombre == null || nombre.isEmpty())
 		{
@@ -191,14 +227,6 @@ public class ProfesionalServicio implements UserDetailsService
 		if (valorConsulta == null || valorConsulta <= 0)
 		{
 			throw new MiException("La consulta ingresada no es válida");
-		}
-		if (horasI == null || horasI < 0 || horasI > 23)
-		{
-			throw new MiException("La horas de ingreso ingresada no es válida");
-		}
-		if (horasF == null || horasF < 0 || horasF > 23)
-		{
-			throw new MiException("La horas de salida ingresada no es válida");
 		}
 	}
 

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/CSS/prestadores.css}">
-    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Static/CSS/prestadores.css">
+        <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+        <title>Red de Prestadores</title>
+    </head>
 
-    <title>Red de Prestadores</title>
-</head>
+    <body>
+        <!-- navbar -->
+        <nav th:replace="/fragments/navbar :: nav" />
+        <h1 class="titlePrestadores">Red de Prestadores</h1>
 
-<body>
-    <!-- navbar -->
-    <nav th:replace="/fragments/navbar :: nav" />
-    <h1 class="titlePrestadores">Red de Prestadores</h1>
-    
         <div class="prestadores">
             <p class="prestadoresText">
                 BUENOS AIRES <br> Clínica FUSAVIM Privada SRL - <br> Chile 67, CABA.

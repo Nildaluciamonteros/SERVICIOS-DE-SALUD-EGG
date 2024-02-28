@@ -158,7 +158,7 @@ public class UsuarioServicio implements UserDetailsService
 	{
 		return usuarioRepositorio.buscarPorNombre(nombre);
 	}
-	
+
 	public Usuario buscarPorEmail(String email)
 	{
 		return usuarioRepositorio.buscarPorEmail(email);
@@ -184,9 +184,9 @@ public class UsuarioServicio implements UserDetailsService
 		{
 			throw new MiException("El email no puede ser nulo o estar vacio");
 		}
-		validarClaves(password,password2);
+		validarClaves(password, password2);
 	}
-	
+
 	public void validarClaves(String password, String password2) throws MiException
 	{
 		if (password == null || password.isEmpty() || password.length() <= 5)
@@ -201,7 +201,13 @@ public class UsuarioServicio implements UserDetailsService
 
 	public Usuario getOne(String id)
 	{
-		return usuarioRepositorio.getOne(id);
+		Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+		if (respuesta.isPresent())
+		{
+			Usuario usuario = respuesta.get();
+			return usuario;
+		}
+		return null;
 	}
 
 	@Override
@@ -253,8 +259,7 @@ public class UsuarioServicio implements UserDetailsService
 
 			}
 
-		}
-		else
+		} else
 		{
 			throw new MiException("No se encuentra el usuario");
 		}
@@ -268,24 +273,22 @@ public class UsuarioServicio implements UserDetailsService
 			Usuario usuario = respuesta.get();
 			usuario.setRecuperacionPendiente(null);
 			usuarioRepositorio.save(usuario);
-		}
-		else
+		} else
 		{
 			throw new MiException("No se encuentra el usuario");
 		}
 	}
-	
+
 	public void cambiarClave(String idUsuario, String password, String password2) throws MiException
 	{
 		Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 		if (respuesta.isPresent())
 		{
-			Usuario usuario = (Usuario)respuesta.get();
-			validarClaves(password,password2);
+			Usuario usuario = (Usuario) respuesta.get();
+			validarClaves(password, password2);
 			usuario.setPassword(password);
 			usuarioRepositorio.save(usuario);
-		}
-		else
+		} else
 		{
 			throw new MiException("No se encuentra el usuario");
 		}
