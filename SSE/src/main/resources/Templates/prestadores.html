@@ -1,58 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
-<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/CSS/prestadores.css}">
     <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
-=======
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../Static/CSS/prestadores.css">
-        <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
->>>>>>> ef198ceb26b394014bd18bcb15aa919e50a64d02
+    <title>SSE-Red de Prestadores</title>
+</head>
 
-        <title>Red de Prestadores</title>
-    </head>
-
-    <body>
-        <!-- navbar -->
-        <nav th:replace="/fragments/navbar :: nav" />
-        <h1 class="titlePrestadores">Red de Prestadores</h1>
-
+<body>
+    <!--Titulo principal-->
+    <h1 class="titlePrestadores">Red de Prestadores</h1>
+    <!--contenedor general-->
+    <div class="prestadoresGral">
         <div class="prestadores">
             <p class="prestadoresText">
-                BUENOS AIRES <br> Clínica FUSAVIM Privada SRL - <br> Chile 67, CABA.
+                <strong><em>BUENOS AIRES <br> Clínica FUSAVIM Privada - <br> Chile 67, CABA</em></strong>
             </p>
         </div>
         <div class="prestadores">
             <p class="prestadoresText">
-                CÓRDOBA <br> Hospital Italiano - <br> Roma 550, Córdoba Capital.
+                <strong><em>CÓRDOBA <br> Hospital Italiano - <br> Roma 550, Córdoba Capital</em></strong>
             </p>
         </div>
         <div class="prestadores">
             <p class="prestadoresText">
-                LA PAMPA <br> Sanatorio Cruz Azul - <br> Lavalle 254, Santa Rosa.
+                <strong><em>LA PAMPA <br> Sanatorio Cruz Azul - <br> Lavalle 254, Santa Rosa</em></strong>
+            </p>
+        </div>
+    </div>
+    <div class="prestadoresGral1">
+        <div class="prestadores">
+            <p class="prestadoresText">
+                <strong><em>LA RIOJA <br> Sanatorio Mercado Luna - <br> Alberdi 769, La Rioja Capital</em></strong>
             </p>
         </div>
         <div class="prestadores">
             <p class="prestadoresText">
-                LA RIOJA <br> Sanatorio Mercado Luna - <br> Alberdi 769, La Rioja Capital.
-            </p>
-        </div>
-        <div class="prestadores">
-            <p class="prestadoresText">
-                TUCUMÁN <br> Sanatorio Modelo S. A. - <br> Rivadavia 559, San Miguel de Tucumán
+                <strong><em>TUCUMÁN <br> Sanatorio Modelo S. A. - <br> Rivadavia 559, San Miguel de
+                        Tucumán</em></strong>
             </p>
         </div>
     </div>
     <h1 class="titlePrestadores">Cobertura Médica</h1>
-    <img class="obraSociales" th:src="@{/Img/ObrasSociales.png}" alt="">
-    <!--footer-->
-    <div th:replace="/fragments/footer :: div" />
+    <div class="coberturaGral">
+        <div class="cobertura">
+            <img class="obraSociales" th:src="@{/Img/vital.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/PAMI.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/laSegunda.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/OMINT.png}" alt="">
+        </div>
+        <div class="cobertura">
+            <img class="obraSociales" th:src="@{/Img/OSJERA.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/OSDEPYM.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/SWISSMEDICAL.png}" alt="">
+            <img class="obraSociales" th:src="@{/Img/MEDICUS.png}" alt="">
+        </div>
+    </div>
 </body>
 
 </html>
