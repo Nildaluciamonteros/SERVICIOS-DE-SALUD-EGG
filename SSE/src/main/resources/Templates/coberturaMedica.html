@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/CSS/coberturaMedica.css}">
+    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+    <title>Cobertura Médica</title>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav th:replace="/fragments/navbar :: nav" />
+    <h1 class="coberturaTitle">Cobertura Médica</h1>
+   
+        <div class="card">
+            <img ht:src="@{/Img/PlanAzul.jpg}" alt="">
+            <div class="btnDiv">
+            <button class="card-btn">Adquirir Plan</button>
+        </div>
+        </div>
+        <div class="card">
+            <img th:src="@{/Img/PlanDorado.jpg}" alt="">
+            <div class="btnDiv">
+                <button class="card-btn">Adquirir Plan</button>
+            </div>
+        </div>
+        <div class="card">
+            <img th:src="@{/Img/PlanJoven.jpg}" alt="">
+            <div class="btnDiv">
+                <button class="card-btn">Adquirir Plan</button>
+            </div>
+        </div>
+        <div class="card">
+            <img th:src="@{/Img/PlanPlatino.jpg}" alt="">
+            <div class="btnDiv">
+                <button class="card-btn">Adquirir Plan</button>
+            </div>
+        </div>
+   
+
+
+    <!--preguntas frecuentes-->
+    <a class="faq" th:href="@{/Templates/faq.html}">Faq</a>
+    <!-- footer -->
+    <div th:replace="/fragments/footer :: div" />
+</body>
+
+</html>
