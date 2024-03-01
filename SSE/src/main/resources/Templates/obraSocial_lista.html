@@ -1,62 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" th:href="@{/CSS/obraSocial_lista.css}" />
-    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
-    <title>Dashboard</title>
-  </head>
-  <body>
-    <nav th:replace="/fragments/navbar :: nav" />
-    <!-- navbar -->
-    <div th:replace="/fragments/status :: div" class="cartel" />
-    <!-- Mensaje de exito / error -->
-    <h1>Obras Sociales Afiliadas</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" th:href="@{/CSS/obraSocial_lista.css}" />
+        <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+        <link rel="stylesheet" th:href="@{/CSS/fragments/footer.css}" />
+        <title>Obra Social</title>
+    </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav" />
+        <!-- navbar -->
+        <div th:replace="/fragments/status :: div" class="cartel" />
+        <!-- Mensaje de exito / error -->
+        <h1 class="titulo-Os">Obras Sociales Afiliadas</h1>
 
-    <table class="table table-gradient">
-      <thead>
-        <tr>
-          <th scope="col">Obra Social</th>
-          <th scope="col">Modificar</th>
-          <th scope="col">Eliminar</th>
-        </tr>
-      </thead>
-      <tbody th:each="obraSocial : ${obraSociales}">
-        <tr>
-          <th scope="row" th:text="${obraSocial.nombre}"></th>
+        <table class="table">
+            <thead>
+            <div class="filas-obraSocial"></div>
+            <tr>
+                <th scope="col">Obra Social</th>
+                <th scope="col">Modificar</th>
+                <th scope="col" class="colEliminar">Alta / Baja</th>
+            </tr>
+        </thead>
+        <tbody th:each="obraSocial : ${obraSociales}">
+            <tr>
+                <th scope="row" th:text="${obraSocial.nombre}"></th>
 
-          <td>
-            <a
-              th:href="@{/obraSocial/__${obraSocial.id}__/modificar}"
-              class="btn btn-primary"
-              >Modificar</a
-            >
-          </td>
-          <td>
-            <a
-              th:href="@{/obraSocial/__${obraSocial.id}__/eliminar}"
-              class="btn btn-danger"
-              >Eliminar</a
-            >
-          </td>
-        </tr>
-      </tbody>
+                <td>
+                    <a
+                        th:href="@{/obraSocial/__${obraSocial.id}__/modificar}"
+                        class="btn btn-primary"
+                        >Modificar</a
+                    >
+                </td>
+
+                <td>
+                    <a
+                        th:if="${obraSocial.activado}"
+                        th:href="@{/obraSocial/__${obraSocial.id}__/darBaja}"
+                        class="btn btn-danger"
+                        >Baja</a
+                    >
+                </td>
+                <td>
+                    <a
+                        th:if="!${obraSocial.activado}"
+                        th:href="@{/obraSocial/__${obraSocial.id}__/darBaja}"
+                        class="btn btn-success"
+                        >Alta</a
+                    >
+                </td>
+                </div>
+            </tr>
+        </tbody>
     </table>
-    <a href="/obraSocial/registrar" class="btn btn-primary">Agregar OS</a>
-    <div th:replace="/fragments/footer :: div" />
-    <!-- footer -->
+    <a href="/obraSocial/registrar" class="btn btn-primary">Agregar</a>
+
+    <div class="contenedor-footer">
+        <footer th:replace="/fragments/footer :: footer" />
+        <!-- footer -->
+    </div>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
     ></script>
-  </body>
+</body>
 </html>

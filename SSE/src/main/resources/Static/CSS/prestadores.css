@@ -1,0 +1,69 @@
+body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../Img/fondoPrestaciones.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
+.prestadoresGral {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+
+}
+
+.prestadoresGral1 {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+
+}
+
+.titlePrestadores {
+        width: 100%;
+        align-content: center;
+        font-size: 3em;
+        text-align: center;
+
+}
+
+.prestadores {
+        margin: 2%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+}
+
+.prestadoresText {
+        font-size: 80%;
+        text-align: center;
+        padding: 5%;
+        border: 2px solid black;
+        border-radius: 30px;
+        background-color: rgba(0, 206, 209, 0.617);
+
+}
+
+.coberturaGral {
+        width: 100%;      
+        align-content: center; 
+}
+
+.cobertura {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        align-items: center;
+        justify-content: space-between;
+}
+
+.obraSociales {
+        width: 25%;
+        padding: 5%;
+        margin: 5%;
+}

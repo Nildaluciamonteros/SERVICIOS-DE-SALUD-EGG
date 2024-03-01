@@ -1,0 +1,22 @@
+.body {
+    background-image: linear-gradient(
+        rgba(159, 229, 255, 0.7),
+        rgba(43, 59, 95, 0.7)),
+        url(c:\Users\54299\Downloads\img-10.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 100px 0;
+}
+
+.button {
+    background-color: blue; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }

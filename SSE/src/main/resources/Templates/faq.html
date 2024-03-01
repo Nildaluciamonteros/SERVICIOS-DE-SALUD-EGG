@@ -1,0 +1,90 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Preguntas Frecuentes</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/CSS/faq.css}" />
+    </head>
+    <body>
+        <main class="vh-100 bg-light d-flex align-items-center">
+            <section class="h-75 container-sm mx-auto">
+                <h1 class="fs-3 text-primary text-center py-3">
+                    Preguntas Frecuentes:
+                </h1>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span class="px 3 text-info">¿Cuáles son nuestros métodos de pago?</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fs-6 fw-semibold">Los pacientes con planes SSE tienen a su disposición varios métodos de pago como efectivo, tarjeta de crédito o débito y transferencia bancaria.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span class="px 3 text-info">¿Puedo elegir el doctor que quiero que me atienda?</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fs-6 fw-semibold">Los pacientes que acudan a través de su seguro médico privado tienen la posibilidad de seleccionar al facultativo que deseen para someterse a cualquiera de nuestros tratamientos o para realizar su consulta.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span class="px 3 text-info">¿Es necesario ingresar parte del presupuesto antes del inicio del tratamiento o consulta?</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fs-6 fw-semibold">El abono de la factura se realizará de manera diferente en función de cada paciente y del procedimiento a realizar. En cualquier caso, dado que todos los presupuestos son personalizados y dependen de la cobertura de cada seguro, lo más recomendable es solicitar información específica antes de cada consulta o tratamiento.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapseFour" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span class="px 3 text-info">¿Puedo utilizar los servicios desde el momento en que me asocio?</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fs-6 fw-semibold">Sí, puedes utilizar los servicios desde el momento en que te asocias.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                <i class="bi bi-hand-index-thumb"></i>
+                                <span class="px 3 text-info">¿Cómo se tramita el cambio de plan?</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fs-6 fw-semibold">Puedes solicitar el cambio de plan contactándonos a través de nuestro centro de contacto al 0810-222-72583 o enviando un correo electrónico a centrodecontacto@SSE.com.</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="fs-5 text-primary text-center py-3">
+                    ¿Cómo puedo asociarme?
+
+                    <p class="fs-6 text-primary text-center py-3"> Contactate con nosotros al <a href="tel:081022272583">0810-222-72583</a>. También podés hacerlo desde nuestro correo electrónico: <a href="mailto:centrodecontacto@SSE.com">centrodecontacto@SSE.com</a>, ingresando a nuestra página web, haciendo click en el botón <button class="button">Contratá</button> o acercándote al Centro de Atención o Agencia más cercano a tu domicilio.</p>
+
+                </h2>
+
+            </section>
+        </main>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>

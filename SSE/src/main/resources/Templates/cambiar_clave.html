@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://thymeleaf.org/extras/spring-security"
+    >
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" th:href="@{/CSS/registro.css}" Develop />
+        <title>SSE Cambiar Clave</title>
+    </head>
+    <body>
+        <div th:replace="/fragments/status :: div" />
+        <!-- Mensaje de exito / error -->
+        <form
+            class="form"
+            action="/cambiarClave"
+            method="post"
+            enctype="multipart/form-data"
+            >
+            <p class="title">Cambiar clave</p>
+            <div class="registroLogo">
+                <img th:src="@{/Img/LogoBlanco.svg}" alt="" />
+            </div>
+            <p class="message">Cambiar clave</p>
+            <div class="flex">
+                <input hidden name="id" th:value="${id}"/>
+                <label>
+                    <input
+                        required=""
+                        placeholder=""
+                        type="password"
+                        class="input"
+                        name="password"
+                        />
+                    <span>Contraseña</span>
+                </label>
+                <label>
+                    <input
+                        required=""
+                        placeholder=""
+                        type="password"
+                        class="input"
+                        name="password2"
+                        />
+                    <span>Confirmar Contraseña</span>
+                </label>
+                <button class="submit">Enviar</button>
+        </form>
+    </body>
+</html>

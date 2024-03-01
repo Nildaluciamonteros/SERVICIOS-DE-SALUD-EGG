@@ -1,0 +1,75 @@
+.order-list{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0px;
+}
+
+.primer-Dia{
+    grid-column-start: 2 ;
+}
+
+.day-name{
+    background: #eee ;
+    border-radius: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cont{
+    text-align: center;
+    width: 300px;
+    background: rgba(0,0,0,.1);
+    backdrop-filter: blur(40px);
+    padding: 30px;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.order-list li{
+    text-align:right ;
+}
+
+.color-green{
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    position: relative;
+    bottom: 8px;
+}
+
+.color-red{
+    width: 20px;
+    height: 20px;
+    background-color:  red;
+    position: relative;
+    bottom: 8px;
+}
+
+.txt-calendar{
+    font-size: 14px;
+}
+
+.dias-container{
+    width: 100%; 
+}
+
+.green-cont{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.red-cont{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+
+}
