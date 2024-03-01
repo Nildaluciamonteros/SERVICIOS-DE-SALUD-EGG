@@ -14,12 +14,16 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+    <link rel="stylesheet" th:href="@{/CSS/fragments/footer.css}" />
     <link rel="stylesheet" th:href="@{/CSS/fragments/status.css}" />
     <link rel="stylesheet" th:href="@{/CSS/panelProfesional.css}" />
     <link rel="stylesheet" th:href="@{/CSS/contactanos.css}" />
     <title>Document</title>
   </head>
   <body>
+    <nav th:replace="/fragments/navbar :: nav" />
+    <!-- navbar -->
     <div th:replace="/fragments/status :: div" />
     <!-- Mensaje de exito / error -->
 
@@ -126,19 +130,25 @@
                 >
                   <use xlink:href="#film" />
                 </svg>
+                <div>
+                  <h5 class="mb-0">Video embeds</h5>
+                  Share videos wherever you go.
+                </div>
               </li>
             </ul>
-            <a
-              href="/inicio"
+            <button
+              type="button"
               class="btn btn-lg btn-primary mt-5 w-100"
               data-bs-dismiss="modal"
             >
-              Gracias!!!
-            </a>
+              Great, thanks!
+            </button>
           </div>
         </div>
       </div>
     </div>
+    <div th:replace="/fragments/footer :: div" />
+    <!-- footer -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

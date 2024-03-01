@@ -1,264 +1,263 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org/"
-  xmlns:sec="http://thymeleaf.org/extras/spring-security"
->
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" th:href="@{/CSS/inicio.css}" />
-    <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
-    <link rel="stylesheet" th:href="@{/CSS/fragments/footer.css}" />
-    <title>SSE-Inicio</title>
-  </head>
-  <body>
-    <nav th:replace="/fragments/navbar :: nav"/>
-    <!-- navbar -->
-
-    <div class="main">
-      <div th:replace="/fragments/status :: div"/>
-      <!-- Mensaje de exito / error -->
-      <div
-        class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center container"
-      >
-        <div class="col-md-6 p-lg-5 mx-auto my-5 text-white-50">
-          <img
-            th:src="@{../Img/LogoBlanco.svg}"
-            alt=""
-            class="inicioLogo"
-          /><!--logo  -->
-          <h1 class="display-3 fw-bold">Servicio de Salud EGG</h1>
-
-          <p >
-            Bienvenido al mejor servicio de salud de Egg ¡¡¡somos el equipo N°1!!!
-          </p>
-
-          <a class="btn btn-outline-light rounded-pill px-3 w-100" href="/turnos/registrados">
-            Turnos
-          </a>
-      
-          
-        </div>
-      </div>
-
-      <div class="row text-white-50">
-        <div class="col-lg-4">
-          <h2 class="fw-normal">Clinica</h2>
-            <image
-              th:src="@{/Img/fondoClinica.jpg}"/>
-          
-          
-          <p>
-            Nuestros médicos clínicos cuentan con años de experiencia en el
-            campo de la medicina, asegurando un diagnóstico preciso y un
-            tratamiento efectivo para una amplia gama de condiciones médicas.
-          </p>
-          <p><a class="btn btn-primary" href="/profesionales/clinica">Profesionales &raquo;</a></p>
-        </div>
-        <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-         <h2 class="fw-normal ">Pediatria</h2>
-            <image
-              th:src="@{/Img/fondoPediatria.jpg}"
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org/"
+    xmlns:sec="http://thymeleaf.org/extras/spring-security"
+    >
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" th:href="@{/CSS/inicio.css}" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
             />
-
-          
-          <p>
-            Nuestro pediatra cuenta con una sólida formación y experiencia en el
-            cuidado de niños desde recién nacidos hasta adolescentes. Su
-            dedicación y enfoque especializado garantizan un cuidado de alta
-            calidad.
-          </p>
-          <p><a class="btn btn-primary" href="/profesionales/pediatria">Profesionales &raquo;</a></p>
-        </div>
-        <!-- /.col-lg-4 -->
-
-        <div class="col-lg-4 ">
-         <h2 class="fw-normal">Cardiologia</h2>
-            <image
-              th:src="@{/Img/fondoCardiologia.jpg}"
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
             />
-          </svg>
-         
-          <p class="text-center">
-            Nuestro cardiólogo cuenta con una sólida formación y experiencia en
-            el diagnóstico y tratamiento de condiciones cardiovasculares. Desde
-            enfermedades cardíacas comunes hasta casos más complejos, estamos
-            aquí para cuidar de tu corazón.
-          </p>
-          <p><a class="btn btn-primary" href="/profesionales/cardiologia">Profesionales &raquo;</a></p>
-        </div>
-        <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2 class="fw-normal">Ginecologia</h2>
-            <image
-              th:src="@{/Img/fondoGinecologia.jpg}"
-            />
-          
-          <p class="text-center">
-            Nuestra ginecóloga cuenta con una amplia experiencia en el campo de
-            la salud femenina. Desde la adolescencia hasta la menopausia,
-            estamos aquí para abordar tus necesidades ginecológicas con
-            comprensión y expertise.
-          </p>
-          <p><a class="btn btn-primary" href="/profesionales/ginecologia">Profesionales&raquo;</a></p>
-        </div>
-        <!-- /.col-lg-4 -->
-      </div>
-    </main>
+        <link rel="stylesheet" th:href="@{/CSS/fragments/navbar.css}" />
+        <title>SSE-Inicio</title>
+    </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"/>
+        <!-- navbar -->
 
-    <div class="prestadores-cont text-white-50 ">
-      <div class="container px-4 py-5" id="featured-3">
-        <h2 class="pb-2 border-bottom">Prestaciones</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-          <div class="feature col align-items-center">
+        <div class="main">
+            <div th:replace="/fragments/status :: div"/>
+            <!-- Mensaje de exito / error -->
             <div
-              class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2em"
-                height="2em"
-                fill="currentColor"
-                class="bi bi-hospital"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M8.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1zM13.25 9a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm.25 1.75a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm-11-4a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 9.75v-.5A.25.25 0 0 0 2.75 9zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25z"
-                />
-                <path
-                  d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1zm2 14h2v-3H7zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1zm0-14H6v1h4zm2 7v7h3V8zm-8 7V8H1v7z"
-                />
-              </svg>
-            </div>
-            <h3 class="fs-2 text-white">
-              Red de Prestadores mas grande del Pais
-            </h3>
-            <p class="text-center">Médicos y centros de diagnóstico.</p>
-            <a th:href="@{/pdf/Prestadores.pdf}"><button
-              class="btn btn-primary rounded-pill px-3 w-100"
-              type="button"
-            >
-              Leer Mas...
-            </button></a>
-          </div>
-          <div class="feature col align-items-center">
-            <div
-              class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2em"
-                height="2em"
-                fill="currentColor"
-                class="bi bi-heart-pulse"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"
-                />
-                <path
-                  d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"
-                />
-              </svg>
-            </div>
-            <h3 class="fs-2 text-white">Cobertura Médica Integral</h3>
-            <p class="text-center">
-              Todos los planes cuentan con cobertura en consultas y prácticas
-              médicas, internación al 100% y emergencias médicas a domicilio
-            </p>
-            <a th:href="@{/pdf/CoberturaMedica.pdf}"><button
-              class="btn btn-primary rounded-pill px-3 w-100"
-              type="button"
-            >
-              Leer Mas...
-            </button></a>
-          </div>
-          <div class="feature col align-items-center">
-            <div
-              class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2em"
-                height="2em"
-                fill="currentColor"
-                class="bi bi-activity"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"
-                />
-              </svg>
-            </div>
-            <h3 class="fs-2  text-white ">
-              Emergencias Médicas las 24 hs
-            </h3>
-            <p class="text-center">
-              Servicio de atención médica en domicilio, urgencias y emergencias
-              médicas las 24 hs
-            </p>
-            <a th:href="@{/pdf/EmergenciasMedicas.pdf}"><button
-              class="btn btn-primary rounded-pill px-3 w-100"
-              type="button"
-            >
-              Leer Mas...
-            </button></a>
-          </div>
-          <div class="feature col align-items-center">
-            <div
-              class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2em"
-                height="2em"
-                fill="currentColor"
-                class="bi bi-pc-display-horizontal"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"
-                />
-              </svg>
-            </div>
-            <h3 class="fs-2 text-white ">Gestiones online</h3>
-            <p class="text-center">Autorizaciones, Consultá tu factura, Imprimí tu credencial</p>
-            <a th:href="@{/pdf/GestionesOnline.pdf}"><button
-              class="btn btn-primary rounded-pill px-3 w-100"
-              type="button"
-            >
-              Leer Mas...
-            </button></a>
-          </div>
-        </div>
-        
-      </div>
-      
-    </div>
-    
-    <div th:replace="/fragments/footer :: div" />
-    <!-- footer -->
+                class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center container"
+                >
+                <div class="col-md-6 p-lg-5 mx-auto my-5 text-white-50">
+                    <img
+                        th:src="@{../Img/LogoBlanco.svg}"
+                        alt=""
+                        class="inicioLogo"
+                        /><!--logo  -->
+                    <h1 class="display-3 fw-bold">Servicio de Salud EGG</h1>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+                    <p >
+                        Bienvenido al mejor servicio de salud de Egg ¡¡¡somos el equipo N°1!!!
+                    </p>
+
+                    <a class="btn btn-outline-light rounded-pill px-3 w-100" href="/turnos/registrados">
+                        Turnos
+                    </a>
+
+
+                </div>
+            </div>
+
+            <div class="row text-white-50">
+                <div class="col-lg-4">
+                    <h2 class="fw-normal">Clinica</h2>
+                    <image
+                        th:src="@{/Img/fondoClinica.jpg}"/>
+
+
+                    <p>
+                        Nuestros médicos clínicos cuentan con años de experiencia en el
+                        campo de la medicina, asegurando un diagnóstico preciso y un
+                        tratamiento efectivo para una amplia gama de condiciones médicas.
+                    </p>
+                    <p><a class="btn btn-primary" href="/profesionales/clinica">Profesionales &raquo;</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <h2 class="fw-normal ">Pediatria</h2>
+                    <image
+                        th:src="@{/Img/fondoPediatria.jpg}"
+                        />
+
+
+                    <p>
+                        Nuestro pediatra cuenta con una sólida formación y experiencia en el
+                        cuidado de niños desde recién nacidos hasta adolescentes. Su
+                        dedicación y enfoque especializado garantizan un cuidado de alta
+                        calidad.
+                    </p>
+                    <p><a class="btn btn-primary" href="/profesionales/pediatria">Profesionales &raquo;</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+
+                <div class="col-lg-4 ">
+                    <h2 class="fw-normal">Cardiologia</h2>
+                    <image
+                        th:src="@{/Img/fondoCardiologia.jpg}"
+                        />
+                    </svg>
+
+                    <p class="text-center">
+                        Nuestro cardiólogo cuenta con una sólida formación y experiencia en
+                        el diagnóstico y tratamiento de condiciones cardiovasculares. Desde
+                        enfermedades cardíacas comunes hasta casos más complejos, estamos
+                        aquí para cuidar de tu corazón.
+                    </p>
+                    <p><a class="btn btn-primary" href="/profesionales/cardiologia">Profesionales &raquo;</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <h2 class="fw-normal">Ginecologia</h2>
+                    <image
+                        th:src="@{/Img/fondoGinecologia.jpg}"
+                        />
+
+                    <p class="text-center">
+                        Nuestra ginecóloga cuenta con una amplia experiencia en el campo de
+                        la salud femenina. Desde la adolescencia hasta la menopausia,
+                        estamos aquí para abordar tus necesidades ginecológicas con
+                        comprensión y expertise.
+                    </p>
+                    <p><a class="btn btn-primary" href="/profesionales/ginecologia">Profesionales&raquo;</a></p>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+        </main>
+
+        <div class="prestadores-cont text-white-50 ">
+            <div class="container px-4 py-5" id="featured-3">
+                <h2 class="pb-2 border-bottom">Prestaciones</h2>
+                <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                    <div class="feature col align-items-center">
+                        <div
+                            class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
+                            >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2em"
+                                height="2em"
+                                fill="currentColor"
+                                class="bi bi-hospital"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M8.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1zM13.25 9a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm.25 1.75a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zm-11-4a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 9.75v-.5A.25.25 0 0 0 2.75 9zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25zM2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25z"
+                                />
+                            <path
+                                d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1zm2 14h2v-3H7zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1zm0-14H6v1h4zm2 7v7h3V8zm-8 7V8H1v7z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="fs-2 text-white">
+                            Red de Prestadores mas grande del Pais
+                        </h3>
+                        <p class="text-center">Médicos y centros de diagnóstico.</p>
+                        <a th:href="@{/Templates/prestadores.html}"><button
+                                class="btn btn-primary rounded-pill px-3 w-100"
+                                type="button"
+                                >
+                                Leer Mas...
+                            </button></a>
+                    </div>
+                    <div class="feature col align-items-center">
+                        <div
+                            class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
+                            >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2em"
+                                height="2em"
+                                fill="currentColor"
+                                class="bi bi-heart-pulse"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"
+                                />
+                            <path
+                                d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="fs-2 text-white">Cobertura Médica Integral</h3>
+                        <p class="text-center">
+                            Todos los planes cuentan con cobertura en consultas y prácticas
+                            médicas, internación al 100% y emergencias médicas a domicilio
+                        </p>
+                        <a th:href="@{/pdf/CoberturaMedica.pdf}"><button
+                                class="btn btn-primary rounded-pill px-3 w-100"
+                                type="button"
+                                >
+                                Leer Mas...
+                            </button></a>
+                    </div>
+                    <div class="feature col align-items-center">
+                        <div
+                            class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
+                            >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2em"
+                                height="2em"
+                                fill="currentColor"
+                                class="bi bi-activity"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                fill-rule="evenodd"
+                                d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="fs-2  text-white ">
+                            Emergencias Médicas las 24 hs
+                        </h3>
+                        <p class="text-center">
+                            Servicio de atención médica en domicilio, urgencias y emergencias
+                            médicas las 24 hs
+                        </p>
+                        <a th:href="@{/pdf/EmergenciasMedicas.pdf}"><button
+                                class="btn btn-primary rounded-pill px-3 w-100"
+                                type="button"
+                                >
+                                Leer Mas...
+                            </button></a>
+                    </div>
+                    <div class="feature col align-items-center">
+                        <div
+                            class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-transparent bg-gradient fs-2 mb-3"
+                            >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2em"
+                                height="2em"
+                                fill="currentColor"
+                                class="bi bi-pc-display-horizontal"
+                                viewBox="0 0 16 16"
+                                >
+                            <path
+                                d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="fs-2 text-white ">Gestiones online</h3>
+                        <p class="text-center">Autorizaciones, Consultá tu factura, Imprimí tu credencial</p>
+                        <a th:href="@{/pdf/GestionesOnline.pdf}"><button
+                                class="btn btn-primary rounded-pill px-3 w-100"
+                                type="button"
+                                >
+                                Leer Mas...
+                            </button></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div th:replace="/fragments/footer :: div" />
+        <!-- footer -->
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+</body>
 </html>

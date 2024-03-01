@@ -2,7 +2,7 @@
 
 <ClassDiagram name="entidades">
   <ClassDiagramComponents>
-    <Class name="Profesional" package="" visibility="public" xPosition="819.0" yPosition="96.0">
+    <Class name="Profesional" package="" visibility="public" xPosition="867.0" yPosition="117.0">
       <Fields>
         <Field name="turnos" type="List&lt;Turno&gt;" visibility="private"/>
         <Field name="especialidad" type="Especialidades" visibility="private"/>
@@ -10,6 +10,7 @@
         <Field name="reputacion" type="Integer" visibility="private"/>
         <Field name="matricula" type="String" visibility="private"/>
         <Field name="curriculum" type="Curriculum" visibility="private"/>
+        <Field name="horarios" type="List&lt;Horario&gt;" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
@@ -90,16 +91,59 @@
         <Literal name="PROFESIONAL"/>
       </Literals>
     </Enum>
+    <Class name="Curriculum" package="" visibility="public" xPosition="661.0" yPosition="1.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="mime" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="contenido" type="byte[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Horario" package="" visibility="public" xPosition="1113.0" yPosition="351.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="horasDesde" type="Integer" visibility="private"/>
+        <Field name="minutosDesde" type="Integer" visibility="private"/>
+        <Field name="horasHasta" type="Integer" visibility="private"/>
+        <Field name="minutosHasta" type="Integer" visibility="private"/>
+        <Field name="dias" type="Boolean[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ObraSocial" package="" visibility="public" xPosition="39.0" yPosition="255.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="activado" type="Boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Recuperacion" package="" visibility="public" xPosition="39.0" yPosition="474.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="usuarioId" type="String" visibility="private"/>
+        <Field name="fechaLimite" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="curriculum" source="Profesional" target="Curriculum" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <IsRelation name="is" source="Paciente" target="Usuario"/>
+    <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="especialidad" source="Profesional" target="Especialidades" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="imagen" source="Usuario" target="Imagen" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Profesional" target="Usuario"/>
     <HasRelation name="paciente" source="HistorialClinico" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="rol" source="Usuario" target="Rol" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="Profesional" target="Usuario"/>
-    <HasRelation name="fichas" source="HistorialClinico" target="Ficha" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="obraSocial" source="Paciente" target="ObraSocial" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="pacientes" source="Profesional" target="Paciente" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="turnos" source="Profesional" target="Turno" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="horarios" source="Profesional" target="Horario" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
