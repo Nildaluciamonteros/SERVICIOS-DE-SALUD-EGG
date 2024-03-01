@@ -10,7 +10,7 @@
       </li>
       <br>
       <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
-        <a class="btn btn-link text-white-50 h5" href="/admin/usuarios">Usuarios</a>
+        <a class="btn btn-link text-white-50 h5" href="/profesional/usuarios">Usuarios</a>
       </li>
       <br>
       <li class="nav-item " th:if='${session.usuarioSession != null}' sec:authorize="hasRole('PROFESIONAL')">
