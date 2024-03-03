@@ -15,11 +15,25 @@
     <!-- navbar -->
     <nav th:replace="/fragments/navbar :: nav" />
     <!--Titulo principal-->
-    <h1 class="titleEmergencias">Emergencias Médicas</h1>
-    <p>Contamos con atención médica por videollamadas las 24 hs.</p>
-    <p>Consulta médica por WhatsApp.</p>
-    <p>Análisis clínicos, estudios complementarios de emergencias 24 hs</p>
-
+    <h1 class="titleEmergencia">Emergencias Médicas</h1>
+    <div class="emergenciaGral">
+        <div class="emergencia">
+            <img class="imgEmergencia" th:src="@{/Img/emergenciasMedicas1.jpg}" alt="">
+            <img class="imgEmergencia" th:src="@{/Img/emergenciasMedicas2.jpg}" alt="">        
+            <img class="imgEmergencia" th:src="@{/Img/emergenciasMedicas3.jpg}" alt="">
+        </div>
+        <h1 class="titleServicio">Nuestro Servicio</h1>
+        <div class="servicio">
+            <img class="imgServicio" th:src="@{/Img/emergenciasMedicas4.jpg}" alt="">        
+            <img class="imgServicio" th:src="@{/Img/emergenciasMedicas5.jpg}" alt="">        
+            <img class="imgServicio" th:src="@{/Img/emergenciasMedicas6.jpg}" alt="">
+        </div>
+        <h1 class="titleContacto">Contacto</h1>
+        <div class="contacto">
+            <img class="imgContacto" th:src="@{/Img/contactoTelefonico.jpg}" alt="">        
+            <img class="imgContacto" th:src="@{/Img/contactoWeb.jpg}" alt="">
+        </div>
+    </div>
     <!-- footer -->
     <div th:replace="/fragments/footer :: div" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

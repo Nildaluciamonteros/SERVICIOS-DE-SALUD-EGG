@@ -58,20 +58,42 @@ body {
 }
 
 .coberturaGral {
-        width: 100%;      
-        align-content: center; 
+        width: 60%;      
+       justify-items: center;
+       margin: 5%;
+      
 }
 
 .cobertura {
         display: flex;
         flex-direction: row;
         width: 60%;
-        align-items: center;
-        justify-content: space-between;
+        align-items: center;        
 }
 
 .obraSociales {
         width: 25%;
-        padding: 5%;
         margin: 5%;
+        align-content: center;
+}
+.diagnosticoPorImagen {
+        width: 60%;      
+        align-content: center; 
+        justify-content: center;
+        margin: 5%;
+}
+
+.diangnostico {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;        
+}
+
+.imagenDiagnostico {
+        width: 40%;
+        padding: 5%;      
+        align-items: center;
+        border: 0;
+        border-radius: 20% 40% 20% 30%;
 }
