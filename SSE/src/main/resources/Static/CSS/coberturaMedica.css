@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../Img/fondoCoberturaMedica.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.coberturaTitle {
+  font-size: 5em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  align-items: center;
+  text-align: center;
+}
+.coberturaGral{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  width: 100%;
+  align-items: center;
+  text-align: center;  
+}
+
+.card {
+  margin-bottom: 5%; 
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+img {
+  width: 40%;
+  border: 2px;
+  border-radius: 1em;
+}
+
+.card-btn {
+  font-size: 0.9em;
+  margin: 5%;
+  border: 0;
+  cursor: pointer;
+  will-change: box-shadow, transform;
+  background: radial-gradient(100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100%);
+  box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+  padding: 0.2em;
+  border-radius: 1em;
+  color: #fff;
+  width: 10em;
+  height: 2em;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card-btn:hover {
+  box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+  transform: translateY(-0.1em);
+}
+
+.card-btn:active {
+  box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+  transform: translateY(0em);
+}
