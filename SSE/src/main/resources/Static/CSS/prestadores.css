@@ -2,98 +2,36 @@ body {
         margin: 0;
         padding: 0;
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        align-items: center;
+        position: relative;
+        top: 8rem;
         background-image: url(../Img/fondoPrestaciones.jpg);
         background-repeat: no-repeat;
         background-size: cover;
 }
-
-.prestadoresGral {
-        width: 90%;
-        display: flex;
-        flex-direction: row;
-
-}
-
-.prestadoresGral1 {
-        width: 60%;
-        display: flex;
-        flex-direction: row;
-
-}
-
-.titlePrestadores {
-        margin-top: 10%;
+.titlePrestadores{
         width: 100%;
         align-content: center;
-        font-size: 3em;
+        font-size: 5em;
         text-align: center;
+       
 }
 
-.titlePrestadores1 {  
-        margin-top: 3%;     
-        width: 100%;
-        align-content: center;
-        font-size: 3em;
-        text-align: center;
-}
-
-.prestadores {
-        margin: 2%;
-        width: 100%;
+.prestadores{     
+        width: 70%;      
         align-items: center;
         justify-content: center;
 }
 
-.prestadoresText {
-        font-size: 80%;
+.prestadoresText{
+        font-size: 1.5em;
         text-align: center;
         padding: 5%;
         border: 2px solid black;
         border-radius: 30px;
-        background-color: rgba(0, 206, 209, 0.617);
+        background-color: darkturquoise;
 
 }
-
-.coberturaGral {
-        width: 60%;      
-       justify-items: center;
-       margin: 5%;
-      
-}
-
-.cobertura {
-        display: flex;
-        flex-direction: row;
-        width: 60%;
-        align-items: center;        
-}
-
-.obraSociales {
-        width: 25%;
-        margin: 5%;
-        align-content: center;
-}
-.diagnosticoPorImagen {
-        width: 60%;      
-        align-content: center; 
-        justify-content: center;
-        margin: 5%;
-}
-
-.diangnostico {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-items: center;        
-}
-
-.imagenDiagnostico {
-        width: 40%;
-        padding: 5%;      
-        align-items: center;
-        border: 0;
-        border-radius: 20% 40% 20% 30%;
+.obraSociales{
+        width: 90%;
 }

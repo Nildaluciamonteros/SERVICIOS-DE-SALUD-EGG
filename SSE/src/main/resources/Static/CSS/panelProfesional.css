@@ -1,5 +1,8 @@
 body{
-   
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
     background-image: url(../Img/fondoProfesional.jpg);
     background-repeat: no-repeat;
     background-size: cover;

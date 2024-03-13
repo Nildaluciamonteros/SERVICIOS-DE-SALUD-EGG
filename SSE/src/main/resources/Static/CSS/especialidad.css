@@ -1,9 +1,18 @@
 body {
-  
+    padding: 0;
+    margin: 0;     
     background-size: cover !important;
     background-repeat: no-repeat;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
+.body {
+    display: flex;     
+    padding: 5%;
+    justify-content: space-around;
+}
 .body-img {
     width: 15%;
     height: 27%;
