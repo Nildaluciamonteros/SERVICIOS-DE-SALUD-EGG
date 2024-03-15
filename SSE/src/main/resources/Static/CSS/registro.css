@@ -1,22 +1,22 @@
 body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url(../Img/Dr.jpg);
-  background-repeat: no-repeat;
-  background-size:cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../Img/Dr.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 .registroLogo{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100px;
- 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+
 }
 .registroLogo img{
-   color: #fff;
-   width: 80px;
-   height: 80px;
+    color: #fff;
+    width: 80px;
+    height: 80px;
 }
 .form {
     display: flex;
@@ -29,9 +29,9 @@ body{
     border-radius: 20px;
     position: relative;
     border: 1px solid #000;
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 28px;
     color: #fff;
     font-weight: 600;
@@ -40,9 +40,9 @@ body{
     display: flex;
     align-items: center;
     padding-left: 30px;
-  }
-  
-  .title::before,.title::after {
+}
+
+.title::before,.title::after {
     position: absolute;
     content: "";
     height: 16px;
@@ -50,59 +50,59 @@ body{
     border-radius: 50%;
     left: 0px;
     background-color: rgb(231, 233, 239);
-  }
-  
-  .title::before {
+}
+
+.title::before {
     width: 18px;
     height: 18px;
     background-color: rgb(214, 220, 240);
-  }
-  
-  .title::after {
+}
+
+.title::after {
     width: 18px;
     height: 18px;
     animation: pulse 1s linear infinite;
-  }
-  
-  .message, .signin {
+}
+
+.message, .signin {
     color: #fff;
     font-size: 14px;
-  }
-  
-  .signin {
+}
+
+.signin {
     text-align: center;
-  }
-  
-  .signin a {
+}
+
+.signin a {
     color:#abc1f3;
     font-weight: bold
-    ;
-  }
-  
-  .signin a:hover {
+        ;
+}
+
+.signin a:hover {
     text-decoration: underline royalblue;
-  }
-  
-  .flex {
+}
+
+.flex {
     display: flex;
     width: 100%;
     gap: 30px;
-  }
-  
-  .form label {
+}
+
+.form label {
     position: relative;
-  }
-  
-  .form label .input {
+}
+
+.form label .input {
     width: 100%;
     padding: 10px 10px 20px 10px;
     outline: 0;
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 10px;
     color:#fff
-  }
-  
-  .form label .input + span {
+}
+
+.form label .input + span {
     position: absolute;
     left: 10px;
     top: 15px;
@@ -110,25 +110,25 @@ body{
     font-size: 0.9em;
     cursor: text;
     transition: 0.3s ease;
-  }
-  
-  .form label .input:placeholder-shown + span {
+}
+
+.form label .input:placeholder-shown + span {
     top: 15px;
     font-size: 0.9em;
-    
-  }
-  
-  .form label .input:focus + span,.form label .input:valid + span {
+
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
     top: 30px;
     font-size: 0.7em;
     font-weight: 600;
-  }
-  
-  .form label .input:valid + span {
+}
+
+.form label .input:valid + span {
     color: green;
-  }
-  
-  .submit {
+}
+
+.submit {
     border: none;
     outline: none;
     background-color: royalblue;
@@ -137,41 +137,41 @@ body{
     color: #fff;
     font-size: 16px;
     transform: .3s ease;
-  }
-  
-  .submit:hover {
+}
+
+.submit:hover {
     background-color: rgb(56, 90, 194);
-  }
-  
-  @keyframes pulse {
+}
+
+@keyframes pulse {
     from {
-      transform: scale(0.9);
-      opacity: 1;
+        transform: scale(0.9);
+        opacity: 1;
     }
-  
+
     to {
-      transform: scale(1.8);
-      opacity: 0;
+        transform: scale(1.8);
+        opacity: 0;
     }
-  }
-  /* configuracion del boton de seleccion de obra social -------------------------------------*/
-  .toggle-button-cover {
+}
+/* configuracion del boton de seleccion de obra social -------------------------------------*/
+.toggle-button-cover {
     display: table-cell;
     position: relative;
     width: 100px;
     height: 60px;
     box-sizing: border-box;
-  }
-  
-  .button-cover {
+}
+
+.button-cover {
     height: 100px;
     margin: 20px;
     background-color: #fff;
     box-shadow: 0 10px 20px -8px #c5d6d6;
     border-radius: 4px;
-  }
-  
-  .button-cover:before {
+}
+
+.button-cover:before {
     counter-increment: button-counter;
     content: counter(button-counter);
     position: absolute;
@@ -181,28 +181,28 @@ body{
     font-size: 12px;
     line-height: 1;
     padding: 5px;
-  }
-  
-  .button-cover,
-  .knobs,
-  .layer {
+}
+
+.button-cover,
+.knobs,
+.layer {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-  }
-  
-  .button {
+}
+
+.button {
     position: relative;
     top: 50%;
     width: 74px;
     height: 36px;
     margin: -20px auto 0 auto;
     overflow: hidden;
-  }
-  
-  .checkbox {
+}
+
+.checkbox {
     position: relative;
     width: 100%;
     height: 100%;
@@ -211,28 +211,28 @@ body{
     opacity: 0;
     cursor: pointer;
     z-index: 3;
-  }
-  .input{
+}
+.input{
     background-color: rgba(0,0,0,0.3);
-    
-  }
-  .knobs {
+
+}
+.knobs {
     z-index: 2;
-  }
-  
-  .layer {
+}
+
+.layer {
     width: 100%;
     background-color: #ebf7fc;
     transition: 0.3s ease all;
     z-index: 1;
-  }
-  
-  .button.r,
-  .button.r .layer {
+}
+
+.button.r,
+.button.r .layer {
     border-radius: 100px;
-  }
-  
-  #button-3 .knobs:before {
+}
+
+#button-3 .knobs:before {
     content: "SI";
     position: absolute;
     top: 4px;
@@ -248,29 +248,29 @@ body{
     background-color: #03a9f4;
     border-radius: 50%;
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  }
-  
-  #button-3 .checkbox:active + .knobs:before {
+}
+
+#button-3 .checkbox:active + .knobs:before {
     width: 46px;
     border-radius: 100px;
-  }
-  
-  #button-3 .checkbox:checked:active + .knobs:before {
+}
+
+#button-3 .checkbox:checked:active + .knobs:before {
     margin-left: -26px;
-  }
-  
-  #button-3 .checkbox:checked + .knobs:before {
+}
+
+#button-3 .checkbox:checked + .knobs:before {
     content: "NO";
     left: 42px;
     background-color: #f44336;
-  }
-  
-  #button-3 .checkbox:checked ~ .layer {
+}
+
+#button-3 .checkbox:checked ~ .layer {
     background-color: #fcebeb;
-  }
-  /* -------------------------------------------------------------------------------------- */
-  
-  .custum-file-upload {
+}
+/* -------------------------------------------------------------------------------------- */
+
+.custum-file-upload {
     height: 15vh;
     width: 15vw;
     display: flex;
@@ -286,46 +286,46 @@ body{
     border-radius: 10px;
     box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
     font-family: sans-serif;    
-  }
-  input::placeholder{
+}
+input::placeholder{
     color: #fff;
     font-family: sans-serif;
-  }
-  .custum-file-upload .icon {
+}
+.custum-file-upload .icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    
-  }
-  
-  .custum-file-upload .icon svg {
+
+}
+
+.custum-file-upload .icon svg {
     height: 80px;
     fill: #fff;
 
-  }
-  
-  .custum-file-upload .text {
+}
+
+.custum-file-upload .text {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .custum-file-upload .text span {
+}
+
+.custum-file-upload .text span {
     font-weight: 400;
     color: #fff;
-    
-  }
-  
-  .custum-file-upload input {
+
+}
+
+.custum-file-upload input {
     display: none;
-  }
-  
-  input[type='checkbox']:checked~.inputs-hidden {
+}
+
+input[type='checkbox']:checked~.inputs-hidden {
     visibility: visible;
-    
-    
-  }
-  .question{
+
+
+}
+.question{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -333,22 +333,31 @@ body{
     gap: 10px;
     color: #fff;
     font-family: sans-serif;
-  }
-  .inputs-hidden{
+}
+.inputs-hidden{
     visibility: hidden;
     display: flex;
     justify-content: center;
     gap: 30px;    
-  }  
+}  
 
 .options{
-  background: rgba(0,0,0, .3);
-  width: 200px;
-  height: 40px;
-  border-radius: 7px;
-  color: #fff;
+    background: rgba(0,0,0, .3);
+    width: 200px;
+    height: 40px;
+    border-radius: 7px;
+    color: #fff;
 }
 select option{
-  color: #000;
-  background: rgba(0,0,0, .3);
+    color: #000;
+    background: rgba(0,0,0, .3);
+}
+.form label .input::placeholder{
+    color:transparent;
+}
+.form label .input:focus::placeholder{
+    color:#fff;
+}
+.form label .input:not(:placeholder-shown) + span {
+    display: none;
 }
